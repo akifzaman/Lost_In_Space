@@ -15,6 +15,13 @@ public class MoveDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.left * Time.deltaTime * speed);
+        if (gameObject.CompareTag("Enemy"))
+        {
+            transform.Translate(Vector2.down * Time.deltaTime * speed);
+        }
+        else if(gameObject.CompareTag("Background"))
+        {
+            transform.Translate(Vector2.left * Time.deltaTime * speed);
+        }
     }
 }
