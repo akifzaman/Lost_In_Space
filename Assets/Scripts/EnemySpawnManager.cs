@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public GameObject enemy;
-    public bool isCollided = false;
+    public List<GameObject> enemyList;
     void Start()
     {
         StartCoroutine(EnemySpawn());
@@ -13,11 +12,12 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Spawn()
     {
-        Instantiate(enemy, new Vector2(Random.Range(-8, 8), 4), enemy.transform.rotation);
+        int randomIndex = Random.Range(0, 3);
+        Instantiate(enemyList[randomIndex], new Vector2(Random.Range(-8, 8), 7), enemyList[randomIndex].transform.rotation);
     }
     IEnumerator EnemySpawn()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         Spawn();
         StartCoroutine(EnemySpawn());
     }

@@ -23,7 +23,6 @@ public class PlayerBulletController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Bingo! " + other.gameObject.tag);
         if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
