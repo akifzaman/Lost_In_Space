@@ -22,4 +22,13 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * speed);
         transform.Translate(Vector2.down * Time.deltaTime * verticalInput * speed);
     }
+
+    //private void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    if (other.gameObject.CompareTag(""))
+    //    {
+    //        Destroy(other.gameObject);
+    //        
+    //    }
+    //}
 }

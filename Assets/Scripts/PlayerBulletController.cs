@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerBulletController : MonoBehaviour
+{
+    public float speed = 10.0f;
+    public float boundary = 10.0f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(Vector2.up * Time.deltaTime * speed);
+        if (transform.position.y > boundary)
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("Bingo! " + other.gameObject.tag);
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
+}

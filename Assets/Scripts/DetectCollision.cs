@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class DestroyOutOfBound : MonoBehaviour
+public class DetectCollision : MonoBehaviour
 {
-    [SerializeField]private float boundary = 10.0f;
+    private EnemyShooting enemyBullet;
+    private Shooting playerBullet;
+    private PlayerController player;
+    private EnemySpawnManager enemy;
     // Start is called before the first frame update
     void Start()
     {

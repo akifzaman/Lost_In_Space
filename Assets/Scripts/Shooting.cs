@@ -16,6 +16,7 @@ public class Shooting : MonoBehaviour
     void Fire()
     {
         Instantiate(bullet, bulletSpawnPosition.position, bullet.transform.rotation);
+        //Instantiate(bullet, bulletSpawnPosition.position, Quaternion.Euler(new Vector3(0f, 0f, 180f)));
     }
     IEnumerator Shoot()
     {
