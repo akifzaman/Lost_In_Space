@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleSpawnManager : MonoBehaviour
 {
     public List<GameObject> obstacleList;
+    public float obstacleSpawnDelay;
     // Start is called before the first frame update
    
     void Start()
@@ -19,7 +20,7 @@ public class ObstacleSpawnManager : MonoBehaviour
     }
     IEnumerator ObstacleSpawn()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(obstacleSpawnDelay);
         Spawn();
         StartCoroutine(ObstacleSpawn());
     }

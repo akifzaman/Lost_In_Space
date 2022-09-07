@@ -6,6 +6,8 @@ public class EnemyShooting : MonoBehaviour
 {
     public GameObject EnemyBullet;
     public Transform EnemyBulletSpawnPosition;
+    public float enemyBulletDelay;
+    private Vector2 offset = new Vector2(10.0f, 0);
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,7 @@ public class EnemyShooting : MonoBehaviour
     }
     IEnumerator EnemyShoot()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(enemyBulletDelay);
         Fire();
         StartCoroutine(EnemyShoot());
     }

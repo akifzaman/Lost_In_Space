@@ -6,7 +6,7 @@ public class Shooting : MonoBehaviour
 {
     public GameObject bullet;
     public Transform bulletSpawnPosition;
-
+    public float playerBulletDelay = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class Shooting : MonoBehaviour
     }
     IEnumerator Shoot()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(playerBulletDelay);
         Fire();
         StartCoroutine(Shoot());
     }

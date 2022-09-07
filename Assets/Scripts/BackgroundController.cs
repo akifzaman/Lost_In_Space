@@ -7,11 +7,12 @@ public class BackgroundController : MonoBehaviour
 {
     private Vector2 startPos;
     private float repeatHeight;
+    [SerializeField] private float movementSpeedMultiplier = 2.10f;
     // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;
-        repeatHeight = GetComponent<BoxCollider2D>().size.y * 2.5f;
+        repeatHeight = GetComponent<BoxCollider2D>().size.y * movementSpeedMultiplier;
     }
 
     // Update is called once per frame

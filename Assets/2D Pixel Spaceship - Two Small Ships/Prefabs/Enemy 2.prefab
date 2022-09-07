@@ -41,10 +41,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5728393788516713227}
   - component: {fileID: 5728393788516713226}
+  - component: {fileID: 3105856624662902783}
   - component: {fileID: -7471165259420646279}
   - component: {fileID: 2370772299670670838}
   - component: {fileID: 3328751149043959897}
-  - component: {fileID: 3105856624662902783}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Enemy
@@ -120,6 +120,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3105856624662902783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5728393788516713225}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0ae25f8f0696040992a99f11a93399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyBullet: {fileID: 5302306558984914604, guid: bd9e294dcd0baa74e89d7d61fe0e7d51, type: 3}
+  EnemyBulletSpawnPosition: {fileID: 2022170615}
+  enemyBulletDelay: 2
 --- !u!114 &-7471165259420646279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,8 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135b3d2c00d16134592c39209adee1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 0.5
   boundary: 6
+  rotateAngle: 1
 --- !u!61 &2370772299670670838
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,7 +163,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0014933646, y: 0.0029867962}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -158,7 +174,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48, y: 0.48}
+  m_Size: {x: 0.38740945, y: 0.4142906}
   m_EdgeRadius: 0
 --- !u!50 &3328751149043959897
 Rigidbody2D:
@@ -181,17 +197,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3105856624662902783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5728393788516713225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0ae25f8f0696040992a99f11a93399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyBullet: {fileID: 5302306558984914604, guid: bd9e294dcd0baa74e89d7d61fe0e7d51, type: 3}
-  EnemyBulletSpawnPosition: {fileID: 2022170615}

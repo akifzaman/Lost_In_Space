@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawnManager : MonoBehaviour
 {
     public List<GameObject> enemyList;
+    public float enemySpawnDelay;
     void Start()
     {
         StartCoroutine(EnemySpawn());
@@ -17,7 +18,7 @@ public class EnemySpawnManager : MonoBehaviour
     }
     IEnumerator EnemySpawn()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(enemySpawnDelay);
         Spawn();
         StartCoroutine(EnemySpawn());
     }
