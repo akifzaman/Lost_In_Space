@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5fb88f73718734d419d5c512ce11052b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989762373844081860}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0ae25f8f0696040992a99f11a93399, type: 3}
   m_Name: 
@@ -150,6 +150,7 @@ MonoBehaviour:
   speed: 0.5
   boundary: 6
   rotateAngle: 0
+  lookDirectionAllow: 0
 --- !u!61 &1605766736564334997
 BoxCollider2D:
   m_ObjectHideFlags: 0

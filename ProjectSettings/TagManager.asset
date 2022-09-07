@@ -8,6 +8,11 @@ TagManager:
   - Enemy
   - EnemyBullet
   - Background
+  - SpeedPowerUp
+  - ShieldPowerUp
+  - bullet_lvl2
+  - BulletPowerUp
+  - GameManager
   layers:
   - Default
   - TransparentFX
