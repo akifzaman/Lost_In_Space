@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBulletController : MonoBehaviour
 {
     public float speed = 10.0f;
-    public float boundary = 10.0f;
+    public float boundary = 5.3f;
     // Start is called before the first frame update
     void Start()
     {

@@ -5,15 +5,18 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public float speed = 3.0f;
-    [SerializeField] private float boundary = 6.0f;
+    [SerializeField] private float boundary = 5.5f;
     [SerializeField] private float rotateAngle = 1.0f;
     [SerializeField] private bool lookDirectionAllow;
 
     private GameObject player;
+
+    private Rigidbody2D enemyRb;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        
     }
 
     // Update is called once per frame

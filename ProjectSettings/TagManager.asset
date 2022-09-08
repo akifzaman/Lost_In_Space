@@ -13,6 +13,7 @@ TagManager:
   - bullet_lvl2
   - BulletPowerUp
   - GameManager
+  - HealthPowerUp
   layers:
   - Default
   - TransparentFX
@@ -20,12 +21,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - PowerUp
+  - PlayerBullet
+  - EnemyBullet
+  - Obstacles
   - 
   - 
   - 

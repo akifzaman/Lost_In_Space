@@ -16,7 +16,7 @@ public class ObstacleSpawnManager : MonoBehaviour
     void Spawn()
     {
         int randomIndex = Random.Range(0, 4);
-        Instantiate(obstacleList[randomIndex], new Vector2(Random.Range(-8, 8), 7), obstacleList[randomIndex].transform.rotation);
+        Instantiate(obstacleList[randomIndex], new Vector2(Random.Range(-2.3f, 2.3f), 7), obstacleList[randomIndex].transform.rotation);
     }
     IEnumerator ObstacleSpawn()
     {

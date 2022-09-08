@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156857492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.106, y: -0.344, z: 0}
+  m_LocalPosition: {x: 0, y: -0.344, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -260,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 5156213549747281124}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5159417118170807720}
@@ -350,6 +350,7 @@ MonoBehaviour:
   bulletOne: {fileID: 3584270463728075363, guid: da35a70f65605cb48aca9bd5db2eaef7, type: 3}
   bulletOneSpawnPosition: {fileID: 6034626188558293700}
   playerBulletOneDelay: 0.1
+  isActivatedOne: 1
 --- !u!61 &7413326897050674083
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -391,3 +392,4 @@ MonoBehaviour:
   bulletTwo: {fileID: 2221009574319880453, guid: 21e5ab47d2b596f4897163b6e5bbac01, type: 3}
   bulletTwoSpawnPosition: {fileID: 1156857493}
   playerBulletTwoDelay: 0.09
+  isActivatedTwo: 0

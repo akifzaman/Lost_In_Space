@@ -14,7 +14,7 @@ public class EnemySpawnManager : MonoBehaviour
     void Spawn()
     {
         int randomIndex = Random.Range(0, 3);
-        Instantiate(enemyList[randomIndex], new Vector2(Random.Range(-8, 8), 7), enemyList[randomIndex].transform.rotation);
+        Instantiate(enemyList[randomIndex], new Vector2(Random.Range(-2.3f, 2.3f), 6), enemyList[randomIndex].transform.rotation);
     }
     IEnumerator EnemySpawn()
     {

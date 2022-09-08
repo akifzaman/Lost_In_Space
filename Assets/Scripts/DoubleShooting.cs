@@ -9,7 +9,6 @@ public class DoubleShooting : MonoBehaviour
     public float playerBulletTwoDelay = 0.09f;
     public bool isActivatedTwo = false;
 
-    //public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {

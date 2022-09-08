@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6267012197547168752}
   - component: {fileID: -6766071432425827714}
   - component: {fileID: 8986000503357425421}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet_lvl1
   m_TagString: bullet_lvl1
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3584270463728075363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: -3.82, z: 0}
-  m_LocalScale: {x: 2, y: 2.5, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  boundary: 5
+  boundary: 5.3
 --- !u!61 &-6766071432425827714
 BoxCollider2D:
   m_ObjectHideFlags: 0
