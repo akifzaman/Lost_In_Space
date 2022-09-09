@@ -2,26 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedPowerUp : MonoBehaviour
+public class ShieldPowerUp : MonoBehaviour
 {
-    private MoveDown moveDownController;
+    public bool isShieldActivated;
+    public GameObject shieldPowerUp;
+    public Transform shieldPosition;
+
     // Start is called before the first frame update
     void Start()
     {
-        moveDownController = GameObject.Find("Background").GetComponent<MoveDown>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            //playerController.isShieldActivated = true;
             Destroy(gameObject);
-            moveDownController.speed *= 10;
+            isShieldActivated = true;
+            if (isShieldActivated)
+            {
+                shieldPowerUp.SetActive(true);
+            }
         }
     }
+
 }

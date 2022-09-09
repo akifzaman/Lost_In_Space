@@ -14,6 +14,8 @@ TagManager:
   - BulletPowerUp
   - GameManager
   - HealthPowerUp
+  - ShieldActivated
+  - Obstacles
   layers:
   - Default
   - TransparentFX
@@ -27,7 +29,7 @@ TagManager:
   - PlayerBullet
   - EnemyBullet
   - Obstacles
-  - 
+  - ShieldActivated
   - 
   - 
   - 

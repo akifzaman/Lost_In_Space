@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
@@ -27,6 +28,10 @@ public class ObstacleController : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
+        }
+        else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
+        {
+            Destroy(other.gameObject);
         }
     }
 }

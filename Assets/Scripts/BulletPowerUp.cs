@@ -21,7 +21,6 @@ public class BulletPowerUp : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("bullet up!");
         if (other.gameObject.CompareTag("Player"))
         {
             doubleShooting.isActivatedTwo = true;
