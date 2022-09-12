@@ -6,9 +6,12 @@ public class EnemySpawnManager : MonoBehaviour
 {
     public List<GameObject> enemyList;
     public float enemySpawnDelay;
+    private GameManager gameManager;
     void Start()
     {
         StartCoroutine(EnemySpawn());
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void Spawn()
@@ -19,7 +22,11 @@ public class EnemySpawnManager : MonoBehaviour
     IEnumerator EnemySpawn()
     {
         yield return new WaitForSeconds(enemySpawnDelay);
-        Spawn();
+        if (gameManager.isGameActive)
+        {
+            Spawn();
+        }
+
         StartCoroutine(EnemySpawn());
     }
     

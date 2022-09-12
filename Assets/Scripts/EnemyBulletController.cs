@@ -5,17 +5,20 @@ using UnityEngine;
 public class EnemyBulletController : MonoBehaviour
 {
     public float speed = 3.0f;
-    public float boundary = 10.0f;
+    public float boundary = -5.5f;
+
+    private PlayerController playerController;
+    private PlayerHealthBar _playerHealthBar;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
     }
 
     void Update()
     {
         transform.Translate(Vector2.down * Time.deltaTime * speed);
-        if (transform.position.y < -boundary)
+        if (transform.position.y < boundary)
         {
             Destroy(gameObject);
         }
@@ -24,7 +27,7 @@ public class EnemyBulletController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
+            _playerHealthBar.DamageTaken(1);
             Destroy(gameObject);
         }
     }

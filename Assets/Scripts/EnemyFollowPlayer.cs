@@ -10,21 +10,27 @@ public class EnemyFollowPlayer : MonoBehaviour
     private Vector2 movement;
     private GameObject player;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = player.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.x, -direction.y) * Mathf.Rad2Deg;
-        rb.rotation = angle;
-        direction.Normalize();
-        movement = direction;
+        if (gameManager.isGameActive)
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.x, -direction.y) * Mathf.Rad2Deg;
+            rb.rotation = angle;
+            direction.Normalize();
+            movement = direction;
+        }
     }
     private void FixedUpdate()
     {
@@ -32,6 +38,9 @@ public class EnemyFollowPlayer : MonoBehaviour
     }
     void moveCharacter(Vector2 direction)
     {
-        rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
+        if (gameManager.isGameActive)
+        {
+            rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
+        }
     }
 }

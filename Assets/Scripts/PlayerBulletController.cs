@@ -6,9 +6,11 @@ public class PlayerBulletController : MonoBehaviour
 {
     public float speed = 10.0f;
     public float boundary = 5.3f;
+
+    private EnemyController enemyController;
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         
     }
 
@@ -25,8 +27,9 @@ public class PlayerBulletController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             Destroy(gameObject);
+
         }
     }
 }

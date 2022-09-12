@@ -7,10 +7,16 @@ public class ObstacleController : MonoBehaviour
 {
     public float speed = 3.0f;
     [SerializeField] private float boundary = 6.0f;
+
+    private PlayerController playerController;
+    private PlayerHealthBar _playerHealthBar;
+
+    public int obstacleEnergy;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
     }
 
     // Update is called once per frame
@@ -26,12 +32,17 @@ public class ObstacleController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
+            _playerHealthBar.DamageTaken(2);
             Destroy(gameObject);
         }
         else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
         {
             Destroy(other.gameObject);
+            obstacleEnergy--;
+            if (obstacleEnergy == 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -213,15 +213,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300200879144602473}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 135b3d2c00d16134592c39209adee1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  boundary: 5.5
+  boundary: -5.5
   rotateAngle: 0
   lookDirectionAllow: 1
+  enemyHealth: 3
 --- !u!114 &5381022016671112878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyBullet: {fileID: 7219904507024058430, guid: 1829c53002655fe478bb4488d994943e, type: 3}
   EnemyBulletSpawnPosition: {fileID: 2100646327}
-  enemyBulletDelay: 1
+  enemyBulletDelay: 0.3
 --- !u!61 &3892620468055213019
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -283,7 +284,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 3
 --- !u!114 &-6940563615779416031
 MonoBehaviour:
   m_ObjectHideFlags: 0

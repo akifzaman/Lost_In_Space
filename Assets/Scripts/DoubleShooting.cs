@@ -9,10 +9,12 @@ public class DoubleShooting : MonoBehaviour
     public float playerBulletTwoDelay = 0.09f;
     public bool isActivatedTwo = false;
 
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(ShootBulletTwo());
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void Fire2()
@@ -25,7 +27,11 @@ public class DoubleShooting : MonoBehaviour
     IEnumerator ShootBulletTwo()
     {
         yield return new WaitForSeconds(playerBulletTwoDelay);
-        Fire2();
+        if (gameManager.isGameActive)
+        {
+            Fire2();
+        }
+
         StartCoroutine(ShootBulletTwo());
     }
 }

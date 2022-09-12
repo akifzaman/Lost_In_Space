@@ -146,3 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6aa1a6e7494e4141a9a936d0e7a6373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShieldActivated: 1
+  shieldPowerUp: {fileID: 0}
+  shieldPosition: {fileID: 0}

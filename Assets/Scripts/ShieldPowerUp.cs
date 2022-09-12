@@ -23,7 +23,6 @@ public class ShieldPowerUp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            //playerController.isShieldActivated = true;
             Destroy(gameObject);
             isShieldActivated = true;
             if (isShieldActivated)

@@ -149,9 +149,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  boundary: 5.5
+  boundary: -5.5
   rotateAngle: 0
   lookDirectionAllow: 0
+  enemyHealth: 1
 --- !u!61 &1605766736564334997
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -198,7 +199,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 3
 --- !u!114 &2399816835315154164
 MonoBehaviour:
   m_ObjectHideFlags: 0

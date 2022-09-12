@@ -9,10 +9,13 @@ public class EnemyShooting : MonoBehaviour
     public float enemyBulletDelay;
     private Vector2 offset = new Vector2(10.0f, 0);
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(EnemyShoot());
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void Fire()
@@ -22,7 +25,10 @@ public class EnemyShooting : MonoBehaviour
     IEnumerator EnemyShoot()
     {
         yield return new WaitForSeconds(enemyBulletDelay);
-        Fire();
+        if (gameManager.isGameActive)
+        {
+            Fire();
+        }
         StartCoroutine(EnemyShoot());
     }
 }

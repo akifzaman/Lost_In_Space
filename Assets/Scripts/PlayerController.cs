@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     private float yBoundaryDown = -4.60f;
     public float speed = 10.0f;
 
-  
+    public float health = 100.0f;
+    private PlayerHealthBar _playerHealthBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         StayInBound();
+
+        if (health == 0.0f)
+        {
+            Destroy(gameObject);
+        }
 
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
@@ -47,6 +54,13 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y >= yBoundaryUp)
         {
             transform.position = new Vector2(transform.position.x, yBoundaryUp);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!gameObject.CompareTag("Player"))
+        {
+            _playerHealthBar.DamageTaken(1);
         }
     }
 }
