@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
 
     public float health = 100.0f;
+    public GameObject glowShield;
     private PlayerHealthBar _playerHealthBar;
 
     // Start is called before the first frame update
@@ -55,6 +56,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x, yBoundaryUp);
         }
+    }
+
+    public void ActivateShield()
+    {
+        glowShield.SetActive(true);
     }
     private void OnCollisionEnter2D(Collision2D other)
     {

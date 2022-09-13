@@ -7,11 +7,12 @@ public class ShieldPowerUp : MonoBehaviour
     public bool isShieldActivated;
     public GameObject shieldPowerUp;
     public Transform shieldPosition;
+    private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -24,11 +25,13 @@ public class ShieldPowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            isShieldActivated = true;
-            if (isShieldActivated)
-            {
-                shieldPowerUp.SetActive(true);
-            }
+            playerController.ActivateShield();
+            //isShieldActivated = true;
+            //if (isShieldActivated)
+            //{
+            //    shieldPowerUp.SetActive(true);
+            //}
+
         }
     }
 

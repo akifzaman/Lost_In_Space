@@ -54,9 +54,21 @@ public class GameManager : MonoBehaviour
             timeCounter--;
         }
 
-        if (timeCounter == 195)
+        if (timeCounter == 190)
         {
             PowerUpSpawner(0);
+        }
+        if (timeCounter == 140)
+        {
+            PowerUpSpawner(1);
+        }
+        if (timeCounter == 120)
+        {
+            PowerUpSpawner(2);
+        }
+        if (timeCounter == 100)
+        {
+            PowerUpSpawner(3);
         }
         yield return new WaitForSeconds(1);
         timerText.text = "Time: " + timeCounter;
@@ -65,6 +77,6 @@ public class GameManager : MonoBehaviour
 
     public void PowerUpSpawner(int powerUpIndex)
     {
-        Instantiate(powerUpList[powerUpIndex], new Vector2(Random.Range(-2.3f, 2.3f), Random.Range(5.5f, -5.5f)), powerUpList[powerUpIndex].transform.rotation);
+        Instantiate(powerUpList[powerUpIndex], new Vector2(Random.Range(-2.3f, 2.3f), Random.Range(3.0f, -3.0f)), powerUpList[powerUpIndex].transform.rotation);
     }
 }

@@ -81,7 +81,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1321812162
 Transform:
   m_ObjectHideFlags: 0
@@ -161,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8308403bebd654bbc9c68d53f2ff18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldDuration: 5
+  shieldDuration: 15
+  shieldPosition: {fileID: 284591550}
 --- !u!50 &1321812165
 Rigidbody2D:
   serializedVersion: 4
@@ -507,6 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   health: 100
+  glowShield: {fileID: 1321812161}
 --- !u!114 &5154822863510121318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,3 +614,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthBarSlider: {fileID: 0}
   amountOfBulletTaken: 10
+  currentBulletTaken: 0

@@ -146,6 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6aa1a6e7494e4141a9a936d0e7a6373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShieldActivated: 1
-  shieldPowerUp: {fileID: 0}
+  isShieldActivated: 0
+  shieldPowerUp: {fileID: 2157960130856785214, guid: f29c368f24aca02469f0b1dfb69a3a89, type: 3}
   shieldPosition: {fileID: 0}

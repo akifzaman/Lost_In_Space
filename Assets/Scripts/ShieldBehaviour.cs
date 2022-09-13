@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShieldBehaviour : MonoBehaviour
 {
     public float shieldDuration = 5.0f;
+    public Transform shieldPosition;
     // Start is called before the first frame update
     void Start()
     {
