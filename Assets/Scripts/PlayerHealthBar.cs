@@ -7,7 +7,7 @@ public class PlayerHealthBar : MonoBehaviour
 {
     public Slider playerHealthBarSlider;
     public int amountOfBulletTaken; //amountOfHealth
-    private int currentBulletTaken = 0; //currentHealth
+    public int currentBulletTaken = 0; //currentHealth
 
     private GameManager gameManager;
     //private GameManager gameManager;
@@ -38,6 +38,13 @@ public class PlayerHealthBar : MonoBehaviour
             gameManager.GameOver();
             Destroy(gameObject, 0.1f);
         }
+    }
+
+    public void Heal(int heal)
+    {
+        currentBulletTaken = heal;
+        playerHealthBarSlider.fillRect.gameObject.SetActive(true);
+        playerHealthBarSlider.value = currentBulletTaken;
     }
 
 }

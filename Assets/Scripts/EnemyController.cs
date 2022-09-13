@@ -19,6 +19,9 @@ public class EnemyController : MonoBehaviour
     public int enemyHealth;
 
     private GameManager gameManager;
+    private StarSpawner starSpawner;
+
+    public bool isDestroyed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +29,7 @@ public class EnemyController : MonoBehaviour
         _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-
+        starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
     }
 
     // Update is called once per frame
@@ -40,14 +43,19 @@ public class EnemyController : MonoBehaviour
             {
                 Vector2 lookDirection = (player.transform.position - transform.position).normalized;
                 transform.Translate(lookDirection * Time.deltaTime * speed, Space.World);
+                gameManager.prevPosition = gameManager.currentPosition;
+                gameManager.currentPosition = transform.position;
+
             }
         }
         else if(gameManager.isGameActive)
         {
             transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
+            gameManager.prevPosition = gameManager.currentPosition;
+            gameManager.currentPosition = transform.position;
         }
 
-        transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
+        //transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
 
         if (transform.position.y < boundary)
         {
@@ -66,7 +74,10 @@ public class EnemyController : MonoBehaviour
             enemyHealth--;
             if (enemyHealth == 0)
             {
+                //starSpawner.Spawn();
+                isDestroyed = true;
                 Destroy(gameObject);
+                starSpawner.Spawn(gameManager.prevPosition);
             }
         }
         

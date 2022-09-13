@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DestroyOutOfBound : MonoBehaviour
 {
-    [SerializeField]private float boundary = 10.0f;
+    //[SerializeField]private float boundary = 10.0f;
     [SerializeField] private float xBoundary = 3.20f;
     [SerializeField] private float yBoundary = -5.5f;
     // Start is called before the first frame update

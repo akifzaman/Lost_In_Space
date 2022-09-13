@@ -223,6 +223,7 @@ MonoBehaviour:
   rotateAngle: 0
   lookDirectionAllow: 1
   enemyHealth: 3
+  isDestroyed: 0
 --- !u!114 &5381022016671112878
 MonoBehaviour:
   m_ObjectHideFlags: 0

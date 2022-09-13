@@ -6,6 +6,7 @@ public class MoveDown : MonoBehaviour
 {
     public float speed = 20.0f;
     private GameManager gameManager;
+    private SpeedPowerUp speedPowerUp;
     
     void Start()
     {
@@ -19,5 +20,15 @@ public class MoveDown : MonoBehaviour
         {
             transform.Translate(Vector2.down * Time.deltaTime * speed);
         }
+
+        if (speed == 50)
+        {
+            StartCoroutine(SpeedPowerUpEnd());
+        }
+    }
+    IEnumerator SpeedPowerUpEnd()
+    {
+        yield return new WaitForSeconds(5f);
+        speed = 10;
     }
 }

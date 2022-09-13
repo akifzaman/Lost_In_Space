@@ -153,6 +153,7 @@ MonoBehaviour:
   rotateAngle: 0
   lookDirectionAllow: 0
   enemyHealth: 1
+  isDestroyed: 0
 --- !u!61 &1605766736564334997
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,7 +200,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 7
 --- !u!114 &2399816835315154164
 MonoBehaviour:
   m_ObjectHideFlags: 0

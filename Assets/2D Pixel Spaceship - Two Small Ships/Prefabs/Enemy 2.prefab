@@ -153,6 +153,7 @@ MonoBehaviour:
   rotateAngle: 1
   lookDirectionAllow: 0
   enemyHealth: 7
+  isDestroyed: 0
 --- !u!61 &2370772299670670838
 BoxCollider2D:
   m_ObjectHideFlags: 0

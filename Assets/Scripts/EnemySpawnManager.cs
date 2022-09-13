@@ -11,7 +11,7 @@ public class EnemySpawnManager : MonoBehaviour
     {
         StartCoroutine(EnemySpawn());
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        //gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void Spawn()
