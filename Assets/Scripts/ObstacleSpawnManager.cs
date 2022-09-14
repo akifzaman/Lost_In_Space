@@ -24,7 +24,7 @@ public class ObstacleSpawnManager : MonoBehaviour
     IEnumerator ObstacleSpawn()
     {
         yield return new WaitForSeconds(obstacleSpawnDelay);
-        if (gameManager.isGameActive)
+        if (gameManager.isGameActive && gameManager.timeCounter > 0)
         {
             Spawn();
         }

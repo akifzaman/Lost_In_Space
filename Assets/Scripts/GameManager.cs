@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Timer()
     {
-        if (isGameActive)
+        if (isGameActive && timeCounter > -100)
         {
             timeCounter--;
         }

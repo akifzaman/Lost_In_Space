@@ -22,7 +22,7 @@ public class EnemySpawnManager : MonoBehaviour
     IEnumerator EnemySpawn()
     {
         yield return new WaitForSeconds(enemySpawnDelay);
-        if (gameManager.isGameActive)
+        if (gameManager.isGameActive && gameManager.timeCounter > 0)
         {
             Spawn();
         }

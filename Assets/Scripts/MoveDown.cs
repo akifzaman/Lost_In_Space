@@ -16,6 +16,10 @@ public class MoveDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.timeCounter == -6)
+        {
+            speed = 0;
+        }
         if (gameManager.isGameActive)
         {
             transform.Translate(Vector2.down * Time.deltaTime * speed);
