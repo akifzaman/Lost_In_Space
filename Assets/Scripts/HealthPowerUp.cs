@@ -9,6 +9,7 @@ public class HealthPowerUp : MonoBehaviour
     void Start()
     {
         playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
+        StartCoroutine(HealthPowerUpDestroy());
     }
 
     // Update is called once per frame
@@ -23,6 +24,11 @@ public class HealthPowerUp : MonoBehaviour
         {
             playerHealthBar.Heal(0);
         }
+        Destroy(gameObject);
+    }
+    IEnumerator HealthPowerUpDestroy()
+    {
+        yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
 }

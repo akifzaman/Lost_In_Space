@@ -81,7 +81,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1321812162
 Transform:
   m_ObjectHideFlags: 0
@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 2072355030}
   - component: {fileID: 1033658582382714241}
   - component: {fileID: 832886413}
+  - component: {fileID: 570643049}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -509,6 +510,7 @@ MonoBehaviour:
   speed: 7
   health: 100
   glowShield: {fileID: 1321812161}
+  speedPowerUp: {fileID: 0}
 --- !u!114 &5154822863510121318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,5 +615,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealthBarSlider: {fileID: 0}
-  amountOfBulletTaken: 10
+  amountOfBulletTaken: 15
   currentBulletTaken: 0
+--- !u!114 &570643049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156213549747281124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507118cc2a6916142b63c2a6a3ceeb31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  superSplash: {fileID: 4423387221507940447, guid: 990d37134bd3b6746b4755d4d8120857, type: 3}
+  superSplashPositioin: {fileID: 284591550}
+  superSplashCounter: 3

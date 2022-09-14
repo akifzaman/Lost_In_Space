@@ -16,12 +16,16 @@ public class EnemyController : MonoBehaviour
     private PlayerController playerController;
     private PlayerHealthBar _playerHealthBar;
 
+    public SpeedPowerUp speedPowerUp;
+
     public int enemyHealth;
 
     private GameManager gameManager;
     private StarSpawner starSpawner;
 
     public bool isDestroyed = false;
+
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +34,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -48,7 +53,7 @@ public class EnemyController : MonoBehaviour
 
             }
         }
-        else if(gameManager.isGameActive)
+        else if (gameManager.isGameActive)
         {
             transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
             gameManager.prevPosition = gameManager.currentPosition;
@@ -62,6 +67,7 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -74,13 +80,15 @@ public class EnemyController : MonoBehaviour
             enemyHealth--;
             if (enemyHealth == 0)
             {
-                //starSpawner.Spawn();
                 isDestroyed = true;
-                Destroy(gameObject);
+                anim.Play("Explosion");
+                //anim.SetTrigger("IsDestroy");
                 starSpawner.Spawn(gameManager.prevPosition);
+                Destroy(gameObject);
+
             }
         }
-        
+
     }
 
 }

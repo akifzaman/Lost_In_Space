@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public float health = 100.0f;
     public GameObject glowShield;
     private PlayerHealthBar _playerHealthBar;
+
+    private GameManager gameManager;
+    public SpeedPowerUp speedPowerUp;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +39,7 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * speed);
         transform.Translate(Vector2.down * Time.deltaTime * verticalInput * speed);
+
     }
 
 
@@ -62,6 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         glowShield.SetActive(true);
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (!gameObject.CompareTag("Player"))
@@ -69,4 +75,5 @@ public class PlayerController : MonoBehaviour
             _playerHealthBar.DamageTaken(1);
         }
     }
+
 }

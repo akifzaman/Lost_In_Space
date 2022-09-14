@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 2370772299670670838}
   - component: {fileID: 3328751149043959897}
   - component: {fileID: -7997541590664398800}
+  - component: {fileID: 4278610853949205911}
   m_Layer: 6
   m_Name: Enemy 2
   m_TagString: Enemy
@@ -62,8 +63,8 @@ Transform:
   m_GameObject: {fileID: 5728393788516713225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5302372, y: -2.3878388, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.28, y: 1.28, z: 1.0239993}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2022170615}
   m_Father: {fileID: 0}
@@ -136,6 +137,8 @@ MonoBehaviour:
   EnemyBullet: {fileID: 5302306558984914604, guid: bd9e294dcd0baa74e89d7d61fe0e7d51, type: 3}
   EnemyBulletSpawnPosition: {fileID: 2022170615}
   enemyBulletDelay: 2
+  prevEnemyBulletDelay: 2
+  isChanged: 0
 --- !u!114 &-7471165259420646279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +155,7 @@ MonoBehaviour:
   boundary: -5.5
   rotateAngle: 1
   lookDirectionAllow: 0
+  speedPowerUp: {fileID: 0}
   enemyHealth: 7
   isDestroyed: 0
 --- !u!61 &2370772299670670838
@@ -213,6 +217,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21544f13794a184f8c7bda9d8f3d3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundary: 10
   xBoundary: 3.2
   yBoundary: -5.5
+--- !u!95 &4278610853949205911
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5728393788516713225}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f262e60e4cb9f344ad9de8ae72b86db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

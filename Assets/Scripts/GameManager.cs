@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public bool isGameActive = false;
+   
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
 
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI timerText;
     public int timeCounter = 200;
+
+    public bool isSpeedUp = false;
 
     public List<GameObject> powerUpList;
     // Start is called before the first frame update
@@ -70,8 +73,12 @@ public class GameManager : MonoBehaviour
         {
             PowerUpSpawner(3);
         }
+        if (timeCounter == 70)
+        {
+            PowerUpSpawner(2);
+        }
         yield return new WaitForSeconds(1);
-        timerText.text = "Time: " + timeCounter;
+        //timerText.text = "Time: " + timeCounter;
         StartCoroutine(Timer());
     }
 

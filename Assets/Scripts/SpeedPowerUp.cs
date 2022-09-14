@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpeedPowerUp : MonoBehaviour
 {
-    public bool isSpeedPowerUpActive;
+    //public bool isSpeedPowerUpActive;
     private MoveDown moveDownController;
     // Start is called before the first frame update
 
@@ -27,7 +27,7 @@ public class SpeedPowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            isSpeedPowerUpActive = true;
+            gameManager.isSpeedUp = true;
             moveDownController.speed *= 10;
             gameManager.timeCounter -= 30;
         }

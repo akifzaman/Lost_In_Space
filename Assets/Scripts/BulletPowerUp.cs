@@ -12,6 +12,7 @@ public class BulletPowerUp : MonoBehaviour
     {
         shooting = GameObject.Find("Player").GetComponent<Shooting>();
         doubleShooting = GameObject.Find("Player").GetComponent<DoubleShooting>();
+        StartCoroutine(BulletPowerUpDestroy());
     }
 
     // Update is called once per frame
@@ -27,5 +28,10 @@ public class BulletPowerUp : MonoBehaviour
            shooting.isActivatedOne = false;
            Destroy(gameObject);
         }
+    }
+    IEnumerator BulletPowerUpDestroy()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
 }

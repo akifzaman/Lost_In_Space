@@ -9,6 +9,8 @@ public class EnemyBulletController : MonoBehaviour
 
     private PlayerController playerController;
     private PlayerHealthBar _playerHealthBar;
+
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class EnemyBulletController : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.down * Time.deltaTime * speed);
+        
         if (transform.position.y < boundary)
         {
             Destroy(gameObject);

@@ -13,6 +13,7 @@ public class ShieldPowerUp : MonoBehaviour
     void Start()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        StartCoroutine(ShieldPowerUpDestroy());
     }
 
     // Update is called once per frame
@@ -33,6 +34,11 @@ public class ShieldPowerUp : MonoBehaviour
             //}
 
         }
+    }
+    IEnumerator ShieldPowerUpDestroy()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
 
 }

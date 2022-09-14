@@ -28,7 +28,8 @@ public class MoveDown : MonoBehaviour
     }
     IEnumerator SpeedPowerUpEnd()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(8.0f);
         speed = 10;
+        gameManager.isSpeedUp = false;
     }
 }

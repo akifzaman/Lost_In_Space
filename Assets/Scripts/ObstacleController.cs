@@ -11,6 +11,10 @@ public class ObstacleController : MonoBehaviour
     private PlayerController playerController;
     private PlayerHealthBar _playerHealthBar;
 
+    private GameManager gameManager;
+
+    public SpeedPowerUp speedPowerUp;
+
     public int obstacleEnergy;
 
     // Start is called before the first frame update
