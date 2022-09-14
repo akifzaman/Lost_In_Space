@@ -21,11 +21,13 @@ public class GameManager : MonoBehaviour
 
     public bool isSpeedUp = false;
 
+    public EnemySpawnManager enemySpawner;
+
     public List<GameObject> powerUpList;
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawnManager>();
     }
 
     // Update is called once per frame
@@ -59,23 +61,33 @@ public class GameManager : MonoBehaviour
 
         if (timeCounter == 190)
         {
-            PowerUpSpawner(0);
+            PowerUpSpawner(0); //sonic
         }
         if (timeCounter == 140)
         {
-            PowerUpSpawner(1);
+            PowerUpSpawner(1); //armour
         }
         if (timeCounter == 120)
         {
-            PowerUpSpawner(2);
+            PowerUpSpawner(2); //heal
+            enemySpawner.enemySpawnDelay -= 0.1f;
         }
         if (timeCounter == 100)
         {
             PowerUpSpawner(3);
+            enemySpawner.enemySpawnDelay -= 0.2f; //double bullet
         }
         if (timeCounter == 70)
         {
-            PowerUpSpawner(2);
+            PowerUpSpawner(2); //heal
+        }
+        if (timeCounter == 45)
+        {
+            PowerUpSpawner(0); //sonic
+        }
+        if (timeCounter == 5)
+        {
+            PowerUpSpawner(2); //heal
         }
         yield return new WaitForSeconds(1);
         //timerText.text = "Time: " + timeCounter;

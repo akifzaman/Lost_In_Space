@@ -28,8 +28,15 @@ public class SpeedPowerUp : MonoBehaviour
         {
             Destroy(gameObject);
             gameManager.isSpeedUp = true;
-            moveDownController.speed *= 10;
-            gameManager.timeCounter -= 30;
+            if (moveDownController.speed == 10)
+            {
+                moveDownController.speed *= 5;
+            }
+            else if (moveDownController.speed == 5)
+            {
+                moveDownController.speed *= 10;
+                gameManager.timeCounter -= 30;
+            }
         }
     }
 
