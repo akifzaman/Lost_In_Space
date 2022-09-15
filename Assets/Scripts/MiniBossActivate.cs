@@ -32,15 +32,6 @@ public class MiniBossActivate : MonoBehaviour
             {
                 transform.Translate(Vector2.down * Time.deltaTime * speed);
             }
-            if (gameObject.CompareTag("MainBoss") && gameManager.miniBossDestroyed && transform.position.y < activationPoint)
-            {
-                speed = 0.0f;
-                gameManager.mainBossActive = true;
-            }
-            if (gameObject.CompareTag("MainBoss") && gameManager.miniBossDestroyed && transform.position.y > activationPoint)
-            {
-                transform.Translate(Vector2.down * Time.deltaTime * speed);
-            }
         }
-    }
+        }
 }

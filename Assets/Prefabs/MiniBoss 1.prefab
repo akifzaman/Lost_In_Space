@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96b18fcf446a694fbceee892b712073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Boss: {fileID: 0}
+  MiniBoss: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!114 &4535670646264881258
 MonoBehaviour:
@@ -274,7 +274,7 @@ MonoBehaviour:
   bulletsAmount: 10
   startAngle: 90
   endAngle: 440
-  Boss: {fileID: 0}
+  MiniBoss: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!114 &4535670646264881261
 MonoBehaviour:
@@ -308,7 +308,8 @@ MonoBehaviour:
   rotateAngle: 0
   lookDirectionAllow: 0
   speedPowerUp: {fileID: 0}
-  enemyHealth: 200
-  Boss: {fileID: 0}
+  enemyHealth: 10
+  MiniBoss: {fileID: 0}
   shakeManager: {fileID: 0}
+  superSplashActivate: {fileID: 0}
   isDestroyed: 0

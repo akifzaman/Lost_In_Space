@@ -25,6 +25,8 @@ public class EnemyController : MonoBehaviour
     public MiniBossActivate MiniBoss;
     public ShakeManager shakeManager;
 
+    public SuperSplashActivate superSplashActivate;
+
     public bool isDestroyed = false;
 
     private Animator anim;
@@ -38,6 +40,7 @@ public class EnemyController : MonoBehaviour
         starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakeManager = GameObject.Find("Shake Manager").GetComponent<ShakeManager>();
+        superSplashActivate = GameObject.Find("Player").GetComponent<SuperSplashActivate>();
         anim = GetComponent<Animator>();
     }
 
@@ -74,10 +77,20 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("Player"))
         {
             _playerHealthBar.DamageTaken(2);
             Destroy(gameObject);
+        }
+        else if (gameObject.CompareTag("MiniBoss") && other.gameObject.CompareTag("Player"))
+        {
+            //_playerHealthBar.DamageTaken(5);
+            //Destroy(gameObject);
+        }
+        else if (gameObject.CompareTag("MainBoss") && other.gameObject.CompareTag("Player"))
+        {
+           // _playerHealthBar.DamageTaken(5);
+            //Destroy(gameObject);
         }
         else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
         {
@@ -95,7 +108,8 @@ public class EnemyController : MonoBehaviour
                     gameManager.mainBossActive = true;
                     shakeManager.speed = 2.34f;
                     shakeManager.amount = 0.06f;
-                    shakeManager.duration = 5.0f;
+                    shakeManager.duration = 10.0f;
+                    //superSplashActivate.superSplashCounter = 5;
                 }
                 Destroy(gameObject);
 

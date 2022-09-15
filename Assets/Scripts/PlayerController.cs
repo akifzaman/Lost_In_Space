@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
     public SpeedPowerUp speedPowerUp;
 
+    public GameObject parryShield;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +67,11 @@ public class PlayerController : MonoBehaviour
     public void ActivateShield()
     {
         glowShield.SetActive(true);
+    }
+
+    public void ActivateParryShield()
+    {
+        parryShield.SetActive(true);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
