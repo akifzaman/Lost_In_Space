@@ -9,10 +9,12 @@ public class ShakeManager : MonoBehaviour
     public float speed, amount, duration;
 
     private GameManager gameManager;
+    public MiniBossActivate miniBoss;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        miniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakePos = startPos = transform.position;
         speed = 2.34f;
         amount = 0.06f;
@@ -22,7 +24,12 @@ public class ShakeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (duration > 0 && gameManager.timeCounter < -5)
+        if (duration > 0 && gameManager.timeCounter < -40 && gameManager.miniBossActive == false)
+        {
+            Shake();
+            duration -= Time.deltaTime;
+        }
+        else if (duration > 0 && gameManager.timeCounter < -5)
         {
             Shake();
             duration -= Time.deltaTime;
@@ -30,7 +37,6 @@ public class ShakeManager : MonoBehaviour
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, startPos, Time.deltaTime * Mathf.Abs(speed));
-
         }
     }
 

@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public EnemySpawnManager enemySpawner;
 
     public List<GameObject> powerUpList;
+
+    public bool miniBossActive = false;
     // Start is called before the first frame update
     void Start()
     {

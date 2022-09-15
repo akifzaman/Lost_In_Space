@@ -22,6 +22,8 @@ public class EnemyController : MonoBehaviour
 
     private GameManager gameManager;
     private StarSpawner starSpawner;
+    public MiniBossActivate miniBoss;
+    public ShakeManager shakeManager;
 
     public bool isDestroyed = false;
 
@@ -34,6 +36,8 @@ public class EnemyController : MonoBehaviour
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
+        miniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
+        shakeManager = GameObject.Find("Shake Manager").GetComponent<ShakeManager>();
         anim = GetComponent<Animator>();
     }
 
@@ -78,12 +82,19 @@ public class EnemyController : MonoBehaviour
         else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
         {
             enemyHealth--;
-            if (enemyHealth == 0)
+            if (enemyHealth <= 0)
             {
                 isDestroyed = true;
-                anim.Play("Explosion");
+                //anim.Play("Explosion");
                 //anim.SetTrigger("IsDestroy");
-                starSpawner.Spawn(gameManager.prevPosition);
+                //starSpawner.Spawn(gameManager.prevPosition);
+                if (gameObject.CompareTag("MiniBoss"))
+                {
+                    gameManager.miniBossActive = false;
+                    shakeManager.speed = 2.34f;
+                    shakeManager.amount = 0.06f;
+                    shakeManager.duration = 5.0f;
+                }
                 Destroy(gameObject);
 
             }

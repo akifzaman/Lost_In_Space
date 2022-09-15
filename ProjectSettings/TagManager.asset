@@ -16,6 +16,8 @@ TagManager:
   - HealthPowerUp
   - ShieldActivated
   - Obstacles
+  - MiniBoss
+  - MiniBossBullet
   layers:
   - Default
   - TransparentFX

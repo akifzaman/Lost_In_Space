@@ -28,7 +28,12 @@ public class EnemyBulletController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag("MiniBossBullet") && other.gameObject.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+            _playerHealthBar.DamageTaken(1);
+        }
+        else if (gameObject.CompareTag("EnemyBullet") && other.gameObject.CompareTag("Player"))
         {
             _playerHealthBar.DamageTaken(1);
             Destroy(gameObject);
