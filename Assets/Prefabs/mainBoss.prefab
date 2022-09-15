@@ -12,13 +12,15 @@ GameObject:
   - component: {fileID: 388159531398174891}
   - component: {fileID: 3039945005082498972}
   - component: {fileID: 8820267981101415440}
-  m_Layer: 0
+  - component: {fileID: 126579782}
+  - component: {fileID: 126579783}
+  m_Layer: 6
   m_Name: mainBoss
-  m_TagString: Untagged
+  m_TagString: MainBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &388159531398174890
 Transform:
   m_ObjectHideFlags: 0
@@ -106,7 +108,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!60 &8820267981101415440
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -188,3 +190,32 @@ PolygonCollider2D:
       - {x: 0.24004765, y: -0.68852395}
       - {x: 0.2704748, y: -0.66274375}
       - {x: 0.089999996, y: -0.29999998}
+--- !u!114 &126579782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388159531398174888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589ddd66c6a8820418f2fbe33d356a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  activationTime: -40
+  activationPoint: 4
+--- !u!114 &126579783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388159531398174888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96b18fcf446a694fbceee892b712073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Boss: {fileID: 0}
+  gameManager: {fileID: 0}

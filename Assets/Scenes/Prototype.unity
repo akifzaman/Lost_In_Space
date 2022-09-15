@@ -171,7 +171,7 @@ MonoBehaviour:
   speed: 2.34
   amount: 0.06
   duration: 5
-  miniBoss: {fileID: 0}
+  MiniBoss: {fileID: 0}
 --- !u!1 &92229096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledBullet: {fileID: 8928460442896055807, guid: a132e62977e77fa46ac4abff3c4f29dc, type: 3}
-  miniBoss: {fileID: 0}
+  MiniBoss: {fileID: 0}
 --- !u!1 &1978234560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2492,7 +2492,7 @@ MonoBehaviour:
   prevPosition: {x: 0, y: 0}
   currentPosition: {x: 0, y: 0}
   timerText: {fileID: 2134388822}
-  timeCounter: 200
+  timeCounter: 10
   isSpeedUp: 0
   enemySpawner: {fileID: 0}
   powerUpList:
@@ -2501,6 +2501,8 @@ MonoBehaviour:
   - {fileID: 2233259059057956973, guid: a353856c733ec034599420c7071b1bd0, type: 3}
   - {fileID: 913307634979902033, guid: 4876f4d77e3b33c4aa25296db8d9242b, type: 3}
   miniBossActive: 0
+  miniBossDestroyed: 0
+  mainBossActive: 0
 --- !u!1 &2134388820
 GameObject:
   m_ObjectHideFlags: 0
@@ -2645,7 +2647,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 388159531398174888, guid: 8213691599b2f49488ffc5fe7261f4db, type: 3}
       propertyPath: m_Name
-      value: mainBoss
+      value: MainBoss
       objectReference: {fileID: 0}
     - target: {fileID: 388159531398174890, guid: 8213691599b2f49488ffc5fe7261f4db, type: 3}
       propertyPath: m_RootOrder
@@ -2657,7 +2659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 388159531398174890, guid: 8213691599b2f49488ffc5fe7261f4db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.22
+      value: 6.72
       objectReference: {fileID: 0}
     - target: {fileID: 388159531398174890, guid: 8213691599b2f49488ffc5fe7261f4db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2862,10 +2864,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4535670646264881260, guid: 46a45ee56f90b57479dd749503c7fef4, type: 3}
-      propertyPath: enemyHealth
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 7244416368282746359, guid: 46a45ee56f90b57479dd749503c7fef4, type: 3}
       propertyPath: m_Name
       value: MiniBoss

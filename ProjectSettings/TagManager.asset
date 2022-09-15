@@ -18,6 +18,7 @@ TagManager:
   - Obstacles
   - MiniBoss
   - MiniBossBullet
+  - MainBoss
   layers:
   - Default
   - TransparentFX

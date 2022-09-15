@@ -11,12 +11,12 @@ public class BulletPool : MonoBehaviour
 
     private List<GameObject> bullets;
 
-    public MiniBossActivate miniBoss;
+    public MiniBossActivate MiniBoss;
     // Start is called before the first frame update
 
     private void Awake()
     {
-        miniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
+        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         bulletPoolInstance = this;
     }
     void Start()

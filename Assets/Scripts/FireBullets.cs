@@ -10,13 +10,13 @@ public class FireBullets : MonoBehaviour
 
     private Vector2 bulletMoveDirection;
 
-    public MiniBossActivate miniBoss;
+    public MiniBossActivate MiniBoss;
 
     public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        miniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
+        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         InvokeRepeating("Fire", 0f, 1.5f);
     }

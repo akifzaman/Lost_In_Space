@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     private Vector2 moveDirection;
     private float moveSpeed;
 
-    public MiniBossActivate miniBoss;
+    public MiniBossActivate MiniBoss;
     // Start is called before the first frame update
 
     private void OnEnable()
@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     }
     void Start()
     {
-        miniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
+        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         moveSpeed = 1.5f;
     }
 

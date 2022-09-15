@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
 
     private GameManager gameManager;
     private StarSpawner starSpawner;
-    public MiniBossActivate miniBoss;
+    public MiniBossActivate MiniBoss;
     public ShakeManager shakeManager;
 
     public bool isDestroyed = false;
@@ -36,7 +36,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
-        miniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
+        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakeManager = GameObject.Find("Shake Manager").GetComponent<ShakeManager>();
         anim = GetComponent<Animator>();
     }
@@ -91,6 +91,8 @@ public class EnemyController : MonoBehaviour
                 if (gameObject.CompareTag("MiniBoss"))
                 {
                     gameManager.miniBossActive = false;
+                    gameManager.miniBossDestroyed = true;
+                    gameManager.mainBossActive = true;
                     shakeManager.speed = 2.34f;
                     shakeManager.amount = 0.06f;
                     shakeManager.duration = 5.0f;

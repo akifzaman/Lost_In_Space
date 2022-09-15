@@ -9,12 +9,12 @@ public class ShakeManager : MonoBehaviour
     public float speed, amount, duration;
 
     private GameManager gameManager;
-    public MiniBossActivate miniBoss;
+    public MiniBossActivate MiniBoss;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        miniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
+        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakePos = startPos = transform.position;
         speed = 2.34f;
         amount = 0.06f;
