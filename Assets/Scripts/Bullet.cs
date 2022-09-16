@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Vector2 moveDirection;
-    private float moveSpeed;
+    public float moveSpeed;
 
     public MiniBossActivate MiniBoss;
     // Start is called before the first frame update
@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
-        moveSpeed = 1.5f;
+        //moveSpeed = 1.5f;
     }
 
     // Update is called once per frame

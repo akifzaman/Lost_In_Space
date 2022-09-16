@@ -73,6 +73,10 @@ public class PlayerController : MonoBehaviour
     {
         parryShield.SetActive(true);
     }
+    public void DeactivateParryShield()
+    {
+        parryShield.SetActive(false);
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {

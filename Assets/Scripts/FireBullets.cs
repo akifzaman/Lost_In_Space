@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireBullets : MonoBehaviour
 {
-    [SerializeField] private int bulletsAmount = 10;
+    [SerializeField] private int bulletsAmount = 20;
 
     [SerializeField] private float startAngle = 90f, endAngle = 440f;
 
@@ -18,7 +18,7 @@ public class FireBullets : MonoBehaviour
     {
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        InvokeRepeating("Fire", 0f, 1.5f);
+        InvokeRepeating("Fire", 0f, 1f);
     }
 
     // Update is called once per frame
@@ -37,12 +37,12 @@ public class FireBullets : MonoBehaviour
             for (int i = 0; i < bulletsAmount; i++)
             {
                 float bulDirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180f);
-                float bulDirY = transform.position.x + Mathf.Cos((angle * Mathf.PI) / 180f);
+                float bulDirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180f);
 
                 Vector3 bullMoveVector = new Vector3(bulDirX, bulDirY, 0f);
                 Vector2 bulDir = (bullMoveVector - transform.position).normalized;
 
-                GameObject bul = BulletPool.bulletPoolInstance.GetBullet();
+                GameObject bul = BulletPool.bulletPoolInstance.GetBullet1();
                 
                 bul.transform.position = transform.position;
                 bul.transform.rotation = transform.rotation;

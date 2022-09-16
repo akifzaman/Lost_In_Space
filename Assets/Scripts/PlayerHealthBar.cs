@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PlayerHealthBar : MonoBehaviour
 {
     public Slider playerHealthBarSlider;
-    public int amountOfBulletTaken; //amountOfHealth
-    public int currentBulletTaken = 0; //currentHealth
+    public float amountOfBulletTaken; //amountOfHealth
+    public float currentBulletTaken = 0; //currentHealth
 
     private GameManager gameManager;
     //private GameManager gameManager;
@@ -26,12 +26,16 @@ public class PlayerHealthBar : MonoBehaviour
     {
         
     }
-    public void DamageTaken(int amount) //damageTaken
+    public void DamageTaken(float amount) //damageTaken
     {
         currentBulletTaken += amount; //currentHealth
+        if (currentBulletTaken < 0)
+        {
+            currentBulletTaken = 0;
+        }
         playerHealthBarSlider.fillRect.gameObject.SetActive(true);
         playerHealthBarSlider.value = currentBulletTaken; //currentHealth
-        if (currentBulletTaken >= amountOfBulletTaken)
+        if (currentBulletTaken >= amountOfBulletTaken && gameManager.isGameActive)
         {
             //gameManager.AddScore(amountToBeFed);
             gameManager.isGameActive = false;

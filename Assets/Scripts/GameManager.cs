@@ -61,31 +61,35 @@ public class GameManager : MonoBehaviour
         if (isGameActive && timeCounter > -100)
         {
             timeCounter--;
+            if (timeCounter > 20)
+            {
+                enemySpawner.enemySpawnDelay -= 0.0031f;
+            }
         }
 
-        if (timeCounter == 190)
+        if (timeCounter == 160)
         {
             PowerUpSpawner(0); //sonic
         }
-        if (timeCounter == 140)
+        if (timeCounter == 130)
         {
             PowerUpSpawner(1); //armour
         }
-        if (timeCounter == 120)
+        if (timeCounter == 110) //105
         {
             PowerUpSpawner(2); //heal
-            enemySpawner.enemySpawnDelay -= 0.1f;
+            //enemySpawner.enemySpawnDelay -= 0.1f;
         }
-        if (timeCounter == 100)
+        if (timeCounter == 80)
         {
             PowerUpSpawner(3);
-            enemySpawner.enemySpawnDelay -= 0.2f; //double bullet
+            //enemySpawner.enemySpawnDelay -= 0.2f; //double bullet
         }
-        if (timeCounter == 70)
+        if (timeCounter == 50)
         {
             PowerUpSpawner(2); //heal
         }
-        if (timeCounter == 45)
+        if (timeCounter == 30)
         {
             PowerUpSpawner(0); //sonic
         }

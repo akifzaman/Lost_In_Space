@@ -12,10 +12,13 @@ public class MiniBossActivate : MonoBehaviour
     public float activationTime;
 
     public float activationPoint;
+
+    public EnemyController enemyController;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        enemyController = GameObject.Find("MiniBoss").GetComponent<EnemyController>();
     }
 
     // Update is called once per frame
@@ -27,11 +30,12 @@ public class MiniBossActivate : MonoBehaviour
             {
                 speed = 0.0f;
                 gameManager.miniBossActive = true;
+                enemyController.laserActivate = true;
             }
             if (gameObject.CompareTag("MiniBoss") && transform.position.y > activationPoint)
             {
                 transform.Translate(Vector2.down * Time.deltaTime * speed);
             }
         }
-        }
+    }
 }

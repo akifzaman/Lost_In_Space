@@ -17,7 +17,7 @@ public class SuperSplashBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Obstacles") || other.gameObject.CompareTag("EnemyBullet"))
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Obstacles") || other.gameObject.CompareTag("EnemyBullet") || other.gameObject.CompareTag("MiniBossBullet"))
         {
             Destroy(other.gameObject);
         }

@@ -19,6 +19,7 @@ TagManager:
   - MiniBoss
   - MiniBossBullet
   - MainBoss
+  - EnemyLaser
   layers:
   - Default
   - TransparentFX
@@ -35,7 +36,7 @@ TagManager:
   - ShieldActivated
   - GoldStar
   - SuperSplash
-  - 
+  - EnemyLaser
   - 
   - 
   - 

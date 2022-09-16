@@ -31,17 +31,23 @@ public class EnemyController : MonoBehaviour
 
     private Animator anim;
 
+    public GameObject laserObject;
+
+    public bool laserActivate = false;
+
     // Start is called before the first frame update
     void Start()
     {
         _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
+        //starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakeManager = GameObject.Find("Shake Manager").GetComponent<ShakeManager>();
         superSplashActivate = GameObject.Find("Player").GetComponent<SuperSplashActivate>();
         anim = GetComponent<Animator>();
+
+        StartCoroutine(Laser());
     }
 
     // Update is called once per frame
@@ -75,6 +81,22 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    IEnumerator Laser()
+    {
+        yield return new WaitForSeconds(3.0f);
+        if (laserActivate)
+        {
+            laserObject.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(1.0f);
+        if (laserActivate)
+        {
+            laserObject.SetActive(false);
+        }
+
+        StartCoroutine(Laser());
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("Player"))
@@ -85,11 +107,6 @@ public class EnemyController : MonoBehaviour
         else if (gameObject.CompareTag("MiniBoss") && other.gameObject.CompareTag("Player"))
         {
             //_playerHealthBar.DamageTaken(5);
-            //Destroy(gameObject);
-        }
-        else if (gameObject.CompareTag("MainBoss") && other.gameObject.CompareTag("Player"))
-        {
-           // _playerHealthBar.DamageTaken(5);
             //Destroy(gameObject);
         }
         else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
