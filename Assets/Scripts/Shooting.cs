@@ -11,16 +11,22 @@ public class Shooting : MonoBehaviour
     public bool isActivatedOne = true;
 
     private GameManager gameManager;
+
+    private AudioSource shootingAudio;
+    public AudioClip bulletSound;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(ShootBulletOne());
+        StartCoroutine(Fire());
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        shootingAudio = GetComponent<AudioSource>();
     }
 
     void Fire1()
     {
         Instantiate(bulletOne, bulletOneSpawnPosition.position, bulletOne.transform.rotation);
+        //
     }
 
     IEnumerator ShootBulletOne()
@@ -36,4 +42,19 @@ public class Shooting : MonoBehaviour
         }
         StartCoroutine(ShootBulletOne());
     }
+    void FireSound()
+    {
+        if (gameManager.isGameActive)
+        {
+            shootingAudio.PlayOneShot(bulletSound, 0.04f);
+        }
+    }
+
+    IEnumerator Fire()
+    {
+        yield return new WaitForSeconds(0.2f);
+        FireSound();
+        StartCoroutine(Fire());
+    }
+
 }

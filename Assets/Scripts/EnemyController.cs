@@ -29,23 +29,32 @@ public class EnemyController : MonoBehaviour
 
     public bool isDestroyed = false;
 
-    private Animator anim;
-
     public GameObject laserObject;
 
     public bool laserActivate = false;
+
+    public GameObject enemyExplosion;
+
+    private PlayerHealthBar _enemyHealthBar;
+
+    private AudioSource enemyAudioSource;
+    public AudioClip explosionSound;
+    public AudioClip enemyLaserSound;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
+        _enemyHealthBar = GameObject.Find("MiniBoss").GetComponent<PlayerHealthBar>();
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         //starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakeManager = GameObject.Find("Shake Manager").GetComponent<ShakeManager>();
         superSplashActivate = GameObject.Find("Player").GetComponent<SuperSplashActivate>();
-        anim = GetComponent<Animator>();
+
+        enemyAudioSource = GetComponent<AudioSource>();
 
         StartCoroutine(Laser());
     }
@@ -84,6 +93,11 @@ public class EnemyController : MonoBehaviour
     IEnumerator Laser()
     {
         yield return new WaitForSeconds(3.0f);
+        if (gameManager.miniBossActive)
+        {
+            AudioSource.PlayClipAtPoint(enemyLaserSound, Camera.main.transform.position, 1.0f);
+        }
+
         if (laserActivate)
         {
             laserObject.SetActive(true);
@@ -102,34 +116,48 @@ public class EnemyController : MonoBehaviour
         if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("Player"))
         {
             _playerHealthBar.DamageTaken(2);
+            GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+            enemyAudioSource.PlayOneShot(explosionSound, 1.0f);
+            Destroy(explosion, 0.5f);
             Destroy(gameObject);
+        }
+        else if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
+        {
+            enemyHealth--;
+            if (enemyHealth <= 0)
+            {
+                GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 1.0f);
+                Destroy(explosion, 0.5f);
+                Destroy(gameObject);
+            }
         }
         else if (gameObject.CompareTag("MiniBoss") && other.gameObject.CompareTag("Player"))
         {
             //_playerHealthBar.DamageTaken(5);
             //Destroy(gameObject);
         }
-        else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
+        
+        else if (gameObject.CompareTag("MiniBoss") && other.gameObject.CompareTag("bullet_lvl1"))
         {
             enemyHealth--;
+            _enemyHealthBar.DamageTaken(1);
             if (enemyHealth <= 0)
             {
-                isDestroyed = true;
-                //anim.Play("Explosion");
-                //anim.SetTrigger("IsDestroy");
-                //starSpawner.Spawn(gameManager.prevPosition);
-                if (gameObject.CompareTag("MiniBoss"))
-                {
-                    gameManager.miniBossActive = false;
-                    gameManager.miniBossDestroyed = true;
-                    gameManager.mainBossActive = true;
-                    shakeManager.speed = 2.34f;
-                    shakeManager.amount = 0.06f;
-                    shakeManager.duration = 10.0f;
-                    //superSplashActivate.superSplashCounter = 5;
-                }
+                GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(explosionSound,Camera.main.transform.position, 1.0f);
+                gameManager.miniBossActive = false;
+                gameManager.miniBossDestroyed = true;
+                gameManager.mainBossActive = true;
+                shakeManager.speed = 2.34f;
+                shakeManager.amount = 0.06f;
+                shakeManager.duration = 10.0f;
+                Destroy(explosion, 0.5f);
                 Destroy(gameObject);
-
+                
+                ////superSplashActivate.superSplashCounter = 5;
+                //Destroy(gameObject);
+                
             }
         }
 

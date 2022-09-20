@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4535670646264881261}
   - component: {fileID: 4535670646264881260}
   - component: {fileID: 1368460069}
+  - component: {fileID: 4420832512555705704}
+  - component: {fileID: 1318640674}
   m_Layer: 6
   m_Name: MiniBoss 1
   m_TagString: MiniBoss
@@ -84,7 +86,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 267190718, guid: dd8c83069f4875b43a46c3658b951203, type: 3}
   m_Color: {r: 0.5613208, g: 0.69941634, b: 1, a: 1}
   m_FlipX: 0
@@ -278,6 +280,7 @@ MonoBehaviour:
   endAngle: 440
   MiniBoss: {fileID: 0}
   gameManager: {fileID: 0}
+  superSplash: {fileID: 0}
 --- !u!114 &4535670646264881261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +321,9 @@ MonoBehaviour:
   isDestroyed: 0
   laserObject: {fileID: 319715066}
   laserActivate: 0
+  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
+  explosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
+  enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
 --- !u!114 &1368460069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +336,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6529e890dff8fba40a0f992fd66cfd40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4420832512555705704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244416368282746359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d012431ec84204c866d803badcbc66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1318640674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244416368282746359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a5f6e8e31547743bcaa943b1ea2adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealthBarSlider: {fileID: 0}
+  amountOfBulletTaken: 600
+  currentBulletTaken: 0
+  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
+  playerExplosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
 --- !u!1001 &2697221399996977961
 PrefabInstance:
   m_ObjectHideFlags: 0

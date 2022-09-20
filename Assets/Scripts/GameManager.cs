@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public bool miniBossActive = false;
     public bool miniBossDestroyed = false;
     public bool mainBossActive = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,15 +76,13 @@ public class GameManager : MonoBehaviour
         {
             PowerUpSpawner(1); //armour
         }
-        if (timeCounter == 110) //105
+        if (timeCounter == 110)
         {
             PowerUpSpawner(2); //heal
-            //enemySpawner.enemySpawnDelay -= 0.1f;
         }
         if (timeCounter == 80)
         {
             PowerUpSpawner(3);
-            //enemySpawner.enemySpawnDelay -= 0.2f; //double bullet
         }
         if (timeCounter == 50)
         {
@@ -98,7 +97,6 @@ public class GameManager : MonoBehaviour
             PowerUpSpawner(2); //heal
         }
         yield return new WaitForSeconds(1);
-        //timerText.text = "Time: " + timeCounter;
         StartCoroutine(Timer());
     }
 
@@ -106,4 +104,5 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(powerUpList[powerUpIndex], new Vector2(Random.Range(-2.3f, 2.3f), Random.Range(3.0f, -3.0f)), powerUpList[powerUpIndex].transform.rotation);
     }
+
 }

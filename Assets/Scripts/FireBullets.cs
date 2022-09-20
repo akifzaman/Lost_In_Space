@@ -13,11 +13,14 @@ public class FireBullets : MonoBehaviour
     public MiniBossActivate MiniBoss;
 
     public GameManager gameManager;
+
+    public SuperSplashBehaviour superSplash;
     // Start is called before the first frame update
     void Start()
     {
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        superSplash = GameObject.Find("Player").GetComponent<SuperSplashBehaviour>();
         InvokeRepeating("Fire", 0f, 1f);
     }
 
@@ -43,7 +46,7 @@ public class FireBullets : MonoBehaviour
                 Vector2 bulDir = (bullMoveVector - transform.position).normalized;
 
                 GameObject bul = BulletPool.bulletPoolInstance.GetBullet1();
-                
+
                 bul.transform.position = transform.position;
                 bul.transform.rotation = transform.rotation;
                 bul.SetActive(true);

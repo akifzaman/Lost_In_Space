@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1939245619601230, guid: d2f2f92c494bd1c41970791d8041c000, type: 3}
       propertyPath: m_TagString
-      value: bullet_lvl2
+      value: bullet_lvl1
       objectReference: {fileID: 0}
     - target: {fileID: 4586067091643388, guid: d2f2f92c494bd1c41970791d8041c000, type: 3}
       propertyPath: m_RootOrder
@@ -202,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1939245619601230, guid: d2f2f92c494bd1c41970791d8041c000, type: 3}
       propertyPath: m_TagString
-      value: bullet_lvl2
+      value: bullet_lvl1
       objectReference: {fileID: 0}
     - target: {fileID: 4586067091643388, guid: d2f2f92c494bd1c41970791d8041c000, type: 3}
       propertyPath: m_RootOrder

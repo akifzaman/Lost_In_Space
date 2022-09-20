@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1706568302894724077}
   m_Layer: 14
   m_Name: superSplash
-  m_TagString: Untagged
+  m_TagString: SuperSplash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
+  isCollided: 0
   startPosition: {fileID: 0}
 --- !u!114 &-4613580006067993225
 MonoBehaviour:

@@ -20,6 +20,9 @@ TagManager:
   - MiniBossBullet
   - MainBoss
   - EnemyLaser
+  - SuperSplash
+  - PlayerHealthBar
+  - EnemyHealthBar
   layers:
   - Default
   - TransparentFX

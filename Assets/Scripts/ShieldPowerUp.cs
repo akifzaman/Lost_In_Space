@@ -27,11 +27,6 @@ public class ShieldPowerUp : MonoBehaviour
         {
             Destroy(gameObject);
             playerController.ActivateShield();
-            //isShieldActivated = true;
-            //if (isShieldActivated)
-            //{
-            //    shieldPowerUp.SetActive(true);
-            //}
 
         }
     }

@@ -20,10 +20,17 @@ public class PlayerController : MonoBehaviour
     public SpeedPowerUp speedPowerUp;
 
     public GameObject parryShield;
+    public GameObject enemyExplosion;
+
+    private AudioSource playerAudio;
+    public AudioClip powerUpSound;
+    public AudioClip bulletSound;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
+        playerAudio = GetComponent<AudioSource>();
     }
     
     // Update is called once per frame
@@ -40,7 +47,6 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * speed);
         transform.Translate(Vector2.down * Time.deltaTime * verticalInput * speed);
-
     }
 
 
@@ -84,6 +90,13 @@ public class PlayerController : MonoBehaviour
         {
             _playerHealthBar.DamageTaken(1);
         }
+
+        if (other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
+            other.gameObject.CompareTag("ShieldPowerUp"))
+        {
+            playerAudio.PlayOneShot(powerUpSound, 1.0f);
+        }
+
     }
 
 }

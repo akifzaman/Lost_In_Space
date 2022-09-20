@@ -17,6 +17,11 @@ public class ObstacleController : MonoBehaviour
 
     public int obstacleEnergy;
 
+    public GameObject enemyExplosion;
+
+    private AudioSource obstacleSoundSource;
+    public AudioClip obstacleSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +42,9 @@ public class ObstacleController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             _playerHealthBar.DamageTaken(2);
+            GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(obstacleSound, Camera.main.transform.position, 1.0f);
+            Destroy(explosion, 0.5f);
             Destroy(gameObject);
         }
         else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
@@ -45,6 +53,9 @@ public class ObstacleController : MonoBehaviour
             obstacleEnergy--;
             if (obstacleEnergy == 0)
             {
+                GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+                AudioSource.PlayClipAtPoint(obstacleSound, Camera.main.transform.position, 1.0f);
+                Destroy(explosion, 0.5f);
                 Destroy(gameObject);
             }
         }

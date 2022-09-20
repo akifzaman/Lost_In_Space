@@ -6,6 +6,10 @@ public class ShieldBehaviour : MonoBehaviour
 {
     public float shieldDuration = 5.0f;
     public Transform shieldPosition;
+
+    public GameObject enemyExplosion;
+
+    public AudioClip explosionSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +30,9 @@ public class ShieldBehaviour : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Player") || !other.gameObject.CompareTag("bullet_lvl1") || !other.gameObject.CompareTag("bullet_lvl2"))
         {
+            GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 1.0f);
+            Destroy(explosion, 0.5f);
             Destroy(other.gameObject);
         }
     }

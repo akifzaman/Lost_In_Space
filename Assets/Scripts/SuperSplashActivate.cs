@@ -10,10 +10,14 @@ public class SuperSplashActivate : MonoBehaviour
 
     private GameManager gameManager;
 
+    private AudioSource playerAudio;
+    public AudioClip superSplashSound;
+
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,6 +28,7 @@ public class SuperSplashActivate : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && superSplashCounter > 0)
             {
                 superSplashCounter--;
+                playerAudio.PlayOneShot(superSplashSound, 0.7f);
                 Instantiate(superSplash, superSplash.transform.position, superSplash.transform.rotation);
             }
         }

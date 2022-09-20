@@ -101,7 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   boundary: 6
+  speedPowerUp: {fileID: 0}
   obstacleEnergy: 4
+  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
+  obstacleSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
 --- !u!50 &527123969139841706
 Rigidbody2D:
   serializedVersion: 4
