@@ -148,9 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3c01b5a223e624eb72b7268e0c6bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5156213549747281124, guid: 9a0d36c519d24654db6c071b44e4a19e, type: 3}
   speed: 2
   bulletRb: {fileID: -7597257616337063978}
+  player: {fileID: 5156213549747281124, guid: 9a0d36c519d24654db6c071b44e4a19e, type: 3}
 --- !u!114 &-2650114901405600891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,5 +177,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b22ae60e7a475245a372b6cca637115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   boundary: -5.5

@@ -44,25 +44,6 @@ public class ShipMovement : MonoBehaviour
                     new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
             }
         }
-        else if (gameManager.miniBossDestroyed)
-        {
-            if (transform.position.x > 2.3f)
-            {
-                moveRight = false;
-            }
-            else if (transform.position.x < -2.3f)
-            {
-                moveRight = true;
-            }
-
-            if (moveRight)
-            {
-                transform.position = new Vector2(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
-            }
-            else
-            {
-                transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
-            }
-        }
+        
     }
 }

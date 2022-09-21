@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyFollowPlayer : MonoBehaviour
 {
@@ -23,12 +24,19 @@ public class EnemyFollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.isGameActive)
+        if (gameManager.isGameActive && transform.position.y >= player.transform.position.y)
         {
             Vector3 direction = player.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.x, -direction.y) * Mathf.Rad2Deg;
             rb.rotation = angle;
             direction.Normalize();
+            movement = direction;
+        }
+        else
+        {
+            Vector3 direction = new Vector3(0,-1,0);
+            float angle = Mathf.Atan2(direction.x, -direction.y) * Mathf.Rad2Deg;
+            rb.rotation = -angle;
             movement = direction;
         }
     }

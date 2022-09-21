@@ -21,6 +21,7 @@ public class ObstacleController : MonoBehaviour
 
     private AudioSource obstacleSoundSource;
     public AudioClip obstacleSound;
+    public AudioClip obstacleHitSound;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,7 @@ public class ObstacleController : MonoBehaviour
         else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
         {
             Destroy(other.gameObject);
+            AudioSource.PlayClipAtPoint(obstacleHitSound, Camera.main.transform.position, 1.0f);
             obstacleEnergy--;
             if (obstacleEnergy == 0)
             {

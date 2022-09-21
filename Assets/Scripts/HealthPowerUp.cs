@@ -5,11 +5,18 @@ using UnityEngine;
 public class HealthPowerUp : MonoBehaviour
 {
     private PlayerHealthBar playerHealthBar;
+
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        if (gameManager.isGameActive)
+        {
+            playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
+        }
         StartCoroutine(HealthPowerUpDestroy());
+
     }
 
     // Update is called once per frame

@@ -5,16 +5,19 @@ using UnityEngine.EventSystems;
 
 public class EnemyBulletAngle : MonoBehaviour
 {
-    public GameObject player;
     public float speed = 3.0f;
     public Rigidbody2D bulletRb;
 
     private GameManager gameManager;
+
+    public GameObject player;
+    private GameObject enemy;
     // Start is called before the first frame update
     void Start()
     {
         bulletRb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
+        enemy = GameObject.Find("Enemy");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         if (gameManager.isGameActive)
         {
@@ -26,6 +29,6 @@ public class EnemyBulletAngle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 }

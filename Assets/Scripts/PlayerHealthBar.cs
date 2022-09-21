@@ -42,10 +42,21 @@ public class PlayerHealthBar : MonoBehaviour
         }
         playerHealthBarSlider.fillRect.gameObject.SetActive(true);
         playerHealthBarSlider.value = currentBulletTaken; //currentHealth
-        if (currentBulletTaken >= amountOfBulletTaken && gameManager.isGameActive && gameManager.miniBossActive)
+
+        if (currentBulletTaken >= amountOfBulletTaken && gameManager.isGameActive && gameObject.CompareTag("Player"))
+        {
+            GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(playerExplosionSound, Camera.main.transform.position, 1.0f);
+            Destroy(explosion, 0.5f);
+            Destroy(gameObject);
+            gameManager.isGameActive = false;
+            gameManager.GameOver();
+        }
+
+        else if (currentBulletTaken >= amountOfBulletTaken && gameManager.isGameActive && gameManager.miniBossActive)
         {
             //gameManager.AddScore(amountToBeFed);
-            Debug.Log("Bingo");
+            //Debug.Log("Bingo");
             gameManager.isGameActive = false;
             gameManager.miniBossActive = false;
             GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);

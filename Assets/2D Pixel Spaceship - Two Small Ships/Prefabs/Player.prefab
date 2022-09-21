@@ -571,9 +571,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300006, guid: 8aeb9e233fbb8f14db39770841b78b94, type: 3}
-  m_Color: {r: 1, g: 0.66766727, b: 0.2688679, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -603,6 +603,9 @@ MonoBehaviour:
   enemyExplosion: {fileID: 0}
   powerUpSound: {fileID: 8300000, guid: 920f601cfb989d142b4c4a01651a449b, type: 3}
   bulletSound: {fileID: 8300000, guid: 92dee7c1a78e4274d9623a65e4bfafe1, type: 3}
+  playerHitSound: {fileID: 8300000, guid: 9e92c356d7e7c4d4cbd8aa70f98eeee2, type: 3}
+  spriteRenderer: {fileID: 0}
+  isClashed: 0
 --- !u!114 &5154822863510121318
 MonoBehaviour:
   m_ObjectHideFlags: 0

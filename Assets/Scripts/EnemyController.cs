@@ -40,6 +40,7 @@ public class EnemyController : MonoBehaviour
     private AudioSource enemyAudioSource;
     public AudioClip explosionSound;
     public AudioClip enemyLaserSound;
+    public AudioClip enemyHitSound;
 
 
     // Start is called before the first frame update
@@ -70,16 +71,16 @@ public class EnemyController : MonoBehaviour
             {
                 Vector2 lookDirection = (player.transform.position - transform.position).normalized;
                 transform.Translate(lookDirection * Time.deltaTime * speed, Space.World);
-                gameManager.prevPosition = gameManager.currentPosition;
-                gameManager.currentPosition = transform.position;
 
+            }
+            else
+            {
+                lookDirectionAllow = false;
             }
         }
         else if (gameManager.isGameActive)
         {
             transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
-            gameManager.prevPosition = gameManager.currentPosition;
-            gameManager.currentPosition = transform.position;
         }
 
         //transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
@@ -119,16 +120,19 @@ public class EnemyController : MonoBehaviour
             GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
             enemyAudioSource.PlayOneShot(explosionSound, 1.0f);
             Destroy(explosion, 0.5f);
+            gameManager.score++;
             Destroy(gameObject);
         }
         else if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
         {
             enemyHealth--;
+            AudioSource.PlayClipAtPoint(enemyHitSound, Camera.main.transform.position, 0.1f);
             if (enemyHealth <= 0)
             {
                 GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
                 AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 1.0f);
                 Destroy(explosion, 0.5f);
+                gameManager.score++;
                 Destroy(gameObject);
             }
         }
@@ -153,6 +157,7 @@ public class EnemyController : MonoBehaviour
                 shakeManager.amount = 0.06f;
                 shakeManager.duration = 10.0f;
                 Destroy(explosion, 0.5f);
+                gameManager.score+=100;
                 Destroy(gameObject);
                 
                 ////superSplashActivate.superSplashCounter = 5;

@@ -25,12 +25,22 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudio;
     public AudioClip powerUpSound;
     public AudioClip bulletSound;
+    public AudioClip playerHitSound;
+
+    private Material matWhite;
+    private Material matDefault;
+    public SpriteRenderer spriteRenderer;
+
+    public bool isClashed = false;
 
     // Start is called before the first frame update
     void Start()
     {
         _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
         playerAudio = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        //matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        //matDefault = spriteRenderer.material;
     }
     
     // Update is called once per frame
@@ -38,6 +48,11 @@ public class PlayerController : MonoBehaviour
     {
         StayInBound();
 
+        if (isClashed)
+        {
+            ColorChange();
+            isClashed = false;
+        }
         if (health == 0.0f)
         {
             Destroy(gameObject);
@@ -86,17 +101,35 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!gameObject.CompareTag("Player"))
+        if (!(other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
+             other.gameObject.CompareTag("ShieldPowerUp")))
         {
             _playerHealthBar.DamageTaken(1);
+            ///flash the player
+            //spriteRenderer.material = matWhite;
+            AudioSource.PlayClipAtPoint(playerHitSound, Camera.main.transform.position, 1.0f);
+            isClashed = true;
         }
 
-        if (other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
-            other.gameObject.CompareTag("ShieldPowerUp"))
+        else if (other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
+                           other.gameObject.CompareTag("ShieldPowerUp"))
         {
             playerAudio.PlayOneShot(powerUpSound, 1.0f);
         }
 
+    }
+
+    void ColorChange()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            spriteRenderer.color = Color.red;
+            Invoke("ResetColor", 0.2f);
+        }
+    }
+    void ResetColor()
+    {
+        spriteRenderer.color = Color.yellow;
     }
 
 }

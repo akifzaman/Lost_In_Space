@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public bool isGameActive = false;
    
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI scoreText;
+    public int score = 0;
+
     public Button restartButton;
 
     public GameObject titleScreen;
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        scoreText.text = $" {score:0000}";
     }
 
     public void StartGame()

@@ -11,6 +11,7 @@ public class EnemyBulletController : MonoBehaviour
     private PlayerHealthBar _playerHealthBar;
 
     private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
