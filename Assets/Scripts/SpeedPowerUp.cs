@@ -35,7 +35,7 @@ public class SpeedPowerUp : MonoBehaviour
             else if (moveDownController.speed == 5)
             {
                 moveDownController.speed *= 10;
-                gameManager.timeCounter -= 20;
+                gameManager.timeCounter -= 5;
             }
         }
     }

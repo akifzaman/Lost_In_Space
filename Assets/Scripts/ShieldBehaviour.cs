@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldBehaviour : MonoBehaviour
 {
-    public float shieldDuration = 5.0f;
+    public float shieldDuration = 7.0f;
     public Transform shieldPosition;
 
     public GameObject enemyExplosion;

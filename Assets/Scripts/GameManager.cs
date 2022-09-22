@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public Vector2 currentPosition;
 
     public TextMeshProUGUI timerText;
-    public int timeCounter = 200;
+    public int timeCounter = 90;
 
     public bool isSpeedUp = false;
 
@@ -75,27 +75,27 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (timeCounter == 160)
+        if (timeCounter == 80)
         {
             PowerUpSpawner(0); //sonic
         }
-        if (timeCounter == 130)
+        if (timeCounter == 65)
         {
             PowerUpSpawner(1); //armour
-        }
-        if (timeCounter == 110)
-        {
-            PowerUpSpawner(2); //heal
-        }
-        if (timeCounter == 80)
-        {
-            PowerUpSpawner(3);
         }
         if (timeCounter == 50)
         {
             PowerUpSpawner(2); //heal
         }
-        if (timeCounter == 30)
+        if (timeCounter == 35)
+        {
+            PowerUpSpawner(3); //double bullet
+        }
+        if (timeCounter == 25)
+        {
+            PowerUpSpawner(2); //heal
+        }
+        if (timeCounter == 15)
         {
             PowerUpSpawner(0); //sonic
         }

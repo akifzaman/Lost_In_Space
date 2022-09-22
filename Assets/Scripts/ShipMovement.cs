@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
     private float moveSpeed;
-    private bool moveRight;
+    //private bool moveRight;
 
     public MiniBossActivate MiniBoss;
 
@@ -24,7 +24,7 @@ public class ShipMovement : MonoBehaviour
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         moveSpeed = 2f;
-        moveRight = true;
+        //moveRight = true;
         StartCoroutine(RandomMovementGenerate());
     }
 
