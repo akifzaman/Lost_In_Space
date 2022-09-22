@@ -19,9 +19,15 @@ public class EnemyBulletAngle : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         enemy = GameObject.Find("Enemy");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        if (gameManager.isGameActive)
+        bool check = (enemy.transform.position.y < player.transform.position.y);
+        if (gameManager.isGameActive && !check)
         {
             Vector2 direction = (player.transform.position - transform.position).normalized * speed;
+            bulletRb.velocity = new Vector2(direction.x, direction.y);
+        }
+        else if ( gameManager.isGameActive && check)
+        {
+            Vector2 direction = Vector2.down * speed;
             bulletRb.velocity = new Vector2(direction.x, direction.y);
         }
     }

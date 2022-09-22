@@ -28,6 +28,7 @@ public class SuperSplashActivate : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && superSplashCounter > 0)
             {
                 superSplashCounter--;
+                gameManager.laserCount--;
                 playerAudio.PlayOneShot(superSplashSound, 0.7f);
                 Instantiate(superSplash, superSplash.transform.position, superSplash.transform.rotation);
             }

@@ -263,6 +263,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MiniBoss: {fileID: 0}
   gameManager: {fileID: 0}
+  prevMovement: 0
+  currentMovement: 1
+  yBoundaryUp: 4.5
+  yBoundaryDown: 3
 --- !u!114 &4535670646264881258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +328,7 @@ MonoBehaviour:
   enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
   explosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
   enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
-  enemyHitSound: {fileID: 0}
+  enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
 --- !u!114 &1368460069
 MonoBehaviour:
   m_ObjectHideFlags: 0

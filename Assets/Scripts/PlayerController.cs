@@ -27,8 +27,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip bulletSound;
     public AudioClip playerHitSound;
 
-    private Material matWhite;
-    private Material matDefault;
     public SpriteRenderer spriteRenderer;
 
     public bool isClashed = false;
@@ -39,8 +37,6 @@ public class PlayerController : MonoBehaviour
         _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
         playerAudio = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
-        //matDefault = spriteRenderer.material;
     }
     
     // Update is called once per frame
@@ -105,8 +101,6 @@ public class PlayerController : MonoBehaviour
              other.gameObject.CompareTag("ShieldPowerUp")))
         {
             _playerHealthBar.DamageTaken(1);
-            ///flash the player
-            //spriteRenderer.material = matWhite;
             AudioSource.PlayClipAtPoint(playerHitSound, Camera.main.transform.position, 1.0f);
             isClashed = true;
         }

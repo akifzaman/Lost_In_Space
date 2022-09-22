@@ -28,7 +28,6 @@ public class MainBossBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Mathf.Abs(transform.position.y - playerController.transform.position.y)););
         if (gameManager.miniBossDestroyed && gameManager.isGameActive)
         {
             if (transform.position.y > 4.0f)
@@ -57,16 +56,13 @@ public class MainBossBehaviour : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space) && parryAllow)
                 {
                     playerController.ActivateParryShield();
-                    //Debug.Log("well done!");
                     parry = true;
                     parryAllow = false;
-                    //playerController.DeactivateParryShield();
 
                 }
             }
             else if(Input.GetKeyDown(KeyCode.Space) && parryAllow && !parry)
             {
-                //Debug.Log("Parry Shield Activated");
                 parryAllow = false;
                 StartCoroutine(ParryRestore());
             }
@@ -86,7 +82,6 @@ public class MainBossBehaviour : MonoBehaviour
             {
                 _playerHealthBar.DamageTaken(-2);
                 parry = false;
-                //parryAllow = false;
                 StartCoroutine(ParryRestore());
             }
         }

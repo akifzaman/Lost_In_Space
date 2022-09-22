@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
    
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI laserText;
+
+    public int laserCount = 3;
     public int score = 0;
 
     public Button restartButton;
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         scoreText.text = $" {score:0000}";
+        laserText.SetText("Laser: " + laserCount);
     }
 
     public void StartGame()

@@ -83,8 +83,6 @@ public class EnemyController : MonoBehaviour
             transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
         }
 
-        //transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
-
         if (transform.position.y < boundary)
         {
             Destroy(gameObject);
@@ -138,13 +136,14 @@ public class EnemyController : MonoBehaviour
         }
         else if (gameObject.CompareTag("MiniBoss") && other.gameObject.CompareTag("Player"))
         {
-            //_playerHealthBar.DamageTaken(5);
-            //Destroy(gameObject);
+            _playerHealthBar.DamageTaken(20);
+            Destroy(other.gameObject);
         }
         
         else if (gameObject.CompareTag("MiniBoss") && other.gameObject.CompareTag("bullet_lvl1"))
         {
             enemyHealth--;
+            AudioSource.PlayClipAtPoint(enemyHitSound, Camera.main.transform.position, 0.1f);
             _enemyHealthBar.DamageTaken(1);
             if (enemyHealth <= 0)
             {
@@ -159,10 +158,6 @@ public class EnemyController : MonoBehaviour
                 Destroy(explosion, 0.5f);
                 gameManager.score+=100;
                 Destroy(gameObject);
-                
-                ////superSplashActivate.superSplashCounter = 5;
-                //Destroy(gameObject);
-                
             }
         }
 

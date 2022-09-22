@@ -12,9 +12,12 @@ public class SuperSplashBehaviour : MonoBehaviour
     private AudioSource laserAudioSource;
     public AudioClip laserExplosionSound;
 
+    private PlayerHealthBar _enemyHealthBar;
+
     void Start()
     {
         laserAudioSource = GetComponent<AudioSource>();
+        _enemyHealthBar = GameObject.Find("MiniBoss").GetComponent<PlayerHealthBar>();
     }
     void Update()
     {
@@ -34,6 +37,10 @@ public class SuperSplashBehaviour : MonoBehaviour
         {
             //AudioSource.PlayClipAtPoint(laserExplosionSound, Camera.main.transform.position, 1.0f);
             Destroy(other.gameObject);
+        }
+        else if (other.gameObject.CompareTag("MiniBoss"))
+        {
+            _enemyHealthBar.DamageTaken(10);
         }
     }
 }

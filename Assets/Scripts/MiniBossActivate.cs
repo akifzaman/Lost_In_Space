@@ -38,7 +38,7 @@ public class MiniBossActivate : MonoBehaviour
                 speed = 0.0f;
                 gameManager.miniBossActive = true;
                 enemyController.laserActivate = true;
-                superSplashActivate.superSplashCounter = 0;
+                //superSplashActivate.superSplashCounter = 0;
             }
             if (gameObject.CompareTag("MiniBoss") && transform.position.y > activationPoint)
             {
