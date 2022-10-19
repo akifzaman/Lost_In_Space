@@ -5,36 +5,34 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float horizontalInput;
-    private float verticalInput;
-    private float xBoundary = 2.40f;
-    private float yBoundaryUp = 4.78f;
-    private float yBoundaryDown = -4.60f;
     public float speed = 10.0f;
-
     public float health = 100.0f;
+    public bool isClashed = false;
+
     public GameObject glowShield;
-    private PlayerHealthBar _playerHealthBar;
-
-    private GameManager gameManager;
-    public SpeedPowerUp speedPowerUp;
-
     public GameObject parryShield;
     public GameObject enemyExplosion;
 
-    private AudioSource playerAudio;
     public AudioClip powerUpSound;
     public AudioClip bulletSound;
     public AudioClip playerHitSound;
 
     public SpriteRenderer spriteRenderer;
 
-    public bool isClashed = false;
+    public SpeedPowerUp speedPowerUp;
+
+    private float horizontalInput;
+    private float verticalInput;
+    private float xBoundary = 2.40f;
+    private float yBoundaryUp = 4.78f;
+    private float yBoundaryDown = -4.60f;
+    private PlayerHealthBar _playerHealthBar;
+    private AudioSource playerAudio;
 
     // Start is called before the first frame update
     void Start()
     {
-        _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
+        _playerHealthBar = GetComponent<PlayerHealthBar>();
         playerAudio = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -42,18 +40,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!GameManager.instance.isGameActive) return;
         StayInBound();
-
-        if (isClashed)
-        {
-            ColorChange();
-            isClashed = false;
-        }
-        if (health == 0.0f)
-        {
-            Destroy(gameObject);
-        }
-
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * speed);
@@ -86,14 +74,6 @@ public class PlayerController : MonoBehaviour
         glowShield.SetActive(true);
     }
 
-    public void ActivateParryShield()
-    {
-        parryShield.SetActive(true);
-    }
-    public void DeactivateParryShield()
-    {
-        parryShield.SetActive(false);
-    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {

@@ -1,60 +1,46 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public SpeedPowerUp speedPowerUp;
+    public int enemyHealth;
     public float speed = 3.0f;
+
     [SerializeField] private float boundary = 5.5f;
     [SerializeField] private float rotateAngle = 1.0f;
     [SerializeField] private bool lookDirectionAllow;
 
     private GameObject player;
-
     private Rigidbody2D enemyRb;
 
     private PlayerController playerController;
+
     private PlayerHealthBar _playerHealthBar;
+    private PlayerHealthBar _enemyHealthBar;
+    
+    private AudioSource enemyAudioSource;
 
-    public SpeedPowerUp speedPowerUp;
-
-    public int enemyHealth;
-
-    private GameManager gameManager;
-    private StarSpawner starSpawner;
     public MiniBossActivate MiniBoss;
     public ShakeManager shakeManager;
-
     public SuperSplashActivate superSplashActivate;
-
     public bool isDestroyed = false;
-
     public GameObject laserObject;
-
     public bool laserActivate = false;
-
     public GameObject enemyExplosion;
     public GameObject laserReload;
-
     public Transform laserReloadPoint;
 
-    private PlayerHealthBar _enemyHealthBar;
-
-    private AudioSource enemyAudioSource;
     public AudioClip explosionSound;
     public AudioClip enemyLaserSound;
     public AudioClip enemyLaserLoadSound;
     public AudioClip enemyHitSound;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
         _enemyHealthBar = GameObject.Find("MiniBoss").GetComponent<PlayerHealthBar>();
         player = GameObject.Find("Player");
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        //starSpawner = GameObject.Find("StarSpawner").GetComponent<StarSpawner>();
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakeManager = GameObject.Find("Shake Manager").GetComponent<ShakeManager>();
         superSplashActivate = GameObject.Find("Player").GetComponent<SuperSplashActivate>();
@@ -64,12 +50,11 @@ public class EnemyController : MonoBehaviour
         StartCoroutine(Laser());
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Rotate(0.0f, 0.0f * Time.deltaTime, rotateAngle, 0.0f);
 
-        if (lookDirectionAllow && gameManager.isGameActive)
+        if (lookDirectionAllow && GameManager.instance.isGameActive)
         {
             if (transform.position.y > player.transform.position.y)
             {
@@ -82,7 +67,7 @@ public class EnemyController : MonoBehaviour
                 lookDirectionAllow = false;
             }
         }
-        else if (gameManager.isGameActive)
+        else if (GameManager.instance.isGameActive)
         {
             transform.Translate(Vector2.down * Time.deltaTime * speed, Space.World);
         }
@@ -96,7 +81,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator Laser()
     {
         yield return new WaitForSeconds(3.0f);
-        if (gameManager.miniBossActive)
+        if (GameManager.instance.miniBossActive)
         {
             GameObject bossLaserReload = Instantiate(laserReload,  transform);
             AudioSource.PlayClipAtPoint(enemyLaserLoadSound, Camera.main.transform.position, 1.0f);
@@ -113,7 +98,6 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         if (laserActivate)
         {
-            //laserReload.SetActive(false);
             laserObject.SetActive(false);
         }
 
@@ -127,7 +111,7 @@ public class EnemyController : MonoBehaviour
             GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
             enemyAudioSource.PlayOneShot(explosionSound, 1.0f);
             Destroy(explosion, 0.5f);
-            gameManager.score++;
+            GameManager.instance.score++;
             Destroy(gameObject);
         }
         else if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
@@ -139,7 +123,7 @@ public class EnemyController : MonoBehaviour
                 GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
                 AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 1.0f);
                 Destroy(explosion, 0.5f);
-                gameManager.score++;
+                GameManager.instance.score++;
                 Destroy(gameObject);
             }
         }
@@ -158,14 +142,13 @@ public class EnemyController : MonoBehaviour
             {
                 GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
                 AudioSource.PlayClipAtPoint(explosionSound,Camera.main.transform.position, 1.0f);
-                gameManager.miniBossActive = false;
-                gameManager.miniBossDestroyed = true;
-                gameManager.mainBossActive = true;
+                GameManager.instance.miniBossActive = false;
+                GameManager.instance.miniBossDestroyed = true;
                 shakeManager.speed = 2.34f;
                 shakeManager.amount = 0.06f;
                 shakeManager.duration = 10.0f;
                 Destroy(explosion, 0.5f);
-                gameManager.score+=100;
+                GameManager.instance.score +=100;
                 Destroy(gameObject);
             }
         }

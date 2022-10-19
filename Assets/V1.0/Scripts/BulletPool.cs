@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,26 +8,15 @@ public class BulletPool : MonoBehaviour
     [SerializeField] private GameObject pooledBullet1;
     [SerializeField] private GameObject pooledBullet2;
     private bool notEnoughBulletInPool = true;
-
     private List<GameObject> bullets;
-
-    public MiniBossActivate MiniBoss;
-    // Start is called before the first frame update
 
     private void Awake()
     {
-        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         bulletPoolInstance = this;
     }
     void Start()
     {
         bullets = new List<GameObject>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public GameObject GetBullet1()

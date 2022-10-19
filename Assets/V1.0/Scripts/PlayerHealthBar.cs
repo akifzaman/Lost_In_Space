@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealthBar : MonoBehaviour
 {
-    public Slider playerHealthBarSlider;
+    private Slider playerHealthBarSlider;
     public float amountOfBulletTaken; //amountOfHealth
     public float currentBulletTaken = 0; //currentHealth
 
@@ -21,18 +21,15 @@ public class PlayerHealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.instance;
+        playerHealthBarSlider = gameManager.UiManager.PlayerHealthBarSlider;
+
         playerHealthBarSlider.maxValue = amountOfBulletTaken; //amountOfHealth
         playerHealthBarSlider.value = 0;
         playerHealthBarSlider.fillRect.gameObject.SetActive(false);
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         playerAudio = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void DamageTaken(float amount) //damageTaken
     {
         currentBulletTaken += amount; //currentHealth
@@ -55,8 +52,6 @@ public class PlayerHealthBar : MonoBehaviour
 
         else if (currentBulletTaken >= amountOfBulletTaken && gameManager.isGameActive && gameManager.miniBossActive)
         {
-            //gameManager.AddScore(amountToBeFed);
-            //Debug.Log("Bingo");
             gameManager.isGameActive = false;
             gameManager.miniBossActive = false;
             GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);

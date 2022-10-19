@@ -7,22 +7,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     public bool isGameActive = false;
-   
-    public TextMeshProUGUI gameOverText;
+    
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI laserText;
 
     public int laserCount = 3;
     public int score = 0;
 
-    public Button restartButton;
-
-    public GameObject titleScreen;
-    public Vector2 prevPosition;
-    public Vector2 currentPosition;
-
-    public TextMeshProUGUI timerText;
     public int timeCounter = 90;
 
     public bool isSpeedUp = false;
@@ -33,7 +27,22 @@ public class GameManager : MonoBehaviour
 
     public bool miniBossActive = false;
     public bool miniBossDestroyed = false;
-    public bool mainBossActive = false;
+
+    public UIManager UiManager;
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        UiManager.InitialGame();
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,19 +59,13 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        titleScreen.gameObject.SetActive(false);
+        isGameActive = true;
         StartCoroutine(Timer());
     }
 
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    public void GameOver()
-    {
-        gameOverText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
-    }
+    
+    public void GameOver() => UiManager.GameOver();
+  
 
     IEnumerator Timer()
     {

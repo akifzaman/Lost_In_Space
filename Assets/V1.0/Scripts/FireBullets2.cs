@@ -1,28 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireBullets2 : MonoBehaviour
 {
     private float angle = 0f;
-
-    private GameManager gameManager;
-    // Start is called before the first frame update
+   
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         InvokeRepeating("Fire", 0f, 0.1f);        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void Fire()
     {
-        if (gameManager.miniBossActive)
+        if (GameManager.instance.miniBossActive)
         {
             
             float bulDirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180f);

@@ -9,14 +9,12 @@ public class ShieldPowerUp : MonoBehaviour
     public Transform shieldPosition;
     private PlayerController playerController;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         StartCoroutine(ShieldPowerUpDestroy());
     }
 
-    // Update is called once per frame
     void Update()
     {
 

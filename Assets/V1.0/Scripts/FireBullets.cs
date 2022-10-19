@@ -1,38 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireBullets : MonoBehaviour
 {
-    [SerializeField] private int bulletsAmount = 20;
 
+    [SerializeField] private int bulletsAmount = 20;
     [SerializeField] private float startAngle = 90f, endAngle = 440f;
 
-    private Vector2 bulletMoveDirection;
-
-    public MiniBossActivate MiniBoss;
-
-    public GameManager gameManager;
-
-    public SuperSplashBehaviour superSplash;
-    // Start is called before the first frame update
     void Start()
     {
-        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        superSplash = GameObject.Find("Player").GetComponent<SuperSplashBehaviour>();
         InvokeRepeating("Fire", 0f, 1f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void Fire()
     {
-        if (gameManager.miniBossActive)
+        if (GameManager.instance.miniBossActive)
         {
             float angleStep = (endAngle - startAngle) / bulletsAmount;
             float angle = startAngle;

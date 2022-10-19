@@ -1,26 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveDown : MonoBehaviour
 {
     public float speed = 20.0f;
-    private GameManager gameManager;
-    private SpeedPowerUp speedPowerUp;
-    
-    void Start()
-    {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        if (gameManager.timeCounter == -6)
+        if (GameManager.instance.timeCounter == -6)
         {
             speed = 0;
         }
-        if (gameManager.isGameActive)
+        if (GameManager.instance.isGameActive)
         {
             transform.Translate(Vector2.down * Time.deltaTime * speed);
         }
@@ -34,6 +25,6 @@ public class MoveDown : MonoBehaviour
     {
         yield return new WaitForSeconds(8.0f);
         speed = 10;
-        gameManager.isSpeedUp = false;
+        GameManager.instance.isSpeedUp = false;
     }
 }
