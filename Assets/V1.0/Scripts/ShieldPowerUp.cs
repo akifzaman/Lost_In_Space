@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShieldPowerUp : MonoBehaviour
 {
-    public bool isShieldActivated;
     public GameObject shieldPowerUp;
     public Transform shieldPosition;
     private PlayerController playerController;
@@ -15,10 +13,6 @@ public class ShieldPowerUp : MonoBehaviour
         StartCoroutine(ShieldPowerUpDestroy());
     }
 
-    void Update()
-    {
-
-    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))

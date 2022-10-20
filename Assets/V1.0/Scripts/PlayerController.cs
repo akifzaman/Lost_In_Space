@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10.0f;
-    public float health = 100.0f;
-    public bool isClashed = false;
+    public Player player;
 
+    public GameObject superSplash;
     public GameObject glowShield;
-    public GameObject parryShield;
-    public GameObject enemyExplosion;
+    public GameObject ExplosionAnimation;
+    public GameObject SingleBulletPrefab;
+    public GameObject DoubleBulletPrefab;
 
     public AudioClip powerUpSound;
     public AudioClip bulletSound;
     public AudioClip playerHitSound;
+    public AudioClip superSplashSound;
+    public AudioClip playerExplosionSound;
 
     public SpriteRenderer spriteRenderer;
 
@@ -27,27 +26,59 @@ public class PlayerController : MonoBehaviour
     private float yBoundaryUp = 4.78f;
     private float yBoundaryDown = -4.60f;
     private PlayerHealthBar _playerHealthBar;
+    private Shooting shooting;
     private AudioSource playerAudio;
 
-    // Start is called before the first frame update
+    private BulletProperties bulletProperties;
+
     void Start()
     {
-        _playerHealthBar = GetComponent<PlayerHealthBar>();
+        shooting = GetComponent<Shooting>();
         playerAudio = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        bulletProperties = new BulletProperties();
     }
-    
-    // Update is called once per frame
+
+    public void StartGame(GameObject playerHealthBarSlider)
+    {
+        _playerHealthBar = playerHealthBarSlider.GetComponent<PlayerHealthBar>();
+        _playerHealthBar.maximumDamageValue = 15f;
+        _playerHealthBar.Initialize();
+        _playerHealthBar.OnMaximumValue.AddListener(() =>
+        {
+            GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(playerExplosionSound, Camera.main.transform.position, 1.0f);
+            Destroy(explosion, 0.5f);
+            Destroy(gameObject);
+            GameManager.instance.GameOver();
+        });
+        bulletProperties.BulletDelay = 0.1f;
+        bulletProperties.BulletPrefab = SingleBulletPrefab;
+        shooting.Initialize(bulletProperties);
+    }
+
     void Update()
     {
         if(!GameManager.instance.isGameActive) return;
         StayInBound();
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * speed);
-        transform.Translate(Vector2.down * Time.deltaTime * verticalInput * speed);
+        transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * player.speed);
+        transform.Translate(Vector2.down * Time.deltaTime * verticalInput * player.speed);
+
+        SuperSplashActivated();
     }
 
+    private void SuperSplashActivated()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && player.superSplashCounter > 0)
+        {
+            player.superSplashCounter--;
+            GameManager.instance.laserCount--;
+            playerAudio.PlayOneShot(superSplashSound, 0.7f);
+            Instantiate(superSplash, superSplash.transform.position, superSplash.transform.rotation);
+        }
+    }
 
     void StayInBound()
     {
@@ -75,14 +106,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    // need to refactor
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (!(other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
              other.gameObject.CompareTag("ShieldPowerUp")))
         {
-            _playerHealthBar.DamageTaken(1);
-            AudioSource.PlayClipAtPoint(playerHitSound, Camera.main.transform.position, 1.0f);
-            isClashed = true;
+            _playerHealthBar.UpdateSlider(1);
+            AudioSource.PlayClipAtPoint(playerHitSound, Camera.main.transform.position, 1.0f); //need to change
         }
 
         else if (other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
@@ -105,5 +136,6 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer.color = Color.yellow;
     }
+
 
 }

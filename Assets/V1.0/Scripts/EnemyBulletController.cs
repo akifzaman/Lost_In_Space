@@ -26,11 +26,11 @@ public class EnemyBulletController : MonoBehaviour
         if (gameObject.CompareTag("MiniBossBullet") && other.gameObject.CompareTag("Player"))
         {
             gameObject.SetActive(false);
-            _playerHealthBar.DamageTaken(0.5f);
+            _playerHealthBar.UpdateSlider(0.5f);
         }
         else if (gameObject.CompareTag("EnemyBullet") && other.gameObject.CompareTag("Player"))
         {
-            _playerHealthBar.DamageTaken(1);
+            _playerHealthBar.UpdateSlider(1);
             Destroy(gameObject);
         }
     }

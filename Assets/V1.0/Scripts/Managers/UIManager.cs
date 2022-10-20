@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
         GameOverPanel.SetActive(false);
 
         PlayerHealthBarSlider.gameObject.SetActive(true);
+        EnemyBossHealthBarSlider.gameObject.SetActive(false);
         GameManager.instance.StartGame();
     }
 
@@ -35,7 +36,6 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
 
     public void GameOver()
     {

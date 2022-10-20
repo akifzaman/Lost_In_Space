@@ -1,38 +1,40 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    public GameObject bulletOne;
-  
-    public Transform bulletOneSpawnPosition;
-    public float playerBulletOneDelay = 0.1f;
+    private GameObject bulletPrefab;
+    public Transform SpawnPosition;
+    private float bulletDelay;
     public bool isActivatedOne = true;
-
-    private GameManager gameManager;
+    public AudioClip bulletSound;
 
     private AudioSource shootingAudio;
-    public AudioClip bulletSound;
-    // Start is called before the first frame update
-    void Start()
+
+    void StartShooting()
     {
         StartCoroutine(ShootBulletOne());
         StartCoroutine(Fire());
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         shootingAudio = GetComponent<AudioSource>();
     }
 
+    public void Initialize(BulletProperties bullet)
+    {
+        bulletPrefab = bullet.BulletPrefab;
+        bulletDelay = bullet.BulletDelay;
+        StartShooting();
+    }
+
+
     void Fire1()
     {
-        Instantiate(bulletOne, bulletOneSpawnPosition.position, bulletOne.transform.rotation);
-        //
+        Instantiate(bulletPrefab, SpawnPosition.position, bulletPrefab.transform.rotation);
     }
 
     IEnumerator ShootBulletOne()
     {
-        yield return new WaitForSeconds(playerBulletOneDelay);
-        if (gameManager.isGameActive)
+        yield return new WaitForSeconds(bulletDelay);
+        if (GameManager.instance.isGameActive)
         {
             Fire1();
         }
@@ -44,7 +46,7 @@ public class Shooting : MonoBehaviour
     }
     void FireSound()
     {
-        if (gameManager.isGameActive)
+        if (GameManager.instance.isGameActive)
         {
             shootingAudio.PlayOneShot(bulletSound, 0.04f);
         }

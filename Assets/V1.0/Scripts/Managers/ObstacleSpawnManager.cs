@@ -7,13 +7,9 @@ public class ObstacleSpawnManager : MonoBehaviour
     public List<GameObject> obstacleList;
     public float obstacleSpawnDelay;
 
-    private GameManager gameManager;
-    // Start is called before the first frame update
-   
     void Start()
     {
         StartCoroutine(ObstacleSpawn());
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void Spawn()
@@ -24,7 +20,7 @@ public class ObstacleSpawnManager : MonoBehaviour
     IEnumerator ObstacleSpawn()
     {
         yield return new WaitForSeconds(obstacleSpawnDelay);
-        if (gameManager.isGameActive && gameManager.timeCounter > 0)
+        if (GameManager.instance.isGameActive && GameManager.instance.timeCounter > 0)
         {
             Spawn();
         }

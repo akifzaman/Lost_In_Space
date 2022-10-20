@@ -23,7 +23,6 @@ public class EnemyController : MonoBehaviour
 
     public MiniBossActivate MiniBoss;
     public ShakeManager shakeManager;
-    public SuperSplashActivate superSplashActivate;
     public bool isDestroyed = false;
     public GameObject laserObject;
     public bool laserActivate = false;
@@ -43,8 +42,6 @@ public class EnemyController : MonoBehaviour
         player = GameObject.Find("Player");
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakeManager = GameObject.Find("Shake Manager").GetComponent<ShakeManager>();
-        superSplashActivate = GameObject.Find("Player").GetComponent<SuperSplashActivate>();
-
         enemyAudioSource = GetComponent<AudioSource>();
 
         StartCoroutine(Laser());
@@ -107,7 +104,7 @@ public class EnemyController : MonoBehaviour
     {
         if (gameObject.CompareTag("Enemy") && other.gameObject.CompareTag("Player"))
         {
-            _playerHealthBar.DamageTaken(2);
+            _playerHealthBar.UpdateSlider(2);
             GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
             enemyAudioSource.PlayOneShot(explosionSound, 1.0f);
             Destroy(explosion, 0.5f);
@@ -129,7 +126,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (gameObject.CompareTag("MiniBoss") && other.gameObject.CompareTag("Player"))
         {
-            _playerHealthBar.DamageTaken(20);
+            _playerHealthBar.UpdateSlider(20);
             Destroy(other.gameObject);
         }
         
@@ -137,7 +134,7 @@ public class EnemyController : MonoBehaviour
         {
             enemyHealth--;
             AudioSource.PlayClipAtPoint(enemyHitSound, Camera.main.transform.position, 0.1f);
-            _enemyHealthBar.DamageTaken(1);
+            _enemyHealthBar.UpdateSlider(1);
             if (enemyHealth <= 0)
             {
                 GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);

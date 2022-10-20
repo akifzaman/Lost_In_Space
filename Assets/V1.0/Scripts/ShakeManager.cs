@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShakeManager : MonoBehaviour
 {
+    public float speed, amount, duration;
+    public MiniBossActivate MiniBoss;
+
     private Vector3 startPos, shakePos;
 
-    public float speed, amount, duration;
-
-    private GameManager gameManager;
-    public MiniBossActivate MiniBoss;
-    // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakePos = startPos = transform.position;
         speed = 2.34f;
@@ -21,15 +16,14 @@ public class ShakeManager : MonoBehaviour
         duration = 5.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (duration > 0 && gameManager.timeCounter < -40 && gameManager.miniBossActive == false)
+        if (duration > 0 && GameManager.instance.timeCounter < -40 && GameManager.instance.miniBossActive == false)
         {
             Shake();
             duration -= Time.deltaTime;
         }
-        else if (duration > 0 && gameManager.timeCounter < -5)
+        else if (duration > 0 && GameManager.instance.timeCounter < -5)
         {
             Shake();
             duration -= Time.deltaTime;

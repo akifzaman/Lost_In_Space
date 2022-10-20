@@ -18,7 +18,6 @@ public class SuperSplashBehaviour : MonoBehaviour
     }
     void Update()
     {
-        //bul.GetComponent<Bullet>().SetMoveDirection(bulDir);
         transform.Translate(Vector2.up * Time.deltaTime * speed);
         if (transform.position.y > yBoundary)
         {
@@ -32,12 +31,11 @@ public class SuperSplashBehaviour : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Obstacles") || other.gameObject.CompareTag("EnemyBullet"))
         {
-            //AudioSource.PlayClipAtPoint(laserExplosionSound, Camera.main.transform.position, 1.0f);
             Destroy(other.gameObject);
         }
         else if (other.gameObject.CompareTag("MiniBoss"))
         {
-            _enemyHealthBar.DamageTaken(10);
+            _enemyHealthBar.UpdateSlider(10);
         }
     }
 }

@@ -1,26 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShieldBehaviour : MonoBehaviour
 {
     public float shieldDuration = 7.0f;
     public Transform shieldPosition;
-
     public GameObject enemyExplosion;
-
     public AudioClip explosionSound;
-    // Start is called before the first frame update
+    
     void Start()
     {
         StartCoroutine(ShieldActive());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     IEnumerator ShieldActive()
     {
         yield return new WaitForSeconds(shieldDuration);

@@ -18,7 +18,7 @@ public class HealthPowerUp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerHealthBar.Heal(0);
+            playerHealthBar.UpdateSlider(0);
         }
         Destroy(gameObject);
     }

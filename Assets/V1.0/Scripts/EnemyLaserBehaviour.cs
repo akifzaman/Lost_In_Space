@@ -13,7 +13,7 @@ public class EnemyLaserBehaviour : MonoBehaviour
     {
         if (gameObject.CompareTag("EnemyLaser") && other.gameObject.CompareTag("Player"))
         {
-            _playerHealthBar.DamageTaken(3.5f);
+            _playerHealthBar.UpdateSlider(3.5f);
         }
     }
 }
