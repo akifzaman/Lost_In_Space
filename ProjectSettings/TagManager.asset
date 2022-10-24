@@ -4,13 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - bullet_lvl1
   - Enemy
   - EnemyBullet
   - Background
   - SpeedPowerUp
   - ShieldPowerUp
-  - bullet_lvl2
   - BulletPowerUp
   - GameManager
   - HealthPowerUp
@@ -23,6 +21,7 @@ TagManager:
   - SuperSplash
   - PlayerHealthBar
   - EnemyHealthBar
+  - Player_Bullet
   layers:
   - Default
   - TransparentFX

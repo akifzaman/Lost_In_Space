@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawnManager>();
+        enemySpawner = GameObject.FindObjectOfType<EnemySpawnManager>();
     }
 
     void Update()

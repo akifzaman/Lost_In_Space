@@ -5,13 +5,13 @@ public class MiniBossActivate : MonoBehaviour
     
     public float activationTime;
     public float activationPoint;
-    public EnemyController enemyController;
+    public Enemy_FollowPlayer EnemyFollowPlayer;
 
     private float speed = 1f;
 
     void Start()
     {
-        enemyController = GameObject.Find("MiniBoss").GetComponent<EnemyController>();
+        EnemyFollowPlayer = GameObject.Find("MiniBoss").GetComponent<Enemy_FollowPlayer>();
     }
 
     void Update()
@@ -22,7 +22,7 @@ public class MiniBossActivate : MonoBehaviour
             {
                 speed = 0.0f;
                 GameManager.instance.miniBossActive = true;
-                enemyController.laserActivate = true;
+                EnemyFollowPlayer.laserActivate = true;
             }
             if (gameObject.CompareTag("MiniBoss") && transform.position.y > activationPoint)
             {

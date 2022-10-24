@@ -6,7 +6,9 @@ public class EnemySpawnManager : MonoBehaviour
 {
     public List<GameObject> enemyList;
     public float enemySpawnDelay;
+    //TODO - Set Enemy Pooling
 
+    //TODO - Spawn Enemy
     void Start()
     {
         StartCoroutine(EnemySpawn());

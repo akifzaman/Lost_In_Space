@@ -41,11 +41,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1989762373844081862}
   - component: {fileID: 1989762373844081863}
-  - component: {fileID: 4164851316693576706}
-  - component: {fileID: -185170438833581448}
   - component: {fileID: 1605766736564334997}
   - component: {fileID: -5295683814616200527}
-  - component: {fileID: 2399816835315154164}
+  - component: {fileID: -185170438833581448}
+  - component: {fileID: 4164851316693576706}
   - component: {fileID: 5168287518907195020}
   m_Layer: 6
   m_Name: Enemy 3
@@ -122,49 +121,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4164851316693576706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989762373844081860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0ae25f8f0696040992a99f11a93399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyBullet: {fileID: 6177475072503491064, guid: bb6e3301793f70442a04b7bb32f00fed, type: 3}
-  EnemyBulletSpawnPosition: {fileID: 972429899}
-  enemyBulletDelay: 0.7
---- !u!114 &-185170438833581448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989762373844081860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135b3d2c00d16134592c39209adee1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1.5
-  boundary: -5.5
-  rotateAngle: 0
-  lookDirectionAllow: 0
-  speedPowerUp: {fileID: 0}
-  enemyHealth: 1
-  MiniBoss: {fileID: 0}
-  shakeManager: {fileID: 0}
-  superSplashActivate: {fileID: 0}
-  isDestroyed: 0
-  laserObject: {fileID: 0}
-  laserActivate: 0
-  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
-  explosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
-  enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
-  enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
 --- !u!61 &1605766736564334997
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -212,7 +168,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &2399816835315154164
+--- !u!114 &-185170438833581448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,11 +177,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989762373844081860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b21544f13794a184f8c7bda9d8f3d3db, type: 3}
+  m_Script: {fileID: 11500000, guid: 135b3d2c00d16134592c39209adee1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy:
+    speed: 1.5
+    health: 1
+  laserObject: {fileID: 0}
+  laserActivate: 0
+  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
+  laserReload: {fileID: 0}
+  explosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
+  enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
+  enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
+  enemyLaserLoadSound: {fileID: 0}
+  rotateAngle: 0
+  lookDirectionAllow: 0
   xBoundary: 3.2
   yBoundary: -5.5
+--- !u!114 &4164851316693576706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989762373844081860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0ae25f8f0696040992a99f11a93399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyBullet: {fileID: 6177475072503491064, guid: bb6e3301793f70442a04b7bb32f00fed, type: 3}
+  EnemyBulletSpawnPosition: {fileID: 972429899}
+  enemyBulletDelay: 0.5
 --- !u!82 &5168287518907195020
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private Shooting shooting;
     private AudioSource playerAudio;
 
-    private BulletProperties bulletProperties;
+    public BulletProperties bulletProperties;
 
     void Start()
     {
@@ -40,6 +41,13 @@ public class PlayerController : MonoBehaviour
     }
 
     public void StartGame(GameObject playerHealthBarSlider)
+    {
+        SetSlider(playerHealthBarSlider);
+        SetBulletProperties(SingleBulletPrefab);
+        shooting.Initialize(bulletProperties);
+    }
+
+    private void SetSlider(GameObject playerHealthBarSlider)
     {
         _playerHealthBar = playerHealthBarSlider.GetComponent<PlayerHealthBar>();
         _playerHealthBar.maximumDamageValue = 15f;
@@ -52,9 +60,16 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             GameManager.instance.GameOver();
         });
+    }
+
+    private void SetBulletProperties(GameObject bulletPrefab)
+    {
+        bulletProperties.Tag = "SingleBullet";
         bulletProperties.BulletDelay = 0.1f;
-        bulletProperties.BulletPrefab = SingleBulletPrefab;
-        shooting.Initialize(bulletProperties);
+        bulletProperties.Speed = 10;
+        bulletProperties.NumberSpawn = 150;
+        bulletProperties.Boundary = 5.0f;
+        bulletProperties.BulletPrefab = bulletPrefab;
     }
 
     void Update()
@@ -74,6 +89,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && player.superSplashCounter > 0)
         {
             player.superSplashCounter--;
+
             GameManager.instance.laserCount--;
             playerAudio.PlayOneShot(superSplashSound, 0.7f);
             Instantiate(superSplash, superSplash.transform.position, superSplash.transform.rotation);
@@ -106,7 +122,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // need to refactor
+    //TODO- need to refactor
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (!(other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
