@@ -1,51 +1,56 @@
 using UnityEngine;
 
-public class ObstacleController : MonoBehaviour
+public class ObstacleController : MonoBehaviour, IPooledObject
 {
-    public float speed = 3.0f;
-    public int obstacleEnergy;
-    public GameObject enemyExplosion;
-    public AudioClip obstacleSound;
-    public AudioClip obstacleHitSound;
+    public float DamageAmount;
+
+    public GameObject ExplosionAnimation;
+    public AudioClip ObstacleHitSound;
+    public AudioClip ExplosionSound;
 
     [SerializeField] private float boundary = 6.0f;
-    private PlayerHealthBar _playerHealthBar;
 
-    void Start()
-    {
-        _playerHealthBar = GameObject.Find("Player").GetComponent<PlayerHealthBar>();
-    }
+    [SerializeField] private ObstacleProperties obstacleProperties;
 
+    public float Speed { get; set; }
+    public float Boundary { get; set; }
     void Update()
     {
-        transform.Translate(Vector2.down * Time.deltaTime * speed);
+        transform.Translate(Vector2.down * Time.deltaTime * obstacleProperties.Speed);
         if (transform.position.y < -boundary)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    protected void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player_Bullet"))
         {
-            _playerHealthBar.UpdateSlider(2);
-            GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(obstacleSound, Camera.main.transform.position, 1.0f);
-            Destroy(explosion, 0.5f);
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.CompareTag("bullet_lvl1") || other.gameObject.CompareTag("bullet_lvl2"))
-        {
-            Destroy(other.gameObject);
-            AudioSource.PlayClipAtPoint(obstacleHitSound, Camera.main.transform.position, 1.0f);
-            obstacleEnergy--;
-            if (obstacleEnergy == 0)
+            obstacleProperties.Health--;
+            AudioSource.PlayClipAtPoint(ObstacleHitSound, Camera.main.transform.position, 0.1f);
+            if (obstacleProperties.Health <= 0)
             {
-                GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
-                AudioSource.PlayClipAtPoint(obstacleSound, Camera.main.transform.position, 1.0f);
-                Destroy(explosion, 0.5f);
-                Destroy(gameObject);
+                GameManager.instance.UpdateScore(1);
+                OnDestroyObject();
             }
         }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerController>().UpdateSlider(DamageAmount);
+            OnDestroyObject();
+        }
+    }
+
+    private void OnDestroyObject()
+    {
+        gameObject.SetActive(false);
+        GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(ExplosionSound, Camera.main.transform.position, 1.0f);
+        Destroy(explosion, 0.5f);
+    }
+
+    public void OnObjectSpawn()
+    {
+        
     }
 }

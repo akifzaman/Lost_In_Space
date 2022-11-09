@@ -128,9 +128,8 @@ GameObject:
   - component: {fileID: 3892620468055213019}
   - component: {fileID: 6456380844728627471}
   - component: {fileID: 3587555393233865096}
-  - component: {fileID: 5381022016671112878}
-  - component: {fileID: -6940563615779416031}
   - component: {fileID: -8141285722931073275}
+  - component: {fileID: 5192001759932518379}
   m_Layer: 6
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -265,49 +264,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135b3d2c00d16134592c39209adee1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy:
-    speed: 2
-    health: 3
-  laserObject: {fileID: 0}
-  laserActivate: 0
-  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
-  laserReload: {fileID: 0}
-  explosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
+  enemyType: 0
+  OnDestroyObject:
+    m_PersistentCalls:
+      m_Calls: []
+  EnemyBullet: {fileID: 7219904507024058430, guid: 1829c53002655fe478bb4488d994943e, type: 3}
+  ExplosionAnimation: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
   enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
-  enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
-  enemyLaserLoadSound: {fileID: 0}
+  ExplosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
+  bulletProperties:
+    NumberSpawn: 50
+    Tag: EnemyBullet_1
+    BulletDelay: 0.1
+    Speed: 0.5
+    Boundary: -6
+    BulletPrefab: {fileID: 7219904507024058430, guid: 1829c53002655fe478bb4488d994943e, type: 3}
+  enemyProperties:
+    NumberSpawn: 100
+    Tag: Enemy_1
+    EnemySpawnDelay: 1
+    Speed: 3
+    Health: 3
+    Boundary: -5.5
+    EnemyPrefab: {fileID: 300200879144602473}
+  shooting: {fileID: 0}
+  xBoundary: 3.2
   rotateAngle: 0
   lookDirectionAllow: 1
-  xBoundary: 3.2
-  yBoundary: -5.5
---- !u!114 &5381022016671112878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300200879144602473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0ae25f8f0696040992a99f11a93399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyBullet: {fileID: 7219904507024058430, guid: 1829c53002655fe478bb4488d994943e, type: 3}
-  EnemyBulletSpawnPosition: {fileID: 2100646327}
-  enemyBulletDelay: 0.3
---- !u!114 &-6940563615779416031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300200879144602473}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7f628b186c66e48b8b7dbdb7ff20de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
 --- !u!82 &-8141285722931073275
 AudioSource:
   m_ObjectHideFlags: 0
@@ -404,6 +387,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5192001759932518379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300200879144602473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fee860595ffee94dbfa8ffe7c3c9c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPosition: {fileID: 2100646327}
+  bulletSound: {fileID: 8300000, guid: 92dee7c1a78e4274d9623a65e4bfafe1, type: 3}
+  shootingAudio: {fileID: 0}
+  _bullet:
+    NumberSpawn: 0
+    Tag: 
+    BulletDelay: 0
+    Speed: 0
+    Boundary: 0
+    BulletPrefab: {fileID: 0}
 --- !u!1 &300370535854537865
 GameObject:
   m_ObjectHideFlags: 0

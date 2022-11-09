@@ -27,7 +27,31 @@ public class Player
     public int superSplashCounter;
 }
 
+[Serializable]
+public class EnemyProperties
+{
+    public int NumberSpawn;
+    public string Tag;
+    public float EnemySpawnDelay;
+    public float Speed;
+    public float Health;
+    public float Boundary;
+    public GameObject EnemyPrefab;
+}
 
+[Serializable]
+public class ObstacleProperties
+{
+    public int NumberSpawn;
+    public string Tag;
+    public float ObstacleSpawnDelay;
+    public float Speed;
+    public float Health;
+    public float Boundary;
+    public GameObject ObstaclePrefab;
+    public GameObject ExplotionAnimPrefab;
+    
+}
 [System.Serializable]
 public class Pool
 {

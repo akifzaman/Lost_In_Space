@@ -1,32 +1,41 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Shooting : MonoBehaviour
 {
+    public bool CanShoot;
+
     public Transform SpawnPosition;
     public AudioClip bulletSound;
 
-    private AudioSource shootingAudio;
-    private BulletProperties _bullet;
+    [SerializeField] private AudioSource shootingAudio;
+    [SerializeField] private BulletProperties _bullet;
+
     public void Initialize(BulletProperties bullet)
     {
-        shootingAudio = GetComponent<AudioSource>();
         _bullet = bullet;
         Pool pool = new Pool();
         pool.prefab = _bullet.BulletPrefab;
         pool.tag = _bullet.Tag;
         pool.size = _bullet.NumberSpawn;
         ObjectPooler.Instance.Initialize(pool);
-        InvokeRepeating("Fire", 0, _bullet.BulletDelay);
-        //StartShooting();
     }
 
-    void Fire()
+    private void Start()
     {
-        if (GameManager.instance.isGameActive)
+        shootingAudio = GetComponent<AudioSource>();
+        //CanShoot = true;
+    }
+
+    public IEnumerator Fire(BulletProperties bullet)
+    {
+        while(GameManager.instance.isGameActive && CanShoot)
         {
-            GameObject go = ObjectPooler.Instance.SpawnFromPool(_bullet.Tag, SpawnPosition.position, _bullet.BulletPrefab.transform.rotation);
+            _bullet = bullet;
+            yield return new WaitForSeconds(bullet.BulletDelay);
+            GameObject go = ObjectPooler.Instance.SpawnFromPool(bullet.Tag, SpawnPosition.position, bullet.BulletPrefab.transform.rotation);
             IPooledObject pooledObj = go.GetComponent<IPooledObject>();
             if (pooledObj != null)
             {

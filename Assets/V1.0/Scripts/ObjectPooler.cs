@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,16 +23,15 @@ public class ObjectPooler : MonoBehaviour
     #endregion
 
     [SerializeField] private List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
-
+    public Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
+    [SerializeField] private string _tag;
     public void Initialize(Pool pool)
     {
         pools.Add(pool);
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-       
         Queue<GameObject> objectPool = new Queue<GameObject>();
 
+        
         for (int i = 0; i < pool.size; i++)
         {
             GameObject obj = Instantiate(pool.prefab);
@@ -41,11 +41,11 @@ public class ObjectPooler : MonoBehaviour
         poolDictionary.Add(pool.tag, objectPool);
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(string tag, Vector2 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.Log("Doesn't exist");
+            Debug.LogError("Doesn't exist");
             return null;
         }
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
@@ -55,6 +55,7 @@ public class ObjectPooler : MonoBehaviour
         objectToSpawn.transform.rotation = rotation;
 
         IPooledObject pooledObj = objectToSpawn.GetComponent<IPooledObject>();
+
         if (pooledObj != null)
         {
             pooledObj.OnObjectSpawn();

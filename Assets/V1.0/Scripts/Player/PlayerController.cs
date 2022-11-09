@@ -8,25 +8,25 @@ public class PlayerController : MonoBehaviour
     public GameObject superSplash;
     public GameObject glowShield;
     public GameObject ExplosionAnimation;
+
     public GameObject SingleBulletPrefab;
     public GameObject DoubleBulletPrefab;
 
     public AudioClip powerUpSound;
     public AudioClip bulletSound;
     public AudioClip playerHitSound;
-    public AudioClip superSplashSound;
     public AudioClip playerExplosionSound;
 
     public SpriteRenderer spriteRenderer;
 
     public SpeedPowerUp speedPowerUp;
 
-    private float horizontalInput;
-    private float verticalInput;
     private float xBoundary = 2.40f;
     private float yBoundaryUp = 4.78f;
     private float yBoundaryDown = -4.60f;
-    private PlayerHealthBar _playerHealthBar;
+    
+    public HealthBar PlayerHealthBar;
+    
     private Shooting shooting;
     private AudioSource playerAudio;
 
@@ -38,46 +38,52 @@ public class PlayerController : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         bulletProperties = new BulletProperties();
+        PlayerHealthBar.gameObject.SetActive(false);
     }
 
-    public void StartGame(GameObject playerHealthBarSlider)
+    public void StartGame()
     {
-        SetSlider(playerHealthBarSlider);
-        SetBulletProperties(SingleBulletPrefab);
-        shooting.Initialize(bulletProperties);
+        SetSlider();
+        SetBulletProperties(SingleBulletPrefab, "SingleBullet");
     }
 
-    private void SetSlider(GameObject playerHealthBarSlider)
+    private void SetSlider()
     {
-        _playerHealthBar = playerHealthBarSlider.GetComponent<PlayerHealthBar>();
-        _playerHealthBar.maximumDamageValue = 15f;
-        _playerHealthBar.Initialize();
-        _playerHealthBar.OnMaximumValue.AddListener(() =>
-        {
-            GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(playerExplosionSound, Camera.main.transform.position, 1.0f);
-            Destroy(explosion, 0.5f);
-            Destroy(gameObject);
-            GameManager.instance.GameOver();
-        });
+        PlayerHealthBar.gameObject.SetActive(true);
+        PlayerHealthBar.Initialize(player.health);
+        PlayerHealthBar.OnMaximumValue.AddListener(OnDestroyPlayer);
     }
 
-    private void SetBulletProperties(GameObject bulletPrefab)
+    public void UpdateSlider(float damageAmount) => PlayerHealthBar.UpdateSlider(damageAmount);
+    public void ActivateShield() => glowShield.SetActive(true);
+    
+    private void SetBulletProperties(GameObject bulletPrefab, string tag)
     {
-        bulletProperties.Tag = "SingleBullet";
+        bulletProperties.Tag = tag;
         bulletProperties.BulletDelay = 0.1f;
         bulletProperties.Speed = 10;
         bulletProperties.NumberSpawn = 150;
         bulletProperties.Boundary = 5.0f;
         bulletProperties.BulletPrefab = bulletPrefab;
+        shooting.Initialize(bulletProperties);
+        shooting.CanShoot = true;
+        StartCoroutine(shooting.Fire(bulletProperties));
     }
-
+    private void OnDestroyPlayer()
+    {
+        GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);
+        //AudioSource.PlayClipAtPoint(playerExplosionSound, Camera.main.transform.position, 1.0f);
+        Destroy(explosion, 0.5f);
+        Destroy(gameObject);
+        GameManager.instance.isGameActive = false;
+        GameManager.instance.GameOver();
+    }
     void Update()
     {
         if(!GameManager.instance.isGameActive) return;
         StayInBound();
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * player.speed);
         transform.Translate(Vector2.down * Time.deltaTime * verticalInput * player.speed);
 
@@ -89,14 +95,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && player.superSplashCounter > 0)
         {
             player.superSplashCounter--;
-
-            GameManager.instance.laserCount--;
-            playerAudio.PlayOneShot(superSplashSound, 0.7f);
+            GameManager.instance.UiManager.laserText.SetText("Laser: " + player.superSplashCounter);
             Instantiate(superSplash, superSplash.transform.position, superSplash.transform.rotation);
         }
     }
 
-    void StayInBound()
+    private void StayInBound()
     {
         if (transform.position.x <= -xBoundary)
         {
@@ -116,42 +120,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ActivateShield()
-    {
-        glowShield.SetActive(true);
-    }
-
-
     //TODO- need to refactor
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!(other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
-             other.gameObject.CompareTag("ShieldPowerUp")))
+        if (other.gameObject.CompareTag("EnemyBullet"))
         {
-            _playerHealthBar.UpdateSlider(1);
-            AudioSource.PlayClipAtPoint(playerHitSound, Camera.main.transform.position, 1.0f); //need to change
-        }
-
-        else if (other.gameObject.CompareTag("HealthPowerUp") || other.gameObject.CompareTag("SpeedPowerUp") || other.gameObject.CompareTag("BulletPowerUp") ||
-                           other.gameObject.CompareTag("ShieldPowerUp"))
-        {
-            playerAudio.PlayOneShot(powerUpSound, 1.0f);
-        }
-
-    }
-
-    void ColorChange()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            spriteRenderer.color = Color.red;
-            Invoke("ResetColor", 0.2f);
+            UpdateSlider(1.0f);
+            other.gameObject.SetActive(false);
+            AudioSource.PlayClipAtPoint(playerHitSound, Camera.main.transform.position, 1.0f);
         }
     }
-    void ResetColor()
-    {
-        spriteRenderer.color = Color.yellow;
-    }
-
-
 }

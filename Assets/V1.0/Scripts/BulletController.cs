@@ -8,13 +8,10 @@ public class BulletController : MonoBehaviour, IPooledObject
     void Update()
     {
         transform.Translate(Vector2.up * Time.deltaTime * Speed);
-        if (transform.position.y > Boundary)
-        {
-            gameObject.SetActive(false);
-        }
     }
+
     public void OnObjectSpawn()
     {
-        
+       
     }
 }

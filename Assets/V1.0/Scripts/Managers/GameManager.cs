@@ -2,33 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     public bool isGameActive = false;
-    
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI laserText;
 
-    public int laserCount = 3;
     public int score = 0;
 
     public int timeCounter = 90;
-
-    public bool isSpeedUp = false;
-
-    public EnemySpawnManager enemySpawner;
 
     public List<GameObject> powerUpList;
 
     public bool miniBossActive = false;
     public bool miniBossDestroyed = false;
 
-    public PlayerController playerController;
+    public bool OnSpeedUp;
 
+    public PlayerController playerController;
+    public MiniBoss miniBoss;
+    public EnemySpawnManager enemySpawnManager;
     public UIManager UiManager;
     void Awake()
     {
@@ -44,31 +39,25 @@ public class GameManager : MonoBehaviour
         UiManager.InitialGame();
     }
 
-    void Start()
-    {
-        enemySpawner = GameObject.FindObjectOfType<EnemySpawnManager>();
-    }
 
-    void Update()
+    public void UpdateScore(int amount)
     {
-        if (miniBossActive)
-        {
-            UiManager.EnemyBossHealthBarSlider.gameObject.SetActive(true);
-        }
-        scoreText.text = $" {score:0000}";
-        laserText.SetText("Laser: " + laserCount);
+        UiManager.scoreText.text = (score + amount).ToString();
     }
-
     public void StartGame()
     {
         isGameActive = true;
-        GameObject slider = UiManager.PlayerHealthBarSlider.gameObject;
-        slider.SetActive(true);
-        playerController.StartGame(slider);
+        playerController.StartGame();
+        enemySpawnManager.StartGame();
+
         StartCoroutine(Timer());
     }
 
-    public void GameOver() => UiManager.GameOver(); //function of only one line can be written like this
+    public void GameOver()
+    {
+        isGameActive = false;
+        UiManager.GameOver();
+    }
 
     IEnumerator Timer()
     {
@@ -77,7 +66,7 @@ public class GameManager : MonoBehaviour
             timeCounter--;
             if (timeCounter > 20)
             {
-                enemySpawner.enemySpawnDelay -= 0.0031f;
+                //enemySpawner.enemySpawnDelay -= 0.0031f;
             }
         }
 
@@ -116,7 +105,7 @@ public class GameManager : MonoBehaviour
     public void PowerUpSpawner(int powerUpIndex)
     {
         GameObject powerUpObject = Instantiate(powerUpList[powerUpIndex], new Vector2(Random.Range(-2.3f, 2.3f), Random.Range(3.0f, -3.0f)), powerUpList[powerUpIndex].transform.rotation);
-        Destroy(powerUpObject, 5);
+        //Destroy(powerUpObject, 5);
     }
 
 }

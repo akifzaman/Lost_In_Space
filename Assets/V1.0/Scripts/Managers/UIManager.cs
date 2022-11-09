@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,17 +9,14 @@ public class UIManager : MonoBehaviour
     public GameObject HudPanel; 
     public GameObject GameOverPanel;
 
-    public Slider PlayerHealthBarSlider;
-    public Slider EnemyBossHealthBarSlider;
-
+    public TextMeshProUGUI laserText;
+    public TextMeshProUGUI scoreText;
     public void InitialGame()
     {
         MainMenuPanel.SetActive(true);
         HudPanel.SetActive(false);
         GameOverPanel.SetActive(false);
-
-        PlayerHealthBarSlider.gameObject.SetActive(false);
-        EnemyBossHealthBarSlider.gameObject.SetActive(false);
+        
     }
 
     public void StartGame()
@@ -26,9 +24,7 @@ public class UIManager : MonoBehaviour
         MainMenuPanel.SetActive(false);
         HudPanel.SetActive(true);
         GameOverPanel.SetActive(false);
-
-        PlayerHealthBarSlider.gameObject.SetActive(true);
-        EnemyBossHealthBarSlider.gameObject.SetActive(false);
+        
         GameManager.instance.StartGame();
     }
 

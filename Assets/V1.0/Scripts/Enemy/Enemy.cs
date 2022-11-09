@@ -3,60 +3,70 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-public enum EnemyType
+
+public class Enemy : MonoBehaviour,IPooledObject
 {
-    FollowPlayer,
-    RandomMovement,
-    StraightMovement
-}
-public class Enemy : MonoBehaviour
-{
-    public EnemyType enemyType;
-    public float speed;
-    public float health;
+    public float DamageAmount;
+
     public GameObject EnemyBullet;
+    public GameObject ExplosionAnimation;
 
     public AudioClip enemyHitSound;
+    public AudioClip ExplosionSound;
 
-    public UnityEvent OnDestroyObject;
     protected AudioSource enemyAudioSource;
-    [SerializeField]
-    protected BulletProperties bulletProperties;
-    protected Shooting shooting;
+    [SerializeField] protected BulletProperties bulletProperties = new BulletProperties();
+    public EnemyProperties enemyProperties;
+    [SerializeField] protected Shooting shooting;
     [SerializeField] protected float xBoundary = 3.20f;
-    [SerializeField] protected float yBoundary = -5.5f;
-    public void SpawnEnemy()
-    {
-        
-        enemyAudioSource = GetComponent<AudioSource>();
-        SetBulletProperties(EnemyBullet);
-        //shooting.Initialize(bulletProperties);
-    }
-    protected void SetBulletProperties(GameObject bulletPrefab)
-    {
-        bulletProperties.Tag = "EnemyBullet";
-        bulletProperties.BulletDelay = 0.1f;
-        bulletProperties.BulletPrefab = bulletPrefab;
-    }
 
-    public void Update()
+    public float Speed { get; set; }
+    public float Boundary { get; set; }
+
+    private void Update()
     {
         if (!GameManager.instance.isGameActive) return;
-        if (transform.position.x < -xBoundary || transform.position.x > xBoundary || transform.position.y < yBoundary)
+        
+        if (transform.position.x < -xBoundary || transform.position.x > xBoundary || transform.position.y < Boundary)
         {
             gameObject.SetActive(false);
         }
+        transform.Translate(Vector2.down * Time.deltaTime * Speed, Space.World);
     }
-    protected void OnCollisionEnter2D(Collision2D other)
+
+    public virtual void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player_Bullet"))
         {
-            health--;
+            enemyProperties.Health--;
             AudioSource.PlayClipAtPoint(enemyHitSound, Camera.main.transform.position, 0.1f);
-            if (health <= 0)
+            if (enemyProperties.Health <= 0)
             {
-                OnDestroyObject.Invoke();
+                GameManager.instance.UpdateScore(1);
+                OnDestroyObject();
             }
+            other.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerController>().UpdateSlider(DamageAmount);
+            OnDestroyObject();
         }
     }
+
+    protected void OnDestroyObject()
+    {
+        gameObject.SetActive(false);
+        GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(ExplosionSound, Camera.main.transform.position, 1.0f);
+        Destroy(explosion, 0.5f);
+    }
+
+    public virtual void OnObjectSpawn()
+    {
+        enemyAudioSource = GetComponent<AudioSource>();
+        shooting = GetComponent<Shooting>();
+    }
+
+    
 }

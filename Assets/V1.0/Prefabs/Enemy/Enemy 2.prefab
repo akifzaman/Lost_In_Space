@@ -43,10 +43,9 @@ GameObject:
   - component: {fileID: 5728393788516713226}
   - component: {fileID: 2370772299670670838}
   - component: {fileID: 3328751149043959897}
-  - component: {fileID: -7471165259420646279}
-  - component: {fileID: 3105856624662902783}
-  - component: {fileID: -4818546078555405302}
+  - component: {fileID: 7996989807970875477}
   - component: {fileID: 4943545638359006884}
+  - component: {fileID: 5000917036893258850}
   m_Layer: 6
   m_Name: Enemy 2
   m_TagString: Enemy
@@ -169,7 +168,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &-7471165259420646279
+--- !u!114 &7996989807970875477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,63 +177,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 5728393788516713225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135b3d2c00d16134592c39209adee1d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b49c4993da847b49a3780bd5042b64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
-  EnemyBullet: {fileID: 0}
-  bulletProperties:
-    NumberSpawn: 0
-    Tag: 
-    BulletDelay: 0
-    Speed: 0
-    Boundary: 0
-    BulletPrefab: {fileID: 0}
-  enemy:
-    speed: 0.5
-    health: 5
-    superSplashCounter: 0
-  enemyType: 0
-  laserObject: {fileID: 0}
-  laserActivate: 0
-  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
-  laserReload: {fileID: 0}
-  explosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
-  enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
-  enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
-  enemyLaserLoadSound: {fileID: 0}
-  rotateAngle: 0
-  lookDirectionAllow: 0
-  xBoundary: 3.2
-  yBoundary: -5.5
---- !u!114 &3105856624662902783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5728393788516713225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0ae25f8f0696040992a99f11a93399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  enemyType: 1
+  OnDestroyObject:
+    m_PersistentCalls:
+      m_Calls: []
   EnemyBullet: {fileID: 5302306558984914604, guid: bd9e294dcd0baa74e89d7d61fe0e7d51, type: 3}
-  EnemyBulletSpawnPosition: {fileID: 2022170615}
-  enemyBulletDelay: 0.9
---- !u!114 &-4818546078555405302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5728393788516713225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6188c60925898046b8d8fc29284ae05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
+  ExplosionAnimation: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
+  enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
+  ExplosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
+  bulletProperties:
+    NumberSpawn: 50
+    Tag: EnemyBullet_2
+    BulletDelay: 1
+    Speed: 0.5
+    Boundary: -7
+    BulletPrefab: {fileID: 5302306558984914604, guid: bd9e294dcd0baa74e89d7d61fe0e7d51, type: 3}
+  enemyProperties:
+    NumberSpawn: 100
+    Tag: Enemy_2
+    EnemySpawnDelay: 1
+    Speed: 1
+    Health: 7
+    Boundary: -5.5
+    EnemyPrefab: {fileID: 5728393788516713225}
+  shooting: {fileID: 0}
+  xBoundary: 3.2
 --- !u!82 &4943545638359006884
 AudioSource:
   m_ObjectHideFlags: 0
@@ -331,3 +301,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5000917036893258850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5728393788516713225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fee860595ffee94dbfa8ffe7c3c9c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPosition: {fileID: 2022170615}
+  bulletSound: {fileID: 8300000, guid: 92dee7c1a78e4274d9623a65e4bfafe1, type: 3}
+  shootingAudio: {fileID: 0}
+  _bullet:
+    NumberSpawn: 0
+    Tag: 
+    BulletDelay: 0
+    Speed: 0
+    Boundary: 0
+    BulletPrefab: {fileID: 0}

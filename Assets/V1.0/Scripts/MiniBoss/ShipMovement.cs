@@ -3,19 +3,15 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-    
-
-    public MiniBossActivate MiniBoss;
     public int prevMovement = 1, currentMovement = 1;
     public float yBoundaryUp = 4.5f;
     public float yBoundaryDown = 3.0f;
 
-    private float moveSpeed;
+    public float moveSpeed;
     private float xBoundary = 2;
 
     void Start()
     {
-        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         moveSpeed = 2f;
         StartCoroutine(RandomMovementGenerate());
     }

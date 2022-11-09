@@ -4,30 +4,48 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public List<GameObject> enemyList;
-    public float enemySpawnDelay;
-    //TODO - Set Enemy Pooling
+    public List<EnemyProperties> enemiesProperties;
+    public List<BulletProperties> enemyBulletProperties;
 
-    //TODO - Spawn Enemy
-    void Start()
+    [SerializeField] private GameObject _go;
+    public void StartGame()
     {
-        StartCoroutine(EnemySpawn());
-    }
-
-    void Spawn()
-    {
-        int randomIndex = Random.Range(0, 3);
-        Instantiate(enemyList[randomIndex], new Vector2(Random.Range(-2.3f, 2.3f), 6), enemyList[randomIndex].transform.rotation);
-    }
-    IEnumerator EnemySpawn()
-    {
-        yield return new WaitForSeconds(enemySpawnDelay);
-        if (GameManager.instance.isGameActive && GameManager.instance.timeCounter > 0)
+        foreach (var enemy in enemiesProperties)
         {
-            Spawn();
+            Pool pool = new Pool();
+            pool.prefab = enemy.EnemyPrefab;
+            pool.tag = enemy.Tag;
+            pool.size = enemy.NumberSpawn;
+            ObjectPooler.Instance.Initialize(pool);
         }
 
-        StartCoroutine(EnemySpawn());
+        foreach (var bullet in enemyBulletProperties)
+        {
+            Pool pool = new Pool();
+            pool.prefab = bullet.BulletPrefab;
+            pool.tag = bullet.Tag;
+            pool.size = bullet.NumberSpawn;
+            ObjectPooler.Instance.Initialize(pool);
+        }
+        InvokeRepeating("Spawn",0, 1f);
     }
-    
+
+    public void Spawn()
+    {
+        if (GameManager.instance.isGameActive && !GameManager.instance.miniBossActive)
+        {
+            Vector2 SpawnPosition = new Vector2(Random.Range(-2.5f, 2.5f), 5.5f);
+            EnemyProperties enemyProperties = enemiesProperties[Random.Range(0, enemiesProperties.Count)];
+
+            _go = ObjectPooler.Instance.SpawnFromPool(enemyProperties.Tag, SpawnPosition, Quaternion.identity);
+            
+            IPooledObject pooledObj = _go.GetComponent<IPooledObject>();
+            if (pooledObj != null)
+            {
+                pooledObj.OnObjectSpawn();
+                pooledObj.Speed = enemyProperties.Speed;
+                pooledObj.Boundary = enemyProperties.Boundary;
+            }
+        }
+    }
 }

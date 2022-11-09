@@ -16,7 +16,7 @@ public class ShieldBehaviour : MonoBehaviour
     IEnumerator ShieldActive()
     {
         yield return new WaitForSeconds(shieldDuration);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -25,7 +25,7 @@ public class ShieldBehaviour : MonoBehaviour
             GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 1.0f);
             Destroy(explosion, 0.5f);
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 }

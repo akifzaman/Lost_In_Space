@@ -16,14 +16,11 @@ GameObject:
   - component: {fileID: 7244416368282746354}
   - component: {fileID: 7244416368282746357}
   - component: {fileID: 7244416368282746356}
+  - component: {fileID: 1390933935}
   - component: {fileID: 4535670646264881259}
   - component: {fileID: 4535670646264881258}
-  - component: {fileID: 4535670646264881261}
-  - component: {fileID: 4535670646264881260}
   - component: {fileID: 1368460069}
-  - component: {fileID: 4420832512555705704}
-  - component: {fileID: 1318640674}
-  m_Layer: 6
+  m_Layer: 16
   m_Name: MiniBoss 1
   m_TagString: MiniBoss
   m_Icon: {fileID: 0}
@@ -249,8 +246,46 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &1390933935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244416368282746359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6c47d5121e7284e8918b5527e43861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageAmount: 2
+  EnemyBullet: {fileID: 8928460442896055807, guid: a132e62977e77fa46ac4abff3c4f29dc, type: 3}
+  ExplosionAnimation: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
+  enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
+  ExplosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
+  bulletProperties:
+    NumberSpawn: 0
+    Tag: 
+    BulletDelay: 0
+    Speed: 0
+    Boundary: 0
+    BulletPrefab: {fileID: 0}
+  enemyProperties:
+    NumberSpawn: 0
+    Tag: MiniBoss
+    EnemySpawnDelay: 0
+    Speed: 0
+    Health: 0
+    Boundary: 0
+    EnemyPrefab: {fileID: 7244416368282746359}
+  shooting: {fileID: 0}
+  xBoundary: 3.2
+  laserObject: {fileID: 319715066}
+  laserReload: {fileID: 465475874153308817, guid: e97bdb1367aca8c4d80022d34a22e20e, type: 3}
+  enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
+  enemyLaserLoadSound: {fileID: 8300000, guid: 229732c07e0016e4f962a55783667074, type: 3}
 --- !u!114 &4535670646264881259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,12 +298,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96b18fcf446a694fbceee892b712073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MiniBoss: {fileID: 0}
-  gameManager: {fileID: 0}
   prevMovement: 0
   currentMovement: 1
   yBoundaryUp: 4.5
   yBoundaryDown: 3
+  moveSpeed: 0
 --- !u!114 &4535670646264881258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,56 +318,6 @@ MonoBehaviour:
   bulletsAmount: 10
   startAngle: 90
   endAngle: 440
-  MiniBoss: {fileID: 0}
-  gameManager: {fileID: 0}
-  superSplash: {fileID: 0}
---- !u!114 &4535670646264881261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7244416368282746359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 589ddd66c6a8820418f2fbe33d356a6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  activationTime: 8
-  activationPoint: 4
-  enemyController: {fileID: 0}
---- !u!114 &4535670646264881260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7244416368282746359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135b3d2c00d16134592c39209adee1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  boundary: 0
-  rotateAngle: 0
-  lookDirectionAllow: 0
-  speedPowerUp: {fileID: 0}
-  enemyHealth: 600
-  MiniBoss: {fileID: 0}
-  shakeManager: {fileID: 0}
-  superSplashActivate: {fileID: 0}
-  isDestroyed: 0
-  laserObject: {fileID: 319715066}
-  laserActivate: 0
-  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
-  laserReload: {fileID: 465475874153308817, guid: e97bdb1367aca8c4d80022d34a22e20e, type: 3}
-  laserReloadPoint: {fileID: 5426216897907855252}
-  explosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
-  enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
-  enemyLaserLoadSound: {fileID: 8300000, guid: 229732c07e0016e4f962a55783667074, type: 3}
-  enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
 --- !u!114 &1368460069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,35 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6529e890dff8fba40a0f992fd66cfd40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4420832512555705704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7244416368282746359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d012431ec84204c866d803badcbc66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1318640674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7244416368282746359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a5f6e8e31547743bcaa943b1ea2adb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealthBarSlider: {fileID: 0}
-  amountOfBulletTaken: 600
-  currentBulletTaken: 0
-  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
-  playerExplosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
 --- !u!1 &7531492896051713503
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5426216897907855252}
-  m_Layer: 6
+  m_Layer: 16
   m_Name: ReloadPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,6 +417,10 @@ PrefabInstance:
       value: Laser
       objectReference: {fileID: 0}
     - target: {fileID: 2697221400215201235, guid: 08099903f9947974ebb3f20aa47913dc, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697221400215201235, guid: 08099903f9947974ebb3f20aa47913dc, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -480,18 +439,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2697221400215201235, guid: 08099903f9947974ebb3f20aa47913dc, type: 3}
   m_PrefabInstance: {fileID: 2697221399996977961}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &319715071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319715066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d012431ec84204c866d803badcbc66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &319715067 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2697221400215201234, guid: 08099903f9947974ebb3f20aa47913dc, type: 3}
@@ -507,6 +454,10 @@ PrefabInstance:
     - target: {fileID: 465475874153308817, guid: e97bdb1367aca8c4d80022d34a22e20e, type: 3}
       propertyPath: m_Name
       value: LaserReload
+      objectReference: {fileID: 0}
+    - target: {fileID: 465475874153308817, guid: e97bdb1367aca8c4d80022d34a22e20e, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 465475874153308817, guid: e97bdb1367aca8c4d80022d34a22e20e, type: 3}
       propertyPath: m_IsActive

@@ -4,27 +4,34 @@ using UnityEngine;
 
 public class ObstacleSpawnManager : MonoBehaviour
 {
-    public List<GameObject> obstacleList;
-    public float obstacleSpawnDelay;
-
-    void Start()
+    public ObstacleProperties obstacle;
+    [SerializeField] private ObstacleProperties _obstacle;
+   
+    public void Start()
     {
-        StartCoroutine(ObstacleSpawn());
+        Pool pool = new Pool();
+        pool.tag = obstacle.Tag;
+        pool.prefab = obstacle.ObstaclePrefab;
+        pool.size = obstacle.NumberSpawn;
+        ObjectPooler.Instance.Initialize(pool);
+        InvokeRepeating("Spawn", 0f, 5f);
     }
 
-    void Spawn()
+    public void Spawn()
     {
-        int randomIndex = Random.Range(0, 4);
-        Instantiate(obstacleList[randomIndex], new Vector2(Random.Range(-2.3f, 2.3f), 7), obstacleList[randomIndex].transform.rotation);
-    }
-    IEnumerator ObstacleSpawn()
-    {
-        yield return new WaitForSeconds(obstacleSpawnDelay);
-        if (GameManager.instance.isGameActive && GameManager.instance.timeCounter > 0)
+        if (GameManager.instance.isGameActive && !GameManager.instance.miniBossActive)
         {
-            Spawn();
-        }
+            Vector2 SpawnPosition = new Vector2(Random.Range(-2.5f, 2.5f), 5.5f);
 
-        StartCoroutine(ObstacleSpawn());
+            GameObject _obstacle = ObjectPooler.Instance.SpawnFromPool(obstacle.Tag, SpawnPosition, Quaternion.identity);
+
+            IPooledObject pooledObj = _obstacle.GetComponent<IPooledObject>();
+            if (pooledObj != null)
+            {
+                pooledObj.OnObjectSpawn();
+                pooledObj.Speed = obstacle.Speed;
+                pooledObj.Boundary = obstacle.Boundary;
+            }
+        }
     }
 }

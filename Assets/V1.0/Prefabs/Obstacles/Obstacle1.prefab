@@ -99,13 +99,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7109d7ee9915054ba0f81cc1161544e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  DamageAmount: 2
+  ExplosionAnimation: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
+  ObstacleHitSound: {fileID: 8300000, guid: 3855168bae20fed4595843424000db65, type: 3}
+  ExplosionSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
   boundary: 6
-  speedPowerUp: {fileID: 0}
-  obstacleEnergy: 4
-  enemyExplosion: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
-  obstacleSound: {fileID: 8300000, guid: 065edf350b0d7a54193b1e5d05b1acd0, type: 3}
-  obstacleHitSound: {fileID: 8300000, guid: 3855168bae20fed4595843424000db65, type: 3}
+  obstacleProperties:
+    NumberSpawn: 100
+    Tag: Obstacle
+    ObstacleSpawnDelay: 5
+    Speed: 5
+    Health: 3
+    Boundary: 6
+    ObstaclePrefab: {fileID: 1158434165084441023}
+    ExplotionAnimPrefab: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
 --- !u!50 &527123969139841706
 Rigidbody2D:
   serializedVersion: 4

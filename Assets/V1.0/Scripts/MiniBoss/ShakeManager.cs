@@ -3,13 +3,12 @@ using UnityEngine;
 public class ShakeManager : MonoBehaviour
 {
     public float speed, amount, duration;
-    public MiniBossActivate MiniBoss;
 
     private Vector3 startPos, shakePos;
 
     void Start()
     {
-        MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
+        //MiniBoss = GameObject.Find("MiniBoss").GetComponent<MiniBossActivate>();
         shakePos = startPos = transform.position;
         speed = 2.34f;
         amount = 0.06f;
