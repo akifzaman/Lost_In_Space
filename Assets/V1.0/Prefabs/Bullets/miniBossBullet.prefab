@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8934782685400282809}
   - component: {fileID: 8727814651024230423}
-  - component: {fileID: 8930320554056449431}
   - component: {fileID: 8932930154403799622}
   - component: {fileID: 7334246734895075898}
+  - component: {fileID: 2406757413816193651}
   m_Layer: 0
   m_Name: miniBossBullet
   m_TagString: MiniBossBullet
@@ -87,19 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8930320554056449431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8928460442896055807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6ad0008e1338c64595f1d93f6c0b644, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1.5
 --- !u!61 &8932930154403799622
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,3 +134,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2406757413816193651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928460442896055807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e3b40d5cc5e28458fc2aa65e0fce2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  bulletsAmount: 20
+  startAngle: 90
+  endAngle: 440

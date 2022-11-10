@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 913307634979902034}
   - component: {fileID: 913307634979902038}
   - component: {fileID: 913307634979902037}
+  - component: {fileID: -761347430655474609}
   m_Layer: 8
   m_Name: BulletPowerUp
   m_TagString: BulletPowerUp
@@ -133,3 +134,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-761347430655474609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913307634979902033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b223892392207b14d851897eb3e03aa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoubleBulletPrefab: {fileID: 2221009574319880453, guid: 21e5ab47d2b596f4897163b6e5bbac01, type: 3}

@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         UiManager.GameOver();
     }
-
+    //ToDo - Need Refactor
     IEnumerator Timer()
     {
         if (isGameActive && timeCounter > -100)

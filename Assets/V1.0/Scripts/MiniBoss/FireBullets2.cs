@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireBullets2 : MonoBehaviour
+public class FireBullets2 : Bullet
 {
     private float angle = 0f;
    

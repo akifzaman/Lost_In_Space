@@ -11,6 +11,7 @@ public class MiniBoss : Enemy, IPooledObject
     public AudioClip enemyLaserLoadSound;
 
     private ShipMovement MiniBossMovement;
+    private Shooting bossShooting;
     public HealthBar BossHealthBar;
 
     private bool laserActivate = false;
@@ -22,13 +23,11 @@ public class MiniBoss : Enemy, IPooledObject
     void Start()
     {
         MiniBossMovement = GetComponent<ShipMovement>();
+        bossShooting = GetComponent<Shooting>();
+
         foreach (var bullet in bossBulletProperties)
         {
-            Pool pool = new Pool();
-            pool.prefab = bullet.BulletPrefab;
-            pool.tag = bullet.Tag;
-            pool.size = bullet.NumberSpawn;
-            ObjectPooler.Instance.Initialize(pool);
+            bossShooting.Initialize(bullet);
         }
         StartCoroutine(Laser());
         BossHealthBar.gameObject.SetActive(false);
@@ -50,6 +49,14 @@ public class MiniBoss : Enemy, IPooledObject
             }
         }
     }
+    public void SetSlider()
+    {
+        BossHealthBar.Initialize(enemyProperties.Health);
+        BossHealthBar.OnMaximumValue.AddListener(OnDestroyBoss);
+    }
+
+    public void UpdateSlider(float damageAmount) => BossHealthBar.UpdateSlider(damageAmount);
+
     public override void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player_Bullet"))
@@ -70,14 +77,7 @@ public class MiniBoss : Enemy, IPooledObject
             GameManager.instance.GameOver();
         }
     }
-    public void SetSlider()
-    {
-        //BossHealthBar.gameObject.SetActive(true);
-        BossHealthBar.Initialize(enemyProperties.Health);
-        BossHealthBar.OnMaximumValue.AddListener(OnDestroyBoss);
-    }
-
-    public void UpdateSlider(float damageAmount) => BossHealthBar.UpdateSlider(damageAmount);
+    
 
     private void OnDestroyBoss()
     {

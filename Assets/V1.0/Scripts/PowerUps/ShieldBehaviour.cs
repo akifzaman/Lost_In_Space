@@ -20,7 +20,7 @@ public class ShieldBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!other.gameObject.CompareTag("Player") || !other.gameObject.CompareTag("bullet_lvl1") || !other.gameObject.CompareTag("bullet_lvl2"))
+        if (!other.gameObject.CompareTag("Player") || !other.gameObject.CompareTag("Player_Bullet") || !other.gameObject.CompareTag("PowerUp"))
         {
             GameObject explosion = Instantiate(enemyExplosion, transform.position, Quaternion.identity);
             AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 1.0f);

@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 
@@ -9,17 +11,10 @@ public class PlayerController : MonoBehaviour
     public GameObject glowShield;
     public GameObject ExplosionAnimation;
 
-    public GameObject SingleBulletPrefab;
-    public GameObject DoubleBulletPrefab;
-
     public AudioClip powerUpSound;
     public AudioClip bulletSound;
     public AudioClip playerHitSound;
     public AudioClip playerExplosionSound;
-
-    public SpriteRenderer spriteRenderer;
-
-    public SpeedPowerUp speedPowerUp;
 
     private float xBoundary = 2.40f;
     private float yBoundaryUp = 4.78f;
@@ -27,16 +22,17 @@ public class PlayerController : MonoBehaviour
     
     public HealthBar PlayerHealthBar;
     
-    private Shooting shooting;
+    public Shooting shooting;
     private AudioSource playerAudio;
 
-    public BulletProperties bulletProperties;
+    [SerializeField]private BulletProperties bulletProperties;
+    public BulletProperties SinglebulletProperties;
+    public BulletProperties DoublebulletProperties;
 
-    void Start()
+    private void Start()
     {
         shooting = GetComponent<Shooting>();
         playerAudio = GetComponent<AudioSource>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         bulletProperties = new BulletProperties();
         PlayerHealthBar.gameObject.SetActive(false);
     }
@@ -44,7 +40,8 @@ public class PlayerController : MonoBehaviour
     public void StartGame()
     {
         SetSlider();
-        SetBulletProperties(SingleBulletPrefab, "SingleBullet");
+        StartCoroutine(SetBulletProperties(SinglebulletProperties));
+        //shooting.CanShoot = false;
     }
 
     private void SetSlider()
@@ -52,22 +49,6 @@ public class PlayerController : MonoBehaviour
         PlayerHealthBar.gameObject.SetActive(true);
         PlayerHealthBar.Initialize(player.health);
         PlayerHealthBar.OnMaximumValue.AddListener(OnDestroyPlayer);
-    }
-
-    public void UpdateSlider(float damageAmount) => PlayerHealthBar.UpdateSlider(damageAmount);
-    public void ActivateShield() => glowShield.SetActive(true);
-    
-    private void SetBulletProperties(GameObject bulletPrefab, string tag)
-    {
-        bulletProperties.Tag = tag;
-        bulletProperties.BulletDelay = 0.1f;
-        bulletProperties.Speed = 10;
-        bulletProperties.NumberSpawn = 150;
-        bulletProperties.Boundary = 5.0f;
-        bulletProperties.BulletPrefab = bulletPrefab;
-        shooting.Initialize(bulletProperties);
-        shooting.CanShoot = true;
-        StartCoroutine(shooting.Fire(bulletProperties));
     }
     private void OnDestroyPlayer()
     {
@@ -78,7 +59,21 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.isGameActive = false;
         GameManager.instance.GameOver();
     }
-    void Update()
+    public void UpdateSlider(float damageAmount) => PlayerHealthBar.UpdateSlider(damageAmount);
+    public void ActivateShield() => glowShield.SetActive(true);
+    public IEnumerator SetBulletProperties(BulletProperties bulletProp)
+    {
+        yield return new WaitForSeconds(0.5f);
+        bulletProperties = bulletProp;
+        shooting.Initialize(bulletProperties);
+        shooting.CanShoot = true;
+        StartCoroutine(shooting.Fire(bulletProperties));
+    }
+    public void SetDoubleBullet()
+    {
+        StartCoroutine(SetBulletProperties(DoublebulletProperties));
+    }
+    private void Update()
     {
         if(!GameManager.instance.isGameActive) return;
         StayInBound();
@@ -86,10 +81,11 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * player.speed);
         transform.Translate(Vector2.down * Time.deltaTime * verticalInput * player.speed);
-
+        
         SuperSplashActivated();
     }
 
+    
     private void SuperSplashActivated()
     {
         if (Input.GetKeyDown(KeyCode.Space) && player.superSplashCounter > 0)

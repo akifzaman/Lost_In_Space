@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour,IPooledObject
 {
@@ -18,7 +14,7 @@ public class Enemy : MonoBehaviour,IPooledObject
     [SerializeField] protected BulletProperties bulletProperties = new BulletProperties();
     public EnemyProperties enemyProperties;
     [SerializeField] protected Shooting shooting;
-    [SerializeField] protected float xBoundary = 3.20f;
+    [SerializeField] private float xBoundary = 3.20f;
 
     public float Speed { get; set; }
     public float Boundary { get; set; }
@@ -54,7 +50,7 @@ public class Enemy : MonoBehaviour,IPooledObject
         }
     }
 
-    protected void OnDestroyObject()
+    private void OnDestroyObject()
     {
         gameObject.SetActive(false);
         GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);

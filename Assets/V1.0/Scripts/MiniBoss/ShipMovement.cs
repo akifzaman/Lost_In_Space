@@ -38,7 +38,7 @@ public class ShipMovement : MonoBehaviour
             {
                 transform.Translate(Vector2.down * Time.deltaTime * moveSpeed, Space.World);
             }
-            else if (currentMovement == 4) //down
+            else if (currentMovement == 4) //up
             {
                 transform.Translate(Vector2.up * Time.deltaTime * moveSpeed, Space.World);
             }

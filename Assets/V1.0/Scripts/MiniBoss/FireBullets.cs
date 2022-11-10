@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireBullets : MonoBehaviour
+public class FireBullets : Bullet
 {
 
     [SerializeField] private int bulletsAmount = 20;
@@ -26,7 +26,6 @@ public class FireBullets : MonoBehaviour
                 Vector3 bullMoveVector = new Vector3(bulDirX, bulDirY, 0f);
                 Vector2 bulDir = (bullMoveVector - transform.position).normalized;
 
-                //GameObject bul = BulletPool.bulletPoolInstance.GetBullet1();
                 GameObject bul = BulletPool.bulletPoolInstance.GetBullet1();
 
                 bul.transform.position = transform.position;
