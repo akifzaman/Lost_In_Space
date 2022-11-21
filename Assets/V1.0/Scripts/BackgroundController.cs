@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 public class BackgroundController : MonoBehaviour
 {
-    public float speed = 20.0f;
+    public float speed = 5.0f;
     private Vector2 startPos;
     private float repeatHeight;
     [SerializeField] private float movementSpeedMultiplier = 20.0f;
@@ -10,23 +10,19 @@ public class BackgroundController : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
-        repeatHeight = GetComponent<BoxCollider2D>().size.y / movementSpeedMultiplier;
+        repeatHeight = GetComponent<BoxCollider2D>().size.y / movementSpeedMultiplier; 
+        GameManager.instance.SpeedPowerUp.AddListener(() =>
+        {
+            speed *= 10;
+            StartCoroutine(SpeedPowerUpEnd());
+        });
     }
 
     void Update()
     {
-        if (GameManager.instance.timeCounter == -6)
-        {
-            speed = 0;
-        }
         if (GameManager.instance.isGameActive)
         {
             transform.Translate(Vector2.down * Time.deltaTime * speed);
-        }
-
-        if (speed == 50)
-        {
-            StartCoroutine(SpeedPowerUpEnd());
         }
         if (transform.position.y < startPos.y - repeatHeight)
         {
@@ -37,7 +33,7 @@ public class BackgroundController : MonoBehaviour
     IEnumerator SpeedPowerUpEnd()
     {
         yield return new WaitForSeconds(8.0f);
-        speed = 10;
+        speed = 5;
         GameManager.instance.OnSpeedUp = false;
     }
 }

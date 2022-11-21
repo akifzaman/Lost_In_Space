@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_StraightMovement : Enemy
 {
-    public override void OnObjectSpawn()
+    private void Update()
     {
-        enemyAudioSource = GetComponent<AudioSource>();
-        
-        shooting.CanShoot = !GameManager.instance.OnSpeedUp;
-        StartCoroutine(shooting.Fire(bulletProperties));
+        if (!GameManager.instance.isGameActive) return;
+        MoveDown();
     }
     private void OnEnable()
     {
         shooting = GetComponent<Shooting>();
         shooting.CanShoot = !GameManager.instance.OnSpeedUp;
+    }
+    public override void OnObjectSpawn()
+    {
+        enemyAudioSource = GetComponent<AudioSource>();
+        shooting.CanShoot = !GameManager.instance.OnSpeedUp;
+        StartCoroutine(shooting.Fire(bulletProperties));
     }
 }

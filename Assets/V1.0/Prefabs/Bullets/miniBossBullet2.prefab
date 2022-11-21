@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 174227469213668346}
   - component: {fileID: 3564201595410021775}
   - component: {fileID: 7531989812188882421}
-  - component: {fileID: -8779217100191365773}
-  m_Layer: 0
+  - component: {fileID: 2627622527622767372}
+  m_Layer: 18
   m_Name: miniBossBullet2
   m_TagString: MiniBossBullet
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &-8779217100191365773
+--- !u!114 &2627622527622767372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 44425410549999122}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6529e890dff8fba40a0f992fd66cfd40, type: 3}
+  m_Script: {fileID: 11500000, guid: e6ad0008e1338c64595f1d93f6c0b644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 3

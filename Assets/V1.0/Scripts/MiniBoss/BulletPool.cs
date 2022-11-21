@@ -9,7 +9,6 @@ public class BulletPool : MonoBehaviour
     [SerializeField] private GameObject pooledBullet2;
     private bool notEnoughBulletInPool = true;
     private List<GameObject> bullets;
-
     private void Awake()
     {
         bulletPoolInstance = this;
@@ -31,7 +30,6 @@ public class BulletPool : MonoBehaviour
                 }
             }
         }
-
         if (notEnoughBulletInPool)
         {
             GameObject bul = Instantiate(pooledBullet1);
@@ -39,7 +37,6 @@ public class BulletPool : MonoBehaviour
             bullets.Add(bul);
             return bul;
         }
-
         return null;
     }
     public GameObject GetBullet2()
@@ -54,7 +51,6 @@ public class BulletPool : MonoBehaviour
                 }
             }
         }
-
         if (notEnoughBulletInPool)
         {
             GameObject bul = Instantiate(pooledBullet2);
@@ -62,7 +58,6 @@ public class BulletPool : MonoBehaviour
             bullets.Add(bul);
             return bul;
         }
-
         return null;
     }
 }

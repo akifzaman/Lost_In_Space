@@ -1,35 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float moveSpeed;
-
     private Vector2 moveDirection;
-
-    private void OnEnable()
-    {
-        Invoke("Destroy", 6f);
-    }
-
+    public float moveSpeed;
     void Update()
     {
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
     }
 
-    public void SetMoveDirection(Vector2 dir)
-    {
-        moveDirection = dir;
-    }
-
-    private void Destroy()
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         gameObject.SetActive(false);
     }
-
-    private void OnDisable()
+    public void SetMoveDirection(Vector2 dir)
     {
-        CancelInvoke();
+        moveDirection = dir;
     }
 }

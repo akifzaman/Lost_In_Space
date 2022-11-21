@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Pool;
-
 public class Shooting : MonoBehaviour
 {
     public bool CanShoot;
@@ -26,7 +24,6 @@ public class Shooting : MonoBehaviour
     private void Start()
     {
         shootingAudio = GetComponent<AudioSource>();
-        //CanShoot = true;
     }
 
     public IEnumerator Fire(BulletProperties bullet)
@@ -43,7 +40,7 @@ public class Shooting : MonoBehaviour
                 pooledObj.Speed = _bullet.Speed;
                 pooledObj.Boundary = _bullet.Boundary;
             }
-            shootingAudio.PlayOneShot(bulletSound, 0.04f);
+            //shootingAudio.PlayOneShot(bulletSound, 0.04f);
         }
     }
 

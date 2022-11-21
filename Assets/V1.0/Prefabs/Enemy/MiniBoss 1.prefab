@@ -18,10 +18,9 @@ GameObject:
   - component: {fileID: 7244416368282746356}
   - component: {fileID: 1390933935}
   - component: {fileID: 4535670646264881259}
-  - component: {fileID: 4535670646264881258}
-  - component: {fileID: 1368460069}
-  - component: {fileID: 7285024609726213652}
   - component: {fileID: 3780300614719321895}
+  - component: {fileID: 3792994648342341561}
+  - component: {fileID: 1355303737130533941}
   m_Layer: 16
   m_Name: MiniBoss 1
   m_TagString: MiniBoss
@@ -273,6 +272,7 @@ MonoBehaviour:
     BulletDelay: 0
     Speed: 0
     Boundary: 0
+    Angle: 0
     BulletPrefab: {fileID: 0}
   enemyProperties:
     NumberSpawn: 0
@@ -295,12 +295,14 @@ MonoBehaviour:
     BulletDelay: 1
     Speed: 5
     Boundary: 7
+    Angle: 0
     BulletPrefab: {fileID: 8928460442896055807, guid: a132e62977e77fa46ac4abff3c4f29dc, type: 3}
   - NumberSpawn: 100
     Tag: BossBullet_2
     BulletDelay: 1
     Speed: 5
     Boundary: 7
+    Angle: 0
     BulletPrefab: {fileID: 44425410549999122, guid: 585b44b78895ee948800ea71f8b08cc3, type: 3}
 --- !u!114 &4535670646264881259
 MonoBehaviour:
@@ -319,58 +321,6 @@ MonoBehaviour:
   yBoundaryUp: 4.5
   yBoundaryDown: 3
   moveSpeed: 0
---- !u!114 &4535670646264881258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7244416368282746359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e3b40d5cc5e28458fc2aa65e0fce2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
-  bulletsAmount: 10
-  startAngle: 90
-  endAngle: 440
---- !u!114 &1368460069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7244416368282746359}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6529e890dff8fba40a0f992fd66cfd40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
---- !u!114 &7285024609726213652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7244416368282746359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fee860595ffee94dbfa8ffe7c3c9c41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanShoot: 0
-  SpawnPosition: {fileID: 7244416368282746367}
-  bulletSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
-  shootingAudio: {fileID: 0}
-  _bullet:
-    NumberSpawn: 0
-    Tag: 
-    BulletDelay: 0
-    Speed: 0
-    Boundary: 0
-    BulletPrefab: {fileID: 0}
 --- !u!82 &3780300614719321895
 AudioSource:
   m_ObjectHideFlags: 0
@@ -467,6 +417,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3792994648342341561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244416368282746359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e3b40d5cc5e28458fc2aa65e0fce2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletsAmount: 20
+  startAngle: 90
+  endAngle: 440
+--- !u!114 &1355303737130533941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244416368282746359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6529e890dff8fba40a0f992fd66cfd40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7531492896051713503
 GameObject:
   m_ObjectHideFlags: 0

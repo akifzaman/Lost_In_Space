@@ -6,7 +6,6 @@ public class ShipMovement : MonoBehaviour
     public int prevMovement = 1, currentMovement = 1;
     public float yBoundaryUp = 4.5f;
     public float yBoundaryDown = 3.0f;
-
     public float moveSpeed;
     private float xBoundary = 2;
 
@@ -15,9 +14,9 @@ public class ShipMovement : MonoBehaviour
         moveSpeed = 2f;
         StartCoroutine(RandomMovementGenerate());
     }
-
     void Update()
     {
+
         if (GameManager.instance.miniBossActive)
         {
             StayInBound();
@@ -45,7 +44,6 @@ public class ShipMovement : MonoBehaviour
         }
         
     }
-
     IEnumerator RandomMovementGenerate()
     {
         if (prevMovement == currentMovement)

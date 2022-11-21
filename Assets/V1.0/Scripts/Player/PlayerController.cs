@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public Shooting shooting;
     private AudioSource playerAudio;
 
-    [SerializeField]private BulletProperties bulletProperties;
+    [SerializeField] private BulletProperties bulletProperties;
     public BulletProperties SinglebulletProperties;
     public BulletProperties DoublebulletProperties;
 
@@ -41,7 +39,6 @@ public class PlayerController : MonoBehaviour
     {
         SetSlider();
         StartCoroutine(SetBulletProperties(SinglebulletProperties));
-        //shooting.CanShoot = false;
     }
 
     private void SetSlider()
@@ -53,7 +50,7 @@ public class PlayerController : MonoBehaviour
     private void OnDestroyPlayer()
     {
         GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);
-        //AudioSource.PlayClipAtPoint(playerExplosionSound, Camera.main.transform.position, 1.0f);
+        AudioSource.PlayClipAtPoint(playerExplosionSound, Camera.main.transform.position, 1.0f);
         Destroy(explosion, 0.5f);
         Destroy(gameObject);
         GameManager.instance.isGameActive = false;
@@ -84,8 +81,6 @@ public class PlayerController : MonoBehaviour
         
         SuperSplashActivated();
     }
-
-    
     private void SuperSplashActivated()
     {
         if (Input.GetKeyDown(KeyCode.Space) && player.superSplashCounter > 0)
@@ -95,7 +90,6 @@ public class PlayerController : MonoBehaviour
             Instantiate(superSplash, superSplash.transform.position, superSplash.transform.rotation);
         }
     }
-
     private void StayInBound()
     {
         if (transform.position.x <= -xBoundary)
@@ -115,15 +109,17 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(transform.position.x, yBoundaryUp);
         }
     }
-
-    //TODO- need to refactor
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("EnemyBullet"))
+        if (other.gameObject.CompareTag("EnemyBullet") || other.gameObject.CompareTag("MiniBossBullet"))
         {
             UpdateSlider(1.0f);
             other.gameObject.SetActive(false);
             AudioSource.PlayClipAtPoint(playerHitSound, Camera.main.transform.position, 1.0f);
+        }
+        else if (other.gameObject.CompareTag("EnemyLaser"))
+        {
+            UpdateSlider(10.0f);
         }
     }
 }

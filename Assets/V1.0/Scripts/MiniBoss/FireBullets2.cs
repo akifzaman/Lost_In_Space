@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class FireBullets2 : Bullet
+public class FireBullets2 : MonoBehaviour
 {
     private float angle = 0f;
-   
     void Start()
     {
-        InvokeRepeating("Fire", 0f, 0.1f);        
+        InvokeRepeating("Fire", 0f, 0.1f);
     }
-
     private void Fire()
     {
         if (GameManager.instance.miniBossActive)
         {
-            
+
             float bulDirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180f);
             float bulDirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180f);
 

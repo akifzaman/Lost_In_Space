@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ModelClass
@@ -16,6 +14,7 @@ public class BulletProperties
     public float BulletDelay;
     public float Speed;
     public float Boundary;
+    public float Angle;
     public GameObject BulletPrefab;
 }
 

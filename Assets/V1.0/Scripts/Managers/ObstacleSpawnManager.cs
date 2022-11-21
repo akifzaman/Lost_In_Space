@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleSpawnManager : MonoBehaviour
@@ -19,19 +17,17 @@ public class ObstacleSpawnManager : MonoBehaviour
 
     public void Spawn()
     {
-        if (GameManager.instance.isGameActive && !GameManager.instance.miniBossActive)
-        {
-            Vector2 SpawnPosition = new Vector2(Random.Range(-2.5f, 2.5f), 5.5f);
+        if (!GameManager.instance.isGameActive || GameManager.instance.miniBossActive) return;
+        float XspawnRange = 2.5f;
+        float YspawnPosition = 5.5f;
+        Vector2 SpawnPosition = new Vector2(Random.Range(-XspawnRange, XspawnRange), YspawnPosition);
 
-            GameObject _obstacle = ObjectPooler.Instance.SpawnFromPool(obstacle.Tag, SpawnPosition, Quaternion.identity);
+        GameObject _obstacle = ObjectPooler.Instance.SpawnFromPool(obstacle.Tag, SpawnPosition, Quaternion.identity);
 
-            IPooledObject pooledObj = _obstacle.GetComponent<IPooledObject>();
-            if (pooledObj != null)
-            {
-                pooledObj.OnObjectSpawn();
-                pooledObj.Speed = obstacle.Speed;
-                pooledObj.Boundary = obstacle.Boundary;
-            }
-        }
+        IPooledObject pooledObj = _obstacle.GetComponent<IPooledObject>();
+        if (pooledObj == null) return;
+        pooledObj.OnObjectSpawn();
+        pooledObj.Speed = obstacle.Speed;
+        pooledObj.Boundary = obstacle.Boundary;
     }
 }

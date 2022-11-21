@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class MiniBoss : Enemy, IPooledObject
+public class MiniBoss : Enemy
 {
     public GameObject laserObject;
     public GameObject laserReload;
@@ -11,42 +9,39 @@ public class MiniBoss : Enemy, IPooledObject
     public AudioClip enemyLaserLoadSound;
 
     private ShipMovement MiniBossMovement;
-    private Shooting bossShooting;
     public HealthBar BossHealthBar;
 
     private bool laserActivate = false;
-    private float activationTime = 8.0f;
     private float activationPoint = 4.0f;
-
-    public List<BulletProperties> bossBulletProperties;
 
     void Start()
     {
         MiniBossMovement = GetComponent<ShipMovement>();
-        bossShooting = GetComponent<Shooting>();
-
-        foreach (var bullet in bossBulletProperties)
-        {
-            bossShooting.Initialize(bullet);
-        }
         StartCoroutine(Laser());
         BossHealthBar.gameObject.SetActive(false);
         SetSlider();
     }
+    private bool shoot = false;
     void Update()
     {
-        if (GameManager.instance.timeCounter <= -activationTime)
+        MiniBossProjectileActivation();
+        MiniBossMoveDown();
+    }
+
+    private void MiniBossProjectileActivation()
+    {
+        if (transform.position.y < activationPoint)
         {
-            if (gameObject.CompareTag("MiniBoss") && transform.position.y < activationPoint)
-            {
-                GameManager.instance.miniBossActive = true;
-                BossHealthBar.gameObject.SetActive(true);
-                laserActivate = true;
-            }
-            if (gameObject.CompareTag("MiniBoss") && transform.position.y > activationPoint)
-            {
-                transform.Translate(Vector2.down * Time.deltaTime * MiniBossMovement.moveSpeed / 2.0f);
-            }
+            if (shoot) return;
+            BossHealthBar.gameObject.SetActive(true);
+            laserActivate = true;
+            shoot = true;
+        }
+    } private void MiniBossMoveDown()
+    {
+        if (transform.position.y > activationPoint && GameManager.instance.miniBossActive)
+        {
+            transform.Translate(Vector2.down * Time.deltaTime * MiniBossMovement.moveSpeed / 2.0f);
         }
     }
     public void SetSlider()
@@ -54,7 +49,6 @@ public class MiniBoss : Enemy, IPooledObject
         BossHealthBar.Initialize(enemyProperties.Health);
         BossHealthBar.OnMaximumValue.AddListener(OnDestroyBoss);
     }
-
     public void UpdateSlider(float damageAmount) => BossHealthBar.UpdateSlider(damageAmount);
 
     public override void OnCollisionEnter2D(Collision2D other)
@@ -73,23 +67,17 @@ public class MiniBoss : Enemy, IPooledObject
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            //other.gameObject.GetComponent<PlayerController>().UpdateSlider(DamageAmount);
             GameManager.instance.GameOver();
         }
     }
-    
-
     private void OnDestroyBoss()
     {
         GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);
-        //AudioSource.PlayClipAtPoint(playerExplosionSound, Camera.main.transform.position, 1.0f);
         Destroy(explosion, 0.5f);
         Destroy(gameObject);
         GameManager.instance.isGameActive = false;
         GameManager.instance.GameOver();
     }
-
-    //TODO- need to refactor
     IEnumerator Laser()
     {
         yield return new WaitForSeconds(3.0f);
@@ -101,18 +89,15 @@ public class MiniBoss : Enemy, IPooledObject
             yield return new WaitForSeconds(1.0f);
             AudioSource.PlayClipAtPoint(enemyLaserSound, Camera.main.transform.position, 1.0f);
         }
-
         if (laserActivate)
         {
             laserObject.SetActive(true);
         }
-
         yield return new WaitForSeconds(1.0f);
         if (laserActivate)
         {
             laserObject.SetActive(false);
         }
-
         StartCoroutine(Laser());
     }
 }

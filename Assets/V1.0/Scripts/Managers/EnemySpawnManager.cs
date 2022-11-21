@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +33,9 @@ public class EnemySpawnManager : MonoBehaviour
     {
         if (GameManager.instance.isGameActive && !GameManager.instance.miniBossActive)
         {
-            Vector2 SpawnPosition = new Vector2(Random.Range(-2.5f, 2.5f), 5.5f);
+            float XspawnRange = 2.5f;
+            float YspawnPosition = 5.5f;
+            Vector2 SpawnPosition = new Vector2(Random.Range(-XspawnRange, XspawnRange), YspawnPosition);
             EnemyProperties enemyProperties = enemiesProperties[Random.Range(0, enemiesProperties.Count)];
 
             _go = ObjectPooler.Instance.SpawnFromPool(enemyProperties.Tag, SpawnPosition, Quaternion.identity);

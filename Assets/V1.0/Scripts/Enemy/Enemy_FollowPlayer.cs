@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class Enemy_FollowPlayer : Enemy, IPooledObject
@@ -14,12 +13,13 @@ public class Enemy_FollowPlayer : Enemy, IPooledObject
     public void Update()
     {
         if (!GameManager.instance.isGameActive) return;
-        lookDirectionAllow = (transform.position.y > lookTransform.position.y);
-        lookDirection = lookDirectionAllow? (lookTransform.position - transform.position) : (Vector2.down * 2);
-        transform.Translate(lookDirection * Time.deltaTime * enemyProperties.Speed, Space.World);
+        DirectionalMovement();
     }
-   
-
+    private void OnEnable()
+    {
+        shooting = GetComponent<Shooting>();
+        shooting.CanShoot = !GameManager.instance.OnSpeedUp;
+    }
     public override void OnObjectSpawn()
     {
         enemyAudioSource = GetComponent<AudioSource>();
@@ -28,10 +28,11 @@ public class Enemy_FollowPlayer : Enemy, IPooledObject
 
         StartCoroutine(shooting.Fire(bulletProperties));
     }
-
-    private void OnEnable()
+    
+    private void DirectionalMovement()
     {
-        shooting = GetComponent<Shooting>();
-        shooting.CanShoot = !GameManager.instance.OnSpeedUp;
+        lookDirectionAllow = (transform.position.y > lookTransform.position.y);
+        lookDirection = lookDirectionAllow ? (lookTransform.position - transform.position) : (Vector2.down * 2);
+        transform.Translate(lookDirection * Time.deltaTime * enemyProperties.Speed, Space.World);
     }
 }

@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -31,7 +28,6 @@ public class ObjectPooler : MonoBehaviour
 
         Queue<GameObject> objectPool = new Queue<GameObject>();
 
-        
         for (int i = 0; i < pool.size; i++)
         {
             GameObject obj = Instantiate(pool.prefab);

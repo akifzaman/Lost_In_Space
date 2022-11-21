@@ -15,19 +15,14 @@ public class Enemy : MonoBehaviour,IPooledObject
     public EnemyProperties enemyProperties;
     [SerializeField] protected Shooting shooting;
     [SerializeField] private float xBoundary = 3.20f;
-
+    [SerializeField] private float explosionDuration = 0.5f;
     public float Speed { get; set; }
     public float Boundary { get; set; }
 
     private void Update()
     {
         if (!GameManager.instance.isGameActive) return;
-        
-        if (transform.position.x < -xBoundary || transform.position.x > xBoundary || transform.position.y < Boundary)
-        {
-            gameObject.SetActive(false);
-        }
-        transform.Translate(Vector2.down * Time.deltaTime * Speed, Space.World);
+        OutOfBoundary();
     }
 
     public virtual void OnCollisionEnter2D(Collision2D other)
@@ -49,13 +44,24 @@ public class Enemy : MonoBehaviour,IPooledObject
             OnDestroyObject();
         }
     }
+    public void MoveDown()
+    {
+        transform.Translate(Vector2.down * Time.deltaTime * Speed, Space.World);
+    }
+    private void OutOfBoundary()
+    {
+        if (transform.position.x < -xBoundary || transform.position.x > xBoundary || transform.position.y < Boundary)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     private void OnDestroyObject()
     {
         gameObject.SetActive(false);
         GameObject explosion = Instantiate(ExplosionAnimation, transform.position, Quaternion.identity);
         AudioSource.PlayClipAtPoint(ExplosionSound, Camera.main.transform.position, 1.0f);
-        Destroy(explosion, 0.5f);
+        Destroy(explosion, explosionDuration);
     }
 
     public virtual void OnObjectSpawn()
