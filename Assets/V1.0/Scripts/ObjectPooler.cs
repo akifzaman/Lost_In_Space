@@ -1,63 +1,73 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+namespace GameTemplate_UltimateSpaceShooterGamesMaker
 {
-    public static ObjectPooler Instance;
+	public class ObjectPooler : MonoBehaviour
+	{
+		public static ObjectPooler Instance;
 
-    #region Singleton
-    public void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            DestroyImmediate(gameObject);
-        }
-    }
-    #endregion
+		#region Singleton
 
-    [SerializeField] private List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
-    [SerializeField] private string _tag;
-    public void Initialize(Pool pool)
-    {
-        pools.Add(pool);
+		public void Awake()
+		{
+			if (Instance == null)
+			{
+				Instance = this;
+			}
+			else
+			{
+				DestroyImmediate(gameObject);
+			}
+		}
 
-        Queue<GameObject> objectPool = new Queue<GameObject>();
+		#endregion
 
-        for (int i = 0; i < pool.size; i++)
-        {
-            GameObject obj = Instantiate(pool.prefab);
-            obj.SetActive(false);
-            objectPool.Enqueue(obj);
-        }
-        poolDictionary.Add(pool.tag, objectPool);
-    }
+		[SerializeField] private List<Pool> pools;
+		public Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
+		[SerializeField] private string _tag;
 
-    public GameObject SpawnFromPool(string tag, Vector2 position, Quaternion rotation)
-    {
-        if (!poolDictionary.ContainsKey(tag))
-        {
-            Debug.LogError("Doesn't exist");
-            return null;
-        }
-        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+		public void Initialize(Pool pool)
+		{
+			pools.Add(pool);
 
-        objectToSpawn.SetActive(true);
-        objectToSpawn.transform.position = position;
-        objectToSpawn.transform.rotation = rotation;
+			Queue<GameObject> objectPool = new Queue<GameObject>();
 
-        IPooledObject pooledObj = objectToSpawn.GetComponent<IPooledObject>();
+			for (int i = 0; i < pool.size; i++)
+			{
+				GameObject obj = Instantiate(pool.prefab);
+				obj.SetActive(false);
+				objectPool.Enqueue(obj);
+			}
 
-        if (pooledObj != null)
-        {
-            pooledObj.OnObjectSpawn();
-        }
-        poolDictionary[tag].Enqueue(objectToSpawn);
+			poolDictionary.Add(pool.tag, objectPool);
+		}
 
-        return objectToSpawn;
-    }
+		public GameObject SpawnFromPool(string tag, Vector2 position, Quaternion rotation)
+		{
+			if (!poolDictionary.ContainsKey(tag))
+			{
+				Debug.LogError("Doesn't exist");
+				return null;
+			}
+
+			GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+
+			objectToSpawn.SetActive(true);
+			objectToSpawn.transform.position = position;
+			objectToSpawn.transform.rotation = rotation;
+
+			IPooledObject pooledObj = objectToSpawn.GetComponent<IPooledObject>();
+
+			if (pooledObj != null)
+			{
+				pooledObj.OnObjectSpawn();
+			}
+
+			poolDictionary[tag].Enqueue(objectToSpawn);
+
+			return objectToSpawn;
+		}
+	}
+
 }

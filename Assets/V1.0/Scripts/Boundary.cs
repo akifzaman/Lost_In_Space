@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class Boundary : MonoBehaviour
+namespace GameTemplate_UltimateSpaceShooterGamesMaker
 {
-    private void OnCollisionEnter2D(Collision2D other) => other.gameObject.SetActive(false);
+	public class Boundary : MonoBehaviour
+	{
+		private void OnCollisionEnter2D(Collision2D other) => other.gameObject.SetActive(false);
+	}
 }

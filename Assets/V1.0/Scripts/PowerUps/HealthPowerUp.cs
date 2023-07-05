@@ -1,11 +1,14 @@
 using System.Collections;
 
-public class HealthPowerUp : PowerUp
+namespace GameTemplate_UltimateSpaceShooterGamesMaker
 {
-    public override PlayerController Player { get; set; }
+	public class HealthPowerUp : PowerUp
+	{
+		public override PlayerController Player { get; set; }
 
-    public override void UsePowerUp()
-    {
-        Player.UpdateSlider(0);
-    }
+		public override void UsePowerUp()
+		{
+			Player.UpdateSlider(0);
+		}
+	}
 }

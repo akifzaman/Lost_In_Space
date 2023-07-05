@@ -1,31 +1,36 @@
 using UnityEngine;
 
-public class FireBullets2 : MonoBehaviour
+namespace GameTemplate_UltimateSpaceShooterGamesMaker
 {
-    private float angle = 0f;
-    void Start()
-    {
-        InvokeRepeating("Fire", 0f, 0.1f);
-    }
-    private void Fire()
-    {
-        if (GameManager.instance.miniBossActive)
-        {
+	public class FireBullets2 : MonoBehaviour
+	{
+		private float angle = 0f;
 
-            float bulDirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180f);
-            float bulDirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180f);
+		void Start()
+		{
+			InvokeRepeating("Fire", 0f, 0.1f);
+		}
 
-            Vector3 bullMoveVector = new Vector3(bulDirX, bulDirY, 0f);
-            Vector2 bulDir = (bullMoveVector - transform.position).normalized;
+		private void Fire()
+		{
+			if (GameManager.instance.miniBossActive)
+			{
 
-            GameObject bul = BulletPool.bulletPoolInstance.GetBullet2();
+				float bulDirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180f);
+				float bulDirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180f);
 
-            bul.transform.position = transform.position;
-            bul.transform.rotation = transform.rotation;
-            bul.SetActive(true);
-            bul.GetComponent<Bullet>().SetMoveDirection(bulDir);
+				Vector3 bullMoveVector = new Vector3(bulDirX, bulDirY, 0f);
+				Vector2 bulDir = (bullMoveVector - transform.position).normalized;
 
-            angle += 10f;
-        }
-    }
+				GameObject bul = BulletPool.bulletPoolInstance.GetBullet2();
+
+				bul.transform.position = transform.position;
+				bul.transform.rotation = transform.rotation;
+				bul.SetActive(true);
+				bul.GetComponent<Bullet>().SetMoveDirection(bulDir);
+
+				angle += 10f;
+			}
+		}
+	}
 }

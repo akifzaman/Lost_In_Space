@@ -1,11 +1,14 @@
 using System.Collections;
 
-public class ShieldPowerUp : PowerUp
+namespace GameTemplate_UltimateSpaceShooterGamesMaker
 {
-    public override PlayerController Player { get; set; }
+	public class ShieldPowerUp : PowerUp
+	{
+		public override PlayerController Player { get; set; }
 
-    public override void UsePowerUp()
-    {
-        Player.ActivateShield();
-    }
+		public override void UsePowerUp()
+		{
+			Player.ActivateShield();
+		}
+	}
 }

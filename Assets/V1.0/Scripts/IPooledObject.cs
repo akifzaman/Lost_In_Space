@@ -1,5 +1,8 @@
-public interface IPooledObject
+namespace GameTemplate_UltimateSpaceShooterGamesMaker
 {
-    float Speed { get; set; }
-    void OnObjectSpawn();
+	public interface IPooledObject
+	{
+		float Speed { get; set; }
+		void OnObjectSpawn();
+	}
 }

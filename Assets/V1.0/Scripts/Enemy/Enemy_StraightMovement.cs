@@ -1,21 +1,26 @@
 using UnityEngine;
 
-public class Enemy_StraightMovement : Enemy
+namespace GameTemplate_UltimateSpaceShooterGamesMaker
 {
-    private void Update()
-    {
-        if (!GameManager.instance.isGameActive) return;
-        MoveDown();
-    }
-    private void OnEnable()
-    {
-        shooting = GetComponent<Shooting>();
-        shooting.CanShoot = !GameManager.instance.OnSpeedUp;
-    }
-    public override void OnObjectSpawn()
-    {
-        enemyAudioSource = GetComponent<AudioSource>();
-        shooting.CanShoot = !GameManager.instance.OnSpeedUp;
-        StartCoroutine(shooting.Fire(bulletProperties));
-    }
+	public class Enemy_StraightMovement : Enemy
+	{
+		private void Update()
+		{
+			if (!GameManager.instance.isGameActive) return;
+			MoveDown();
+		}
+
+		private void OnEnable()
+		{
+			shooting = GetComponent<Shooting>();
+			shooting.CanShoot = !GameManager.instance.OnSpeedUp;
+		}
+
+		public override void OnObjectSpawn()
+		{
+			enemyAudioSource = GetComponent<AudioSource>();
+			shooting.CanShoot = !GameManager.instance.OnSpeedUp;
+			StartCoroutine(shooting.Fire(bulletProperties));
+		}
+	}
 }

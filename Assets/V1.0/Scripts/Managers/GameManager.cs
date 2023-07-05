@@ -3,80 +3,88 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameManager : MonoBehaviour
+namespace GameTemplate_UltimateSpaceShooterGamesMaker
 {
-    public static GameManager instance;
-    public bool OnSpeedUp;
-    public bool miniBossActive = false;
-    public bool miniBossDestroyed = false;
-    public bool isGameActive = false;
-    public bool isShakeActive = false;
-    public bool AllowMiniBossMovement = false;
-    
-    public int score = 0;
+	public class GameManager : MonoBehaviour
+	{
+		public static GameManager instance;
+		public bool OnSpeedUp;
+		public bool miniBossActive = false;
+		public bool miniBossDestroyed = false;
+		public bool isGameActive = false;
+		public bool isShakeActive = false;
+		public bool AllowMiniBossMovement = false;
 
-    public List<GameObject> powerUpList;
+		public int score = 0;
 
-    public UIManager UiManager;
-    public PlayerController playerController;
-    public EnemySpawnManager enemySpawnManager;
+		public List<GameObject> powerUpList;
 
-    public UnityEvent SpeedPowerUp;
+		public UIManager UiManager;
+		public PlayerController playerController;
+		public EnemySpawnManager enemySpawnManager;
 
-    #region Singleton
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+		public UnityEvent SpeedPowerUp;
 
-        UiManager.InitialGame();
-    }
-    #endregion
+		#region Singleton
 
-    public void StartGame()
-    {
-        isGameActive = true;
-        playerController.StartGame();
-        enemySpawnManager.StartGame();
-        StartCoroutine(Timer());
-    }
+		void Awake()
+		{
+			if (instance == null)
+			{
+				instance = this;
+			}
+			else
+			{
+				Destroy(gameObject);
+			}
 
-    public void GameOver()
-    {
-        isGameActive = false;
-        UiManager.GameOver();
-    }
+			UiManager.InitialGame();
+		}
 
-    public void UpdateScore(int amount)
-    {
-        UiManager.scoreText.text = (score + amount).ToString();
-    }
+		#endregion
 
-    IEnumerator Timer()
-    {
-        
-        for (int i = 0; i < powerUpList.Count; i++)
-        {
-            yield return new WaitForSeconds(Random.Range(10,11));
-            GameObject powerUpObject = 
-                Instantiate(powerUpList[i], new Vector2(Random.Range(-2.3f, 2.3f), Random.Range(3.0f, -3.0f)), powerUpList[i].transform.rotation);
+		public void StartGame()
+		{
+			isGameActive = true;
+			playerController.StartGame();
+			enemySpawnManager.StartGame();
+			StartCoroutine(Timer());
+		}
 
-        }
-        isShakeActive = true;
-        AllowMiniBossMovement = true;
-        yield return new WaitForSeconds(10.0f);
-        ActivateMiniBoss();
-        AllowMiniBossMovement = false;
-    }
-    public void ActivateMiniBoss()
-    {
-        miniBossActive = true;
-    }
+		public void GameOver()
+		{
+			isGameActive = false;
+			UiManager.GameOver();
+		}
 
+		public void UpdateScore(int amount)
+		{
+			UiManager.scoreText.text = (score + amount).ToString();
+		}
+
+		IEnumerator Timer()
+		{
+
+			for (int i = 0; i < powerUpList.Count; i++)
+			{
+				yield return new WaitForSeconds(Random.Range(10, 11));
+				GameObject powerUpObject =
+					Instantiate(powerUpList[i], new Vector2(Random.Range(-2.3f, 2.3f), Random.Range(3.0f, -3.0f)),
+						powerUpList[i].transform.rotation);
+
+			}
+
+			isShakeActive = true;
+			AllowMiniBossMovement = true;
+			yield return new WaitForSeconds(10.0f);
+			ActivateMiniBoss();
+			AllowMiniBossMovement = false;
+		}
+
+		public void ActivateMiniBoss()
+		{
+			miniBossActive = true;
+		}
+
+	}
 }
