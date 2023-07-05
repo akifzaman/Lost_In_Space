@@ -45,7 +45,6 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 pooledObj.OnObjectSpawn();
                 pooledObj.Speed = enemyProperties.Speed;
-                pooledObj.Boundary = enemyProperties.Boundary;
             }
         }
     }

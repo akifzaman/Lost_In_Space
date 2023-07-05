@@ -14,11 +14,9 @@ public abstract class PowerUp : MonoBehaviour
     public abstract void UsePowerUp();
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Player = other.gameObject.GetComponent<PlayerController>();
-            UsePowerUp();
-            gameObject.SetActive(false);
-        }
+	    Player = other.gameObject.GetComponent<PlayerController>();
+		AudioSource.PlayClipAtPoint(Player.powerUpSound, Camera.main.transform.position, 1.0f);
+		UsePowerUp();
+        gameObject.SetActive(false);
     }
 }

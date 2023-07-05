@@ -11,19 +11,11 @@ public class Enemy : MonoBehaviour,IPooledObject
     public AudioClip ExplosionSound;
 
     protected AudioSource enemyAudioSource;
-    [SerializeField] protected BulletProperties bulletProperties = new BulletProperties();
+    [SerializeField] protected BulletProperties bulletProperties = new();
     public EnemyProperties enemyProperties;
-    [SerializeField] protected Shooting shooting;
-    [SerializeField] private float xBoundary = 3.20f;
+    public Shooting shooting;
     [SerializeField] private float explosionDuration = 0.5f;
     public float Speed { get; set; }
-    public float Boundary { get; set; }
-
-    private void Update()
-    {
-        if (!GameManager.instance.isGameActive) return;
-        OutOfBoundary();
-    }
 
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
@@ -40,20 +32,13 @@ public class Enemy : MonoBehaviour,IPooledObject
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerController>().UpdateSlider(DamageAmount);
+	        other.gameObject.GetComponent<PlayerController>().UpdateSlider(DamageAmount);
             OnDestroyObject();
         }
     }
     public void MoveDown()
     {
         transform.Translate(Vector2.down * Time.deltaTime * Speed, Space.World);
-    }
-    private void OutOfBoundary()
-    {
-        if (transform.position.x < -xBoundary || transform.position.x > xBoundary || transform.position.y < Boundary)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     private void OnDestroyObject()
@@ -69,6 +54,4 @@ public class Enemy : MonoBehaviour,IPooledObject
         enemyAudioSource = GetComponent<AudioSource>();
         shooting = GetComponent<Shooting>();
     }
-
-    
 }

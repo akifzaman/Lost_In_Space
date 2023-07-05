@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee8a58bf4cace84a890a75a83acf974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageAmount: 0
+  DamageAmount: 2
   EnemyBullet: {fileID: 6177475072503491064, guid: bb6e3301793f70442a04b7bb32f00fed, type: 3}
   ExplosionAnimation: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
   enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
@@ -191,6 +191,7 @@ MonoBehaviour:
     BulletDelay: 1
     Speed: -5
     Boundary: -7
+    Angle: 0
     BulletPrefab: {fileID: 6177475072503491064, guid: bb6e3301793f70442a04b7bb32f00fed, type: 3}
   enemyProperties:
     NumberSpawn: 100
@@ -201,8 +202,7 @@ MonoBehaviour:
     Boundary: -5.5
     EnemyPrefab: {fileID: 1989762373844081860}
   shooting: {fileID: 0}
-  xBoundary: 3.2
-  EnemyPrefab: {fileID: 1989762373844081860}
+  explosionDuration: 0.5
 --- !u!82 &5168287518907195020
 AudioSource:
   m_ObjectHideFlags: 0
@@ -321,4 +321,5 @@ MonoBehaviour:
     BulletDelay: 0
     Speed: 0
     Boundary: 0
+    Angle: 0
     BulletPrefab: {fileID: 0}

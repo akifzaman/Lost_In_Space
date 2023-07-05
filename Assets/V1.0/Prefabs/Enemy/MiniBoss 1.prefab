@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6c47d5121e7284e8918b5527e43861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageAmount: 2
+  DamageAmount: 4
   EnemyBullet: {fileID: 8928460442896055807, guid: a132e62977e77fa46ac4abff3c4f29dc, type: 3}
   ExplosionAnimation: {fileID: 4681922145145960088, guid: 7c52e9d630d914548b01d82dae0d8098, type: 3}
   enemyHitSound: {fileID: 8300000, guid: eb1c552f9697bfa4a8e291ce9bfc80ed, type: 3}
@@ -283,27 +283,12 @@ MonoBehaviour:
     Boundary: 0
     EnemyPrefab: {fileID: 7244416368282746359}
   shooting: {fileID: 0}
-  xBoundary: 3.2
+  explosionDuration: 0.5
   laserObject: {fileID: 319715066}
   laserReload: {fileID: 465475874153308817, guid: e97bdb1367aca8c4d80022d34a22e20e, type: 3}
   enemyLaserSound: {fileID: 8300000, guid: a7a8b06ccc346174487876dc86fd0d79, type: 3}
   enemyLaserLoadSound: {fileID: 8300000, guid: 229732c07e0016e4f962a55783667074, type: 3}
   BossHealthBar: {fileID: 0}
-  bossBulletProperties:
-  - NumberSpawn: 100
-    Tag: BossBullet_1
-    BulletDelay: 1
-    Speed: 5
-    Boundary: 7
-    Angle: 0
-    BulletPrefab: {fileID: 8928460442896055807, guid: a132e62977e77fa46ac4abff3c4f29dc, type: 3}
-  - NumberSpawn: 100
-    Tag: BossBullet_2
-    BulletDelay: 1
-    Speed: 5
-    Boundary: 7
-    Angle: 0
-    BulletPrefab: {fileID: 44425410549999122, guid: 585b44b78895ee948800ea71f8b08cc3, type: 3}
 --- !u!114 &4535670646264881259
 MonoBehaviour:
   m_ObjectHideFlags: 0

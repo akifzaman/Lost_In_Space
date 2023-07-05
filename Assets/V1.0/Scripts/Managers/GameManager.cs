@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         
         for (int i = 0; i < powerUpList.Count; i++)
         {
-            yield return new WaitForSeconds(Random.Range(1,2));
+            yield return new WaitForSeconds(Random.Range(10,11));
             GameObject powerUpObject = 
                 Instantiate(powerUpList[i], new Vector2(Random.Range(-2.3f, 2.3f), Random.Range(3.0f, -3.0f)), powerUpList[i].transform.rotation);
 

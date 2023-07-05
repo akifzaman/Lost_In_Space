@@ -3,7 +3,6 @@ using UnityEngine;
 public class ObstacleSpawnManager : MonoBehaviour
 {
     public ObstacleProperties obstacle;
-    [SerializeField] private ObstacleProperties _obstacle;
    
     public void Start()
     {
@@ -28,6 +27,5 @@ public class ObstacleSpawnManager : MonoBehaviour
         if (pooledObj == null) return;
         pooledObj.OnObjectSpawn();
         pooledObj.Speed = obstacle.Speed;
-        pooledObj.Boundary = obstacle.Boundary;
     }
 }

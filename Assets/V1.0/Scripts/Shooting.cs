@@ -38,9 +38,8 @@ public class Shooting : MonoBehaviour
             {
                 pooledObj.OnObjectSpawn();
                 pooledObj.Speed = _bullet.Speed;
-                pooledObj.Boundary = _bullet.Boundary;
             }
-            //shootingAudio.PlayOneShot(bulletSound, 0.04f);
+            shootingAudio.PlayOneShot(bulletSound, 0.04f);
         }
     }
 
