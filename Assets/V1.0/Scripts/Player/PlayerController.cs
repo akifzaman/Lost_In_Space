@@ -19,6 +19,7 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 		private float xBoundary = 2.40f;
 		private float yBoundaryUp = 4.78f;
 		private float yBoundaryDown = -4.60f;
+		private float mouseSensitivity = 5f;
 
 		public HealthBar PlayerHealthBar;
 
@@ -81,17 +82,38 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 		{
 			if (!GameManager.instance.isGameActive) return;
 			StayInBound();
-			float horizontalInput = Input.GetAxis("Horizontal");
-			float verticalInput = Input.GetAxis("Vertical");
-			transform.Translate(Vector2.left * Time.deltaTime * horizontalInput * player.speed);
-			transform.Translate(Vector2.down * Time.deltaTime * verticalInput * player.speed);
+			
+			float moveHorizontal = Input.GetAxis("Horizontal");
+			float moveVertical = Input.GetAxis("Vertical");
 
-			SuperSplashActivated();
+			// Mouse movement
+			Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * mouseSensitivity;
+
+			// Touch movement
+			if (Input.touchCount > 0)
+			{
+				Touch touch = Input.GetTouch(0);
+				mouseDelta = touch.deltaPosition;
+				transform.Translate(mouseDelta  / player.speed * Time.deltaTime);
+			}
+			else
+			{
+				// Calculate the movement direction
+				Vector2 movement = new Vector2(moveHorizontal, moveVertical) + mouseDelta;
+
+				// Apply movement using Transform.Translate
+				transform.Translate(movement * player.speed * Time.deltaTime);
+			}
+
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				SuperSplashActivated();
+			}
 		}
 
-		private void SuperSplashActivated()
+		public void SuperSplashActivated()
 		{
-			if (Input.GetKeyDown(KeyCode.Space) && player.superSplashCounter > 0)
+			if (player.superSplashCounter > 0)
 			{
 				player.superSplashCounter--;
 				GameManager.instance.UiManager.laserText.SetText("Laser: " + player.superSplashCounter);
