@@ -28,10 +28,14 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 
 		private void OnCollisionEnter2D(Collision2D other)
 		{
-			if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Obstacles") ||
-			    other.gameObject.CompareTag("EnemyBullet"))
+			if (other.gameObject.CompareTag("EnemyBullet"))
 			{
 				other.gameObject.SetActive(false);
+			}
+			else if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Obstacles"))
+			{
+				other.gameObject.SetActive(false);
+				GameManager.instance.UpdateScore(1);
 			}
 			else if (other.gameObject.CompareTag("MiniBoss"))
 			{

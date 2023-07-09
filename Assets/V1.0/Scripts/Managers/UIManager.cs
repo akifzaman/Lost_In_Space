@@ -30,6 +30,10 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 			GameManager.instance.StartGame();
 		}
 
+		public void ExitGame()
+		{
+			GameManager.instance.ExitGame();
+		}
 		public void RestartGame()
 		{
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);

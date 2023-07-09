@@ -27,6 +27,7 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 			AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, 1.0f);
 			Destroy(explosion, 0.5f);
 			other.gameObject.SetActive(false);
+			GameManager.instance.UpdateScore(1);
 		}
 	}
 }

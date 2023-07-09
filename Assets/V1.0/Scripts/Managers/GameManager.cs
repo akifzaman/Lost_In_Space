@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +17,8 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 		public bool AllowMiniBossMovement = false;
 
 		public int score = 0;
+		public int highScore;
+		public TextMeshProUGUI highScoreText;
 
 		public List<GameObject> powerUpList;
 
@@ -39,6 +42,8 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 			}
 
 			UiManager.InitialGame();
+			highScore = PlayerPrefs.GetInt("HighScore", 0);
+			highScoreText.text += highScore.ToString();
 		}
 
 		#endregion
@@ -49,8 +54,22 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 			playerController.StartGame();
 			enemySpawnManager.StartGame();
 			StartCoroutine(Timer());
+			Debug.Log(highScore);
 		}
 
+		public void ExitGame()
+		{
+			// Check the platform and quit the application accordingly
+			#if UNITY_EDITOR
+						UnityEditor.EditorApplication.isPlaying = false; // Exit play mode in Unity Editor
+			#elif UNITY_STANDALONE
+			            Application.Quit(); // Quit the application on Windows or Mac
+			#elif UNITY_ANDROID
+			            AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer")
+			                .GetStatic<AndroidJavaObject>("currentActivity");
+			            activity.Call("finishAffinity"); // Completely stop the application on Android
+			#endif
+		}
 		public void GameOver()
 		{
 			isGameActive = false;
@@ -59,7 +78,13 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 
 		public void UpdateScore(int amount)
 		{
-			UiManager.scoreText.text = (score + amount).ToString();
+			score += amount;
+			if (score > highScore)
+			{
+				highScore = score;
+				PlayerPrefs.SetInt("HighScore", highScore);
+			}
+			UiManager.scoreText.text = score.ToString();
 		}
 
 		IEnumerator Timer()

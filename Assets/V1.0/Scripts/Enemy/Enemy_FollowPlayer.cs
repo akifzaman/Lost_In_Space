@@ -36,6 +36,7 @@ namespace GameTemplate_UltimateSpaceShooterGamesMaker
 
 		private void DirectionalMovement()
 		{
+			if (GameManager.instance.playerController == null) return;
 			lookDirectionAllow = (transform.position.y > lookTransform.position.y);
 			lookDirection = lookDirectionAllow ? (lookTransform.position - transform.position) : (Vector2.down * 2);
 			transform.Translate(lookDirection * Time.deltaTime * enemyProperties.Speed, Space.World);
